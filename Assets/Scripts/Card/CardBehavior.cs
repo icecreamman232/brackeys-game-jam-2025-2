@@ -4,44 +4,59 @@ namespace SGGames.Scripts.Card
 {
     public class CardBehavior : MonoBehaviour
     {
-        [SerializeField] protected bool m_isDragging;
-        private Camera m_camera;
-        private const float k_OffsetY = 0.75f; 
+        [SerializeField] protected bool m_isSelected;
+        protected bool m_canClick = true;
         
-        private void Awake()
-        {
-            m_camera = Camera.main;
-        }
+        public bool IsSelected => m_isSelected;
 
-        private void Update()
+        private void OnMouseDown()
         {
-            if (!m_isDragging) return;
-            var pos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-            pos.y -= k_OffsetY;
-            pos.z = 0;
-            transform.position = pos;
-        }
-
-        private void OnMouseDrag()
-        {
-            m_isDragging = true;
-            OnDragging();
+            if (!m_canClick) return;
+            
+            if (m_isSelected)
+            {
+                OnSelectTween();
+            }
+            else
+            {
+                OnDeselectTween();
+            }
         }
         
-        private void OnMouseUp()
+        public virtual void OnSelect()
         {
-            m_isDragging = false;
-            OnReleased();
+            
         }
-
-        protected virtual void OnDragging()
+        
+        public virtual void OnDeselect()
         {
             
         }
 
-        protected virtual void OnReleased()
+        private void OnCompleteTween()
         {
-            
+            m_isSelected = !m_isSelected;
+            m_canClick = true;
+            if (m_isSelected)
+            {
+                OnSelect();
+            }
+            else
+            {
+                OnDeselect();
+            }
+        }
+
+        private void OnSelectTween()
+        {
+            m_canClick = false;
+            transform.LeanMoveLocalY(-1f, 0.2f).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
+        }
+        
+        private void OnDeselectTween()
+        {
+            m_canClick = false;
+            transform.LeanMoveLocalY(-1.5f, 0.2f).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
         }
     }
 }
