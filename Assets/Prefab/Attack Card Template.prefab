@@ -92,7 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eeb2c8841ab8e148b47d31296713a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isDragging: 0
+  m_cardIndex: 0
+  m_selectCardEvent: {fileID: 11400000, guid: 9492163a1c62d464aac181cd905b48be, type: 2}
+  m_isSelected: 0
 --- !u!1 &4024155305141304595
 GameObject:
   m_ObjectHideFlags: 0

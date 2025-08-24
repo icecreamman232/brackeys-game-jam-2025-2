@@ -4,10 +4,14 @@ namespace SGGames.Scripts.Card
 {
     public class CardBehavior : MonoBehaviour
     {
+        [SerializeField] private int m_cardIndex;
+        [SerializeField] private SelectCardEvent m_selectCardEvent;
         [SerializeField] protected bool m_isSelected;
         protected bool m_canClick = true;
         
         public bool IsSelected => m_isSelected;
+        
+        public void SetCardIndex(int index) => m_cardIndex = index;
 
         private void OnMouseDown()
         {
@@ -25,12 +29,20 @@ namespace SGGames.Scripts.Card
         
         public virtual void OnSelect()
         {
-            
+            m_selectCardEvent.Raise(new SelectCardEventData
+            {
+                CardIndex = m_cardIndex,
+                IsSelected = true
+            });
         }
         
         public virtual void OnDeselect()
         {
-            
+            m_selectCardEvent.Raise(new SelectCardEventData
+            {
+                CardIndex = m_cardIndex,
+                IsSelected = false
+            });
         }
 
         private void OnCompleteTween()

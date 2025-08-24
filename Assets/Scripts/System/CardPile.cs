@@ -23,6 +23,8 @@ namespace SGGames.Scripts.Card
             {
                 var newCard = Instantiate(m_cardPrefab, m_handTransform);
                 newCard.transform.position = this.transform.position;
+                newCard.SetCardIndex(i);
+                newCard.name = $"Card {i}";
                 var index = i;
                 newCard.transform.LeanMove(m_cardPositions[i].position, k_MovingToPositionTime)
                     .setEase(LeanTweenType.easeOutCubic)

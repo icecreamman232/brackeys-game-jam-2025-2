@@ -584,11 +584,11 @@ MonoBehaviour:
   m_cardPrefab: {fileID: 5466925117698070943, guid: 93c680b89542c4d41b0b9d4651d41e59, type: 3}
   m_handTransform: {fileID: 611521751}
   m_cardPositions:
-  - {fileID: 2045594686}
-  - {fileID: 2055551648}
-  - {fileID: 416521570}
-  - {fileID: 94958378}
   - {fileID: 372755206}
+  - {fileID: 94958378}
+  - {fileID: 416521570}
+  - {fileID: 2055551648}
+  - {fileID: 2045594686}
 --- !u!1 &2045594685
 GameObject:
   m_ObjectHideFlags: 0
