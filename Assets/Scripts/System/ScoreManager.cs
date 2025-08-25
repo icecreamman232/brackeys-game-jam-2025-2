@@ -6,6 +6,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int m_score;
     [SerializeField] private float m_multiplier;
     
+    public int FinalScore => m_finalScore;
+    
     public void AddScoresFromCard(int score)
     {
         m_score += score;
