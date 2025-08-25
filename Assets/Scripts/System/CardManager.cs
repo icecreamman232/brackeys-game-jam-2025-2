@@ -58,15 +58,6 @@ namespace SGGames.Scripts.System
             }
         }
 
-        private void AnimateCardToHand(CardBehavior card, int handIndex, float delay)
-        {
-            card.gameObject.SetActive(true);
-            card.transform.LeanMove(m_handPositions[handIndex].position, k_MovingToPositionTime)
-                .setEase(LeanTweenType.easeOutCubic)
-                .setDelay(delay)
-                .setOnComplete(()=> card.transform.position = m_handPositions[handIndex].position);
-        }
-
         public void DiscardSelectedCards()
         {
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
@@ -117,6 +108,15 @@ namespace SGGames.Scripts.System
                     m_discardPile.PositionCardAtDiscard(card);
                 });
 
+        }
+        
+        private void AnimateCardToHand(CardBehavior card, int handIndex, float delay)
+        {
+            card.gameObject.SetActive(true);
+            card.transform.LeanMove(m_handPositions[handIndex].position, k_MovingToPositionTime)
+                .setEase(LeanTweenType.easeOutCubic)
+                .setDelay(delay)
+                .setOnComplete(()=> card.transform.position = m_handPositions[handIndex].position);
         }
     }
 }
