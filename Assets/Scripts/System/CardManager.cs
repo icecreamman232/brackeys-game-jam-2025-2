@@ -58,6 +58,18 @@ namespace SGGames.Scripts.System
             }
         }
 
+        public List<int> GetScoresFromSelectedCards()
+        {
+            var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
+            var scores = new List<int>();
+            foreach (var card in selectedCards)
+            {
+                scores.Add(card.AttackPts);
+            }
+
+            return scores;
+        }
+
         public void DiscardSelectedCards()
         {
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();

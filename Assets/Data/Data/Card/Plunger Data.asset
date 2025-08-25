@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5f317677c04d64c9018a2c228cd1e7, type: 3}
   m_Name: Plunger Data
   m_EditorClassIdentifier: 
+  Info:
+    AttackPoint: 5
   Type: 0
   Icon: {fileID: 3750798351498651040, guid: ae0094c2c91f66341bddc693b30bc303, type: 3}
   CardPrefab: {fileID: 3135851394043013441, guid: d8051365d80177d438ff8541351b9233, type: 3}

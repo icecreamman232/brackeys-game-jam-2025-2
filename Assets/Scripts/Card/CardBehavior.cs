@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace SGGames.Scripts.Card
@@ -12,8 +13,10 @@ namespace SGGames.Scripts.Card
     {
         [SerializeField] private CardState m_cardState = CardState.InPile;
         [SerializeField] private int m_cardIndex;
+        [SerializeField] private int m_atkPoint;
         [SerializeField] private SelectCardEvent m_selectCardEvent;
         [SerializeField] private SpriteRenderer m_cardIcon;
+        [SerializeField] private TextMeshPro m_atkPointText;
         [SerializeField] protected bool m_isSelected;
         protected bool m_canClick = true;
         private const float k_SelectCardYOffset = -1f;
@@ -25,6 +28,14 @@ namespace SGGames.Scripts.Card
         public bool IsSelected => m_isSelected;
         
         public void SetCardIndex(int index) => m_cardIndex = index;
+        public int AttackPts => m_atkPoint;
+        
+        public void SetAtkPoint(int atkPoint)
+        {
+            m_atkPoint = atkPoint;
+            m_atkPointText.text = atkPoint.ToString();
+        }
+
 
         private void OnMouseDown()
         {

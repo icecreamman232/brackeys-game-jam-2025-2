@@ -83,6 +83,7 @@ namespace SGGames.Scripts.Card
             var newCard = Instantiate(data.CardPrefab);
             newCard.transform.position = this.transform.position;
             newCard.SetIcon(data.Icon);
+            newCard.SetAtkPoint(data.Info.AttackPoint);
             newCard.SetCardIndex(-1);
             newCard.gameObject.SetActive(false);
             return newCard;

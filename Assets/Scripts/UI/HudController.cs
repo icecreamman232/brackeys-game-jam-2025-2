@@ -6,6 +6,7 @@ namespace SGGames.Scripts.UI
 {
     public class HudController : MonoBehaviour
     {
+        [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private CardManager m_cardManager;
         [SerializeField] private ButtonController m_playButton;
         [SerializeField] private ButtonController m_discardButton;
@@ -19,6 +20,8 @@ namespace SGGames.Scripts.UI
         private void PlayButtonClicked()
         {
             Debug.Log("Clicked play button");
+            m_scoreManager.AddScoresFromCards(m_cardManager.GetScoresFromSelectedCards());
+            m_cardManager.DiscardSelectedCards();
         }
 
         private void DiscardButtonClicked()
