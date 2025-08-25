@@ -14,7 +14,9 @@ namespace SGGames.Scripts.UI
         [SerializeField] private ButtonController m_playButton;
         [SerializeField] private ButtonController m_discardButton;
         [SerializeField] private ScoreCountingDisplayer m_scoreDisplayer;
-
+        
+        private const float k_ShowScoreTime = 1f;
+        
         private void Awake()
         {
             m_playButton.OnClickAction = PlayButtonClicked;
@@ -40,7 +42,7 @@ namespace SGGames.Scripts.UI
             m_scoreDisplayer.HideScoreCounting();
             m_scoreManager.FinishScoreCounting();
             m_scoreDisplayer.ShowFinalScore(m_scoreManager.FinalScore);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(k_ShowScoreTime);
             m_scoreDisplayer.HideAll();
             InputSystem.actions.Enable();
         }
