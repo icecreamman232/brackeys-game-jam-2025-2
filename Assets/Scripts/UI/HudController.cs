@@ -6,6 +6,7 @@ namespace SGGames.Scripts.UI
 {
     public class HudController : MonoBehaviour
     {
+        [SerializeField] private ItemManager m_itemManager;
         [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private CardManager m_cardManager;
         [SerializeField] private ButtonController m_playButton;
@@ -25,6 +26,7 @@ namespace SGGames.Scripts.UI
                 () =>
             {
                 m_scoreDisplayer.HideDisplayer();
+                m_itemManager.TriggerItem(m_scoreDisplayer.AddMultiplier, m_scoreManager.FinishScoreCounting);
             });
         }
 

@@ -1314,7 +1314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea5d974566f93e49836a13d27f7afed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_finalScore: 0
   m_score: 0
+  m_multiplier: 0
 --- !u!1 &890930862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,6 +1802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e06547b0c08d942be3ef24a2092573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_scoreManager: {fileID: 867436023}
+  m_itemContainer: {fileID: 11400000, guid: 1d77948dd097be745ae7ce242e7c7457, type: 2}
+  m_ownedItems: []
 --- !u!1 &1655555929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,6 +2085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aca351f0916d8d418cd03a6b2197525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_itemManager: {fileID: 1516102850}
   m_scoreManager: {fileID: 867436023}
   m_cardManager: {fileID: 723669628}
   m_playButton: {fileID: 1984840105}

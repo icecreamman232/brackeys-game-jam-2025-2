@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IItem
 {
-    void Use();
+    (MultiplierType type, float value) Use();
 }

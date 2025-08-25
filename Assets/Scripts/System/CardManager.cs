@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SGGames.Scripts.System
 {
@@ -69,6 +70,8 @@ namespace SGGames.Scripts.System
         
         private IEnumerator OnCountingScore(Action<int> addingScoreToUIAction, Action onFinish)
         {
+            InputSystem.actions.Disable();
+            
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
             var totalScore = 0;
 
@@ -81,10 +84,11 @@ namespace SGGames.Scripts.System
             }
             
             m_scoreManager.AddScoresFromCard(totalScore);
-            m_scoreManager.FinishScoreCounting();
             onFinish?.Invoke();
             
             DiscardSelectedCards();
+            
+            InputSystem.actions.Enable();
         }
 
         public void DiscardSelectedCards()

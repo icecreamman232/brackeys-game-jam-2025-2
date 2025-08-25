@@ -21,10 +21,10 @@ namespace SGGames.Scripts.UI
             m_scoreText.text = score.ToString();
         }
         
-        public void AddMultiplier(int multiplier)
+        public void AddMultiplier(float multiplier)
         {
             m_canvasGroup.alpha = 1;
-            m_multiplierText.text = multiplier.ToString();
+            m_multiplierText.text = multiplier.ToString("F2");
         }
 
         public void HideDisplayer()
