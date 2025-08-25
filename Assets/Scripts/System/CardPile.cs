@@ -9,94 +9,83 @@ namespace SGGames.Scripts.Card
     {
         [SerializeField] private CardManager m_cardManager;
         [SerializeField] private CardContainer m_cardContainer;
-        [SerializeField] private int m_numberCardsInHand;
-        [SerializeField] private Transform m_handTransform;
-        [SerializeField] private Transform[] m_cardPositions;
 
+        private List<CardBehavior> m_cardsInPile = new List<CardBehavior>();
         private const int k_DefaultCardCollectionSize = 12;
-        private const float k_MovingToPositionTime = 0.7f;
-        private const float k_MovingToPositionDelay = 0.05f;
         
-        private void Start()
+        public int CardCount => m_cardsInPile.Count;
+        
+        public CardBehavior DrawCard()
         {
-            InitializeCardPile();
-            DealAllCards();
+            if (m_cardsInPile.Count == 0) return null;
+            
+            var card = m_cardsInPile[0];
+            m_cardsInPile.RemoveAt(0);
+            
+            return card;
         }
-        
-        public void DealCardIntoIndex(List<int> positionIndex)
+
+        public List<CardBehavior> DrawCards(int number)
         {
-            //There is not enough card in the pile
-            if (positionIndex.Count > m_cardManager.CardsInPile.Count)
+            var drawnCard = new List<CardBehavior>();
+            for (int i = 0; i < number; i++)
             {
-                m_cardManager.BringCardFromDiscardBack();
+                var card = DrawCard();
+                drawnCard.Add(card);
             }
             
-            var listCardToHand = new List<CardBehavior>();
-            for (int i = 0; i < positionIndex.Count; i++)
-            {
-                var newCard = m_cardManager.CardsInPile[i];
-                newCard.transform.position = this.transform.position;
-                newCard.SetCardIndex(positionIndex[i]);
-                newCard.name = $"{newCard.name} - Index {i}";
-                var index = positionIndex[i];
-                newCard.transform.LeanMove(m_cardPositions[positionIndex[i]].position, k_MovingToPositionTime)
-                    .setEase(LeanTweenType.easeOutCubic)
-                    .setDelay(k_MovingToPositionDelay * positionIndex[i])
-                    .setOnComplete(
-                        ()=> { newCard.transform.position = m_cardPositions[index].position;});
-                listCardToHand.Add(newCard);
-                
-                
-                newCard.gameObject.SetActive(true);
-            }
-
-            for (int i = 0; i < listCardToHand.Count; i++)
-            {
-                m_cardManager.AddCardToHand(listCardToHand[i]);
-            }
+            return drawnCard;
         }
 
-        private void DealAllCards()
+        public void AddCardsFromDiscard(List<CardBehavior> cards)
         {
-            for (int i = 0; i < m_numberCardsInHand; i++)
+            foreach (var card in cards)
             {
-                var newCard = m_cardManager.CardsInPile[i];
-                newCard.transform.position = this.transform.position;
-                newCard.SetCardIndex(i);
-                newCard.name = $"{newCard.name} - Index {i}";
-                var index = i;
-                newCard.transform.LeanMove(m_cardPositions[i].position, k_MovingToPositionTime)
-                    .setEase(LeanTweenType.easeOutCubic)
-                    .setDelay(k_MovingToPositionDelay * i)
-                    .setOnComplete(
-                    ()=> { newCard.transform.position = m_cardPositions[index].position;});
-                m_cardManager.AddCardToHand(newCard);
-                
-                newCard.gameObject.SetActive(true);
+                AddCardToPile(card);
             }
         }
-
-        private void InitializeCardPile()
+        
+        public void InitializePile()
         {
             for (int i = 0; i < k_DefaultCardCollectionSize; i++)
             {
-                var data = GetCard();
-                var newCard = Instantiate(data.CardPrefab, m_handTransform);
-                newCard.transform.position = this.transform.position;
-                newCard.SetIcon(data.Icon);
-                newCard.SetCardIndex(-1);
-                newCard.gameObject.SetActive(false);
-                m_cardManager.AddNewCardToPile(newCard);
+                var data = GetRandomCard();
+                var newCard = CreateCard(data);
+                AddCardToPile(newCard);
             }
+        }
+
+        private void AddCardToPile(CardBehavior card)
+        {
+            if (card == null)
+            {
+                Debug.LogError("Card is null");
+                return;
+            }
+            
+            m_cardsInPile.Add(card);
+            card.ChangeCardState(CardState.InPile);
+            card.transform.position = this.transform.position;
+            card.gameObject.SetActive(false);
         }
         
         /// <summary>
         /// Get card prefab to create new card.
         /// </summary>
         /// <returns></returns>
-        private CardData GetCard()
+        private CardData GetRandomCard()
         {
             return m_cardContainer.AttackCardList[Random.Range(0, m_cardContainer.AttackCardList.Length)];
+        }
+
+        private CardBehavior CreateCard(CardData data)
+        {
+            var newCard = Instantiate(data.CardPrefab);
+            newCard.transform.position = this.transform.position;
+            newCard.SetIcon(data.Icon);
+            newCard.SetCardIndex(-1);
+            newCard.gameObject.SetActive(false);
+            return newCard;
         }
     }
 }

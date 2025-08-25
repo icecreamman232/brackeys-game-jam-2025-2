@@ -982,14 +982,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5784abb6482ea7a4da83aee8039c91bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cardsInPile: []
+  m_maxHandSize: 5
+  m_handPositions:
+  - {fileID: 372755206}
+  - {fileID: 94958378}
+  - {fileID: 416521570}
+  - {fileID: 2055551648}
+  - {fileID: 2045594686}
   m_cardsInHand: []
-  m_cardsInDiscard: []
   m_cardPile: {fileID: 2008295626}
   m_discardPile: {fileID: 1655555930}
-  m_pilePivot: {fileID: 890930863}
-  m_handPivot: {fileID: 1755961523}
-  m_discardPivot: {fileID: 321792894}
 --- !u!1 &781285677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +1643,6 @@ MonoBehaviour:
   m_cardManager: {fileID: 723669628}
   m_cardContainer: {fileID: 11400000, guid: 457d4b39112b17048a4550018914c2b0, type: 2}
   m_numberCardsInHand: 5
-  m_pileTransform: {fileID: 890930863}
   m_cardPositions:
   - {fileID: 372755206}
   - {fileID: 94958378}

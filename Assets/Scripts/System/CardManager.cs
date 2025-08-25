@@ -1,97 +1,122 @@
 using System.Collections.Generic;
+using System.Linq;
 using SGGames.Scripts.Card;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace SGGames.Scripts.System
 {
     public class CardManager : MonoBehaviour
     {
-        [SerializeField] private List<CardBehavior> m_cardsInPile;
+        [SerializeField] private int m_maxHandSize = 5;
+        [SerializeField] private Transform[] m_handPositions;
         [SerializeField] private List<CardBehavior> m_cardsInHand;
-        [SerializeField] private List<CardBehavior> m_cardsInDiscard;
         [SerializeField] private CardPile m_cardPile;
         [SerializeField] private DiscardPile m_discardPile;
-        [SerializeField] private Transform m_pilePivot;
-        [SerializeField] private Transform m_handPivot;
-        [SerializeField] private Transform m_discardPivot;
         
-        public List<CardBehavior> CardsInPile => m_cardsInPile;
-        public List<CardBehavior> CardsInHand => m_cardsInHand;
-        public List<CardBehavior> CardsInDiscard => m_cardsInDiscard;
-        
-        public void AddNewCardToPile(CardBehavior card)
+        private const float k_MovingToPositionTime = 0.7f;
+        private const float k_MovingToPositionDelay = 0.05f;
+        private const float k_DiscardMoveTime = 0.3f;
+
+        private void Start()
         {
-            card.ChangeCardState(CardState.InPile);
-            m_cardsInPile.Add(card);
-            card.transform.SetParent(m_pilePivot, worldPositionStays:true);
-            card.transform.localPosition = Vector3.zero;
-        }
-        
-        public void AddCardToHand(CardBehavior card)
-        {
-            m_cardsInPile.Remove(card);
-            card.ChangeCardState(CardState.InHand);
-            m_cardsInHand.Add(card);
-            card.transform.SetParent(m_handPivot, worldPositionStays:true);
-            card.transform.localPosition = Vector3.zero;
+            m_cardPile.InitializePile();
+            DealInitialHand();
+
         }
 
-        public void DiscardSelectedCard()
+        private void DealInitialHand()
         {
-            var discardIndexList = new List<int>();
-            var cardsToDiscard = new List<CardBehavior>();
-            
-            // First, collect all cards to discard
-            foreach (var card in m_cardsInHand)
+            var cardsToDeal = m_cardPile.DrawCards(m_maxHandSize);
+            for (int i = 0; i < cardsToDeal.Count; i++)
             {
-                //Only discard selected cards in hand
-                if (card.IsSelected && card.CardState == CardState.InHand)
+                var card = cardsToDeal[i];
+                AddCardToHand(card, i);
+                AnimateCardToHand(card, i, k_MovingToPositionDelay * i);
+            }
+        }
+
+        private void AddCardToHand(CardBehavior card, int handIndex)
+        {
+            card.ChangeCardState(CardState.InHand);
+            card.SetCardIndex(handIndex);
+            card.name = $"{card.name} - Index {handIndex}";
+            
+            // Ensure the hand list can accommodate the index
+            while (m_cardsInHand.Count <= handIndex)
+            {
+                m_cardsInHand.Add(null);
+            }
+            m_cardsInHand[handIndex] = card;
+        }
+
+        private void RemoveCardFromHand(CardBehavior card)
+        {
+            int index = card.CardIndex;
+            if (index >= 0 && index < m_cardsInHand.Count)
+            {
+                m_cardsInHand[index] = null;
+            }
+        }
+
+        private void AnimateCardToHand(CardBehavior card, int handIndex, float delay)
+        {
+            card.gameObject.SetActive(true);
+            card.transform.LeanMove(m_handPositions[handIndex].position, k_MovingToPositionTime)
+                .setEase(LeanTweenType.easeOutCubic)
+                .setDelay(delay)
+                .setOnComplete(()=> card.transform.position = m_handPositions[handIndex].position);
+        }
+
+        public void DiscardSelectedCards()
+        {
+            var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
+            var emptySlot = new List<int>();
+            foreach (var card in selectedCards)
+            {
+                int slot = card.CardIndex;
+                emptySlot.Add(slot);
+                
+                RemoveCardFromHand(card);
+                AnimateCardToDiscard(card);
+            }
+            
+            FillEmptySlots(emptySlot);
+        }
+
+        private void FillEmptySlots(List<int> emptySlot)
+        {
+            // Check if we need to reshuffle discard pile
+            if (emptySlot.Count > m_cardPile.CardCount)
+            {
+                ReshuffleDiscardIntoPile();
+            }
+            
+            var newCards = m_cardPile.DrawCards(emptySlot.Count);
+            for (int i = 0; i < emptySlot.Count; i++)
+            {
+                var card = newCards[i];
+                var slotIndex = emptySlot[i];
+                AddCardToHand(card, slotIndex);
+                AnimateCardToHand(card, slotIndex, k_MovingToPositionDelay * i);
+            }
+        }
+
+        private void ReshuffleDiscardIntoPile()
+        {
+            var discardedCards = m_discardPile.RemoveAllCards();
+            m_cardPile.AddCardsFromDiscard(discardedCards);
+        }
+
+        private void AnimateCardToDiscard(CardBehavior card)
+        {
+            card.transform.LeanMove(m_discardPile.transform.position, k_DiscardMoveTime)
+                .setEase(LeanTweenType.easeOutCirc)
+                .setOnComplete(() => 
                 {
-                    cardsToDiscard.Add(card);
-                    discardIndexList.Add(card.CardIndex);
-                }
-            }
-            
-            // Then process the discarding
-            foreach (var card in cardsToDiscard)
-            {
-                card.transform.LeanMove(m_discardPile.transform.position, 0.5f)
-                    .setEase(LeanTweenType.easeOutCirc)
-                    .setOnComplete(()=> OnFinishMoveToDiscardPile(card));
-                
-                //Reset card index, since they are no longer in hand
-                card.SetCardIndex(-1);
-                
-                m_cardsInHand.Remove(card);
-                m_cardsInDiscard.Add(card);
-                card.ChangeCardState(CardState.InDiscard);
-                card.transform.SetParent(m_discardPivot, worldPositionStays:true);
-                card.transform.localPosition = Vector3.zero;
-            }
-            
-            //Deal new cards into empty slot in hand
-            m_cardPile.DealCardIntoIndex(discardIndexList);
-        }
-        
-        public void BringCardFromDiscardBack()
-        {
-            foreach (var card in m_cardsInDiscard)
-            {
-                card.ChangeCardState(CardState.InPile);
-                m_cardsInPile.Add(card);
-                card.transform.position = m_cardPile.transform.position;
-                card.transform.SetParent(m_pilePivot, worldPositionStays:true);
-                card.transform.localPosition = Vector3.zero;
-                card.gameObject.SetActive(false);
-            }
-            m_cardsInDiscard.Clear();
-        }
-        
-        private void OnFinishMoveToDiscardPile(CardBehavior card)
-        {
-            card.transform.position = m_discardPile.transform.position;
-            card.gameObject.SetActive(false);
+                    m_discardPile.AddCardToDiscard(card);
+                    m_discardPile.PositionCardAtDiscard(card);
+                });
+
         }
     }
 }

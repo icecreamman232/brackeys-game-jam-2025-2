@@ -40,6 +40,15 @@ namespace SGGames.Scripts.Card
             }
         }
 
+        public void ResetSelection()
+        {
+            m_canClick = true;
+            m_isSelected = false;
+            var currentLocal = transform.localPosition;
+            currentLocal.y = k_DeselectOffset;
+            transform.localPosition = currentLocal;
+        }
+
         public void SetIcon(Sprite icon)
         {
             m_cardIcon.sprite = icon;

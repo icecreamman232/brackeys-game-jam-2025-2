@@ -24,7 +24,7 @@ namespace SGGames.Scripts.UI
         private void DiscardButtonClicked()
         {
             Debug.Log("Clicked discard button");
-            m_cardManager.DiscardSelectedCard();
+            m_cardManager.DiscardSelectedCards();
         }
     }
 }
