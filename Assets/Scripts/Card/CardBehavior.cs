@@ -17,10 +17,11 @@ namespace SGGames.Scripts.Card
         [SerializeField] private SelectCardEvent m_selectCardEvent;
         [SerializeField] private SpriteRenderer m_cardIcon;
         [SerializeField] private TextMeshPro m_atkPointText;
+        [SerializeField] private TextMeshPro m_scoreDisplayer;
         [SerializeField] protected bool m_isSelected;
         protected bool m_canClick = true;
-        private const float k_SelectCardYOffset = -1f;
-        private const float k_DeselectOffset = -1.5f;
+        private const float k_SelectCardYOffset = -2f;
+        private const float k_DeselectOffset = -2.5f;
         private const float k_MoveCardTweenDuration = 0.2f;
         
         public CardState CardState => m_cardState;
@@ -86,6 +87,17 @@ namespace SGGames.Scripts.Card
                 CardIndex = m_cardIndex,
                 IsSelected = false
             });
+        }
+
+        public void ShowAtkPointHUD()
+        {
+            m_scoreDisplayer.gameObject.SetActive(true);
+            m_scoreDisplayer.text = m_atkPoint.ToString();
+        }
+
+        public void HideAtkPointHUD()
+        {
+            m_scoreDisplayer.gameObject.SetActive(false);
         }
 
         private void OnCompleteTween()

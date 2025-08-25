@@ -5,11 +5,13 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private int m_score;
     
-    public void AddScoresFromCards(List<int> scores)
+    public void AddScoresFromCard(int score)
     {
-        foreach (var score in scores)
-        {
-            m_score += score;
-        }
+        m_score += score;
+    }
+
+    public void FinishScoreCounting()
+    {
+        
     }
 }

@@ -10,6 +10,7 @@ namespace SGGames.Scripts.UI
         [SerializeField] private CardManager m_cardManager;
         [SerializeField] private ButtonController m_playButton;
         [SerializeField] private ButtonController m_discardButton;
+        [SerializeField] private ScoreCountingDisplayer m_scoreDisplayer;
 
         private void Awake()
         {
@@ -20,8 +21,11 @@ namespace SGGames.Scripts.UI
         private void PlayButtonClicked()
         {
             Debug.Log("Clicked play button");
-            m_scoreManager.AddScoresFromCards(m_cardManager.GetScoresFromSelectedCards());
-            m_cardManager.DiscardSelectedCards();
+            m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,
+                () =>
+            {
+                m_scoreDisplayer.HideDisplayer();
+            });
         }
 
         private void DiscardButtonClicked()

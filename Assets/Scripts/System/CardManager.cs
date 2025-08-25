@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
@@ -7,6 +9,7 @@ namespace SGGames.Scripts.System
 {
     public class CardManager : MonoBehaviour
     {
+        [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private int m_maxHandSize = 5;
         [SerializeField] private Transform[] m_handPositions;
         [SerializeField] private List<CardBehavior> m_cardsInHand;
@@ -16,6 +19,7 @@ namespace SGGames.Scripts.System
         private const float k_MovingToPositionTime = 0.7f;
         private const float k_MovingToPositionDelay = 0.05f;
         private const float k_DiscardMoveTime = 0.3f;
+        private const float k_ShowScoreTime = 0.3f;
 
         private void Start()
         {
@@ -58,16 +62,29 @@ namespace SGGames.Scripts.System
             }
         }
 
-        public List<int> GetScoresFromSelectedCards()
+        public void CountScoreFromSelectedCards(Action<int> addingScoreToUIAction, Action onFinish)
+        {
+            StartCoroutine(OnCountingScore(addingScoreToUIAction, onFinish));
+        }
+        
+        private IEnumerator OnCountingScore(Action<int> addingScoreToUIAction, Action onFinish)
         {
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
-            var scores = new List<int>();
+            var totalScore = 0;
+
             foreach (var card in selectedCards)
             {
-                scores.Add(card.AttackPts);
+                totalScore += card.AttackPts;
+                addingScoreToUIAction?.Invoke(totalScore);
+                AnimateShowScore(card, null);
+                yield return new WaitForSeconds(k_ShowScoreTime);
             }
-
-            return scores;
+            
+            m_scoreManager.AddScoresFromCard(totalScore);
+            m_scoreManager.FinishScoreCounting();
+            onFinish?.Invoke();
+            
+            DiscardSelectedCards();
         }
 
         public void DiscardSelectedCards()
@@ -129,6 +146,18 @@ namespace SGGames.Scripts.System
                 .setEase(LeanTweenType.easeOutCubic)
                 .setDelay(delay)
                 .setOnComplete(()=> card.transform.position = m_handPositions[handIndex].position);
+        }
+
+        private void AnimateShowScore(CardBehavior cardBehavior, Action onFinish)
+        {
+            cardBehavior.ShowAtkPointHUD();
+            cardBehavior.gameObject.LeanDelayedCall(
+                k_ShowScoreTime,
+                () =>
+                {
+                    cardBehavior.HideAtkPointHUD();
+                    onFinish?.Invoke();
+                });
         }
     }
 }
