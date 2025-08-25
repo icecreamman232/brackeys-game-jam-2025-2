@@ -92,8 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eeb2c8841ab8e148b47d31296713a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_cardState: 0
   m_cardIndex: 0
   m_selectCardEvent: {fileID: 11400000, guid: 9492163a1c62d464aac181cd905b48be, type: 2}
+  m_cardIcon: {fileID: 4644864964324931158}
   m_isSelected: 0
 --- !u!1 &4024155305141304595
 GameObject:
@@ -209,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 6729388973599310298}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

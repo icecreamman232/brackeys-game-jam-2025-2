@@ -80,8 +80,10 @@ namespace SGGames.Scripts.Card
         {
             for (int i = 0; i < k_DefaultCardCollectionSize; i++)
             {
-                var newCard = Instantiate(GetCard(), m_handTransform);
+                var data = GetCard();
+                var newCard = Instantiate(data.CardPrefab, m_handTransform);
                 newCard.transform.position = this.transform.position;
+                newCard.SetIcon(data.Icon);
                 newCard.SetCardIndex(-1);
                 newCard.gameObject.SetActive(false);
                 m_cardManager.AddNewCardToPile(newCard);
@@ -92,9 +94,9 @@ namespace SGGames.Scripts.Card
         /// Get card prefab to create new card.
         /// </summary>
         /// <returns></returns>
-        private CardBehavior GetCard()
+        private CardData GetCard()
         {
-            return m_cardContainer.AttackCardList[Random.Range(0, m_cardContainer.AttackCardList.Length)].CardPrefab;
+            return m_cardContainer.AttackCardList[Random.Range(0, m_cardContainer.AttackCardList.Length)];
         }
     }
 }

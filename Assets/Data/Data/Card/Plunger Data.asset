@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Plunger Data
   m_EditorClassIdentifier: 
   Type: 0
-  Icon: {fileID: 0}
+  Icon: {fileID: 3750798351498651040, guid: ae0094c2c91f66341bddc693b30bc303, type: 3}
   CardPrefab: {fileID: 3135851394043013441, guid: d8051365d80177d438ff8541351b9233, type: 3}
+  Description: 

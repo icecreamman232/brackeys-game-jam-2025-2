@@ -13,6 +13,7 @@ namespace SGGames.Scripts.Card
         [SerializeField] private CardState m_cardState = CardState.InPile;
         [SerializeField] private int m_cardIndex;
         [SerializeField] private SelectCardEvent m_selectCardEvent;
+        [SerializeField] private SpriteRenderer m_cardIcon;
         [SerializeField] protected bool m_isSelected;
         protected bool m_canClick = true;
         private const float k_SelectCardYOffset = -1f;
@@ -39,6 +40,11 @@ namespace SGGames.Scripts.Card
             }
         }
 
+        public void SetIcon(Sprite icon)
+        {
+            m_cardIcon.sprite = icon;
+        }
+        
         public void ChangeCardState(CardState state)
         {
             m_cardState = state;

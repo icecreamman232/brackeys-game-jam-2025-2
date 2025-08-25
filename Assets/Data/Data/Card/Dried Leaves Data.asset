@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dried Leaves Data
   m_EditorClassIdentifier: 
   Type: 0
-  Icon: {fileID: 0}
+  Icon: {fileID: 4983751181996206269, guid: ae0094c2c91f66341bddc693b30bc303, type: 3}
   CardPrefab: {fileID: 3135851394043013441, guid: b7c0f28bfbcbfc44a8ffff286c6b611c, type: 3}
+  Description: 

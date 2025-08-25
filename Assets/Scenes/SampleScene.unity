@@ -511,7 +511,7 @@ Transform:
   m_GameObject: {fileID: 321792893}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.3, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1091,7 +1091,7 @@ Transform:
   m_GameObject: {fileID: 890930862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.3, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1641,7 +1641,7 @@ MonoBehaviour:
   m_cardManager: {fileID: 723669628}
   m_cardContainer: {fileID: 11400000, guid: 457d4b39112b17048a4550018914c2b0, type: 2}
   m_numberCardsInHand: 5
-  m_handTransform: {fileID: 611521751}
+  m_pileTransform: {fileID: 890930863}
   m_cardPositions:
   - {fileID: 372755206}
   - {fileID: 94958378}
