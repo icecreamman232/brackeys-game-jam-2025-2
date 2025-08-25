@@ -2,13 +2,25 @@ using UnityEngine;
 
 namespace SGGames.Scripts.Card
 {
+    public enum CardState
+    {
+        InPile,
+        InHand,
+        InDiscard,
+    }
     public class CardBehavior : MonoBehaviour
     {
+        [SerializeField] private CardState m_cardState = CardState.InPile;
         [SerializeField] private int m_cardIndex;
         [SerializeField] private SelectCardEvent m_selectCardEvent;
         [SerializeField] protected bool m_isSelected;
         protected bool m_canClick = true;
+        private const float k_SelectCardYOffset = -1f;
+        private const float k_DeselectOffset = -1.5f;
+        private const float k_MoveCardTweenDuration = 0.2f;
         
+        public CardState CardState => m_cardState;
+        public int CardIndex => m_cardIndex;
         public bool IsSelected => m_isSelected;
         
         public void SetCardIndex(int index) => m_cardIndex = index;
@@ -17,7 +29,7 @@ namespace SGGames.Scripts.Card
         {
             if (!m_canClick) return;
             
-            if (m_isSelected)
+            if (!m_isSelected)
             {
                 OnSelectTween();
             }
@@ -25,6 +37,11 @@ namespace SGGames.Scripts.Card
             {
                 OnDeselectTween();
             }
+        }
+
+        public void ChangeCardState(CardState state)
+        {
+            m_cardState = state;
         }
         
         public virtual void OnSelect()
@@ -62,13 +79,13 @@ namespace SGGames.Scripts.Card
         private void OnSelectTween()
         {
             m_canClick = false;
-            transform.LeanMoveLocalY(-1f, 0.2f).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
+            transform.LeanMoveLocalY(k_SelectCardYOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
         }
         
         private void OnDeselectTween()
         {
             m_canClick = false;
-            transform.LeanMoveLocalY(-1.5f, 0.2f).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
+            transform.LeanMoveLocalY(k_DeselectOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
         }
     }
 }
