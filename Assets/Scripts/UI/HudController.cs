@@ -25,7 +25,6 @@ namespace SGGames.Scripts.UI
 
         private void PlayButtonClicked()
         {
-            Debug.Log("Clicked play button");
             m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,
                 () =>
             {
@@ -51,7 +50,6 @@ namespace SGGames.Scripts.UI
 
         private void DiscardButtonClicked()
         {
-            Debug.Log("Clicked discard button");
             m_cardManager.DiscardSelectedCards();
         }
     }
