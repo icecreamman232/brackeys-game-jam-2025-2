@@ -5,16 +5,21 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviour, IBootStrap
 {
    [SerializeField] private ScoreManager m_scoreManager;
    [SerializeField] private ItemContainer m_itemContainer;
    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
-
-   private void Start()
+   
+   public void Install()
    {
       var item = GetRandomItem();
       AddItem(item);
+   }
+
+   public void Uninstall()
+   {
+      
    }
 
    public void TriggerItem(Action<float> onUpdateMultiplierUIAction, Action onFinish)

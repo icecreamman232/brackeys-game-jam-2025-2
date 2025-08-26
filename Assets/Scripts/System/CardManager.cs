@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace SGGames.Scripts.System
 {
-    public class CardManager : MonoBehaviour
+    public class CardManager : MonoBehaviour, IBootStrap
     {
         [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private int m_maxHandSize = 5;
@@ -22,11 +22,14 @@ namespace SGGames.Scripts.System
         private const float k_DiscardMoveTime = 0.3f;
         private const float k_ShowScoreTime = 0.3f;
 
-        private void Start()
-        {
-            m_cardPile.InitializePile();
+        public void Install()
+        {m_cardPile.InitializePile();
             DealInitialHand();
+        }
 
+        public void Uninstall()
+        {
+            
         }
 
         private void DealInitialHand()
