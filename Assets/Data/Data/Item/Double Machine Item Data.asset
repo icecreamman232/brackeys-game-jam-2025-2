@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
-  m_Name: Healthy Gut Item Data
+  m_Name: Double Machine Item Data
   m_EditorClassIdentifier: 
   Rarity: 1
   MultiplierType: 1
-  MultiplierValue: 1.2
+  MultiplierValue: 2
   Icon: {fileID: 0}
