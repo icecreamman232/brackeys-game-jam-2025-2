@@ -44,8 +44,9 @@ namespace SGGames.Scripts.System
         {
             card.ChangeCardState(CardState.InHand);
             card.SetCardIndex(handIndex);
-            card.name = $"{card.name} - Index {handIndex}";
+            card.SetName();
             card.IsOverlappedOnCard = IsCardOverlapping;
+            card.SwapCardsAction = SwapCard;
             
             // Ensure the hand list can accommodate the index
             while (m_cardsInHand.Count <= handIndex)
@@ -132,6 +133,18 @@ namespace SGGames.Scripts.System
             m_cardPile.AddCardsFromDiscard(discardedCards);
         }
 
+        private void SwapCard(CardBehavior card1, CardBehavior card2)
+        {
+            card1.transform.position = m_handPositions[card2.CardIndex].position;
+            card2.transform.position = m_handPositions[card1.CardIndex].position;
+            var card1Index = card1.CardIndex;
+            var card2Index = card2.CardIndex;
+            card1.SetCardIndex(card2Index);
+            card2.SetCardIndex(card1Index);
+            card1.SetName();
+            card2.SetName();
+        }
+        
         /// <summary>
         /// Check if this card is overlapping any other card.
         /// </summary>

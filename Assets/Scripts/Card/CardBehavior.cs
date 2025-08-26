@@ -29,21 +29,29 @@ namespace SGGames.Scripts.Card
         private const float k_MoveCardTweenDuration = 0.2f;
         private Camera m_mainCamera;
         private Vector3 m_startDraggingPosition;
+        private CardBehavior m_overlappedCard;
+        private string m_originalName;
         
         public CardState CardState => m_cardState;
         public int CardIndex => m_cardIndex;
         public bool IsSelected => m_isSelected;
         
         public void SetCardIndex(int index) => m_cardIndex = index;
+
+        public void SetName()
+        {
+            this.gameObject.name = $"{m_originalName} Index {m_cardIndex}";
+        }
         public int AttackPts => m_atkPoint;
         public BoxCollider2D CardCollider => m_cardCollider;
         
         public Func<CardBehavior, CardBehavior> IsOverlappedOnCard;
-        public Action SwapCardsAction;
+        public Action<CardBehavior,CardBehavior> SwapCardsAction;
 
         private void Awake()
         {
             m_mainCamera = Camera.main;
+            m_originalName = gameObject.name;
         }
 
         private void Update()
@@ -71,10 +79,12 @@ namespace SGGames.Scripts.Card
             {
                 Debug.Log($"Overlapped on {overlappedCard.gameObject.name}");
                 m_canSwawpWithOtherCard = true;
+                m_overlappedCard = overlappedCard;
             }
             else
             {
                 m_canSwawpWithOtherCard = false;
+                m_overlappedCard = null;
             }
         }
 
@@ -98,7 +108,8 @@ namespace SGGames.Scripts.Card
             
             if (m_canSwawpWithOtherCard)
             {
-                
+                SwapCardsAction?.Invoke(this, m_overlappedCard);
+                m_startDraggingPosition = transform.position;
             }
             else
             {
@@ -106,6 +117,7 @@ namespace SGGames.Scripts.Card
             }
 
             m_canSwawpWithOtherCard = false;
+            m_overlappedCard = null;
         }
 
         public void ResetSelection()
