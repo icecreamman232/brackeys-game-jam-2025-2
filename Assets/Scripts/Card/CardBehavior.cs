@@ -95,7 +95,6 @@ namespace SGGames.Scripts.Card
                 {
                     m_dragIntentDetected = true;
                     m_isDragging = true;
-                    Debug.Log("Drag intent detected!");
                 }
                 else
                 {
