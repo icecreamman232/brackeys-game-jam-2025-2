@@ -1,4 +1,5 @@
 using System;
+using SGGames.Scripts.Data;
 using TMPro;
 using UnityEngine;
 
@@ -12,12 +13,12 @@ namespace SGGames.Scripts.Card
     }
     public class CardBehavior : MonoBehaviour
     {
+        [SerializeField] private CardData m_cardData;
+        [SerializeField] private CardVisual m_cardVisual;
         [SerializeField] private CardState m_cardState = CardState.InPile;
         [SerializeField] private int m_cardIndex;
         [SerializeField] private int m_atkPoint;
         [SerializeField] private SelectCardEvent m_selectCardEvent;
-        [SerializeField] private SpriteRenderer m_cardIcon;
-        [SerializeField] private TextMeshPro m_atkPointText;
         [SerializeField] private TextMeshPro m_scoreDisplayer;
         [SerializeField] private BoxCollider2D m_cardCollider;
         [SerializeField] protected bool m_isSelected;
@@ -51,6 +52,14 @@ namespace SGGames.Scripts.Card
         {
             this.gameObject.name = $"{m_originalName} Index {m_cardIndex}";
         }
+        
+        public void SetData(CardData cardData)
+        {
+            m_cardData = cardData;
+            m_atkPoint = m_cardData.Info.AttackPoint;
+            m_cardVisual.ChangeCardVisual(m_cardData);
+        }
+
         public int AttackPts => m_atkPoint;
         public BoxCollider2D CardCollider => m_cardCollider;
         
@@ -72,14 +81,7 @@ namespace SGGames.Scripts.Card
                 transform.position = newPos;
             }
         }
-
-        public void SetAtkPoint(int atkPoint)
-        {
-            m_atkPoint = atkPoint;
-            m_atkPointText.text = atkPoint.ToString();
-        }
-
-
+        
         private void OnMouseDrag()
         {
             if (!m_canClick) return;
@@ -186,11 +188,6 @@ namespace SGGames.Scripts.Card
             currentLocal.y = k_DeselectOffset;
             transform.localPosition = currentLocal;
         }
-
-        public void SetIcon(Sprite icon)
-        {
-            m_cardIcon.sprite = icon;
-        }
         
         public void ChangeCardState(CardState state)
         {
@@ -281,14 +278,14 @@ namespace SGGames.Scripts.Card
             transform.LeanMoveLocalY(k_DeselectOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
         }
 
-        private void OnDrawGizmos()
-        {
-            //if (m_isDragging)
-            {
-                Gizmos.color = Color.red;
-                var cardCenter = m_cardCollider.bounds.center;
-                Gizmos.DrawCube(cardCenter, m_cardCollider.size);
-            }
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     //if (m_isDragging)
+        //     {
+        //         Gizmos.color = Color.red;
+        //         var cardCenter = m_cardCollider.bounds.center;
+        //         Gizmos.DrawCube(cardCenter, m_cardCollider.size);
+        //     }
+        // }
     }
 }

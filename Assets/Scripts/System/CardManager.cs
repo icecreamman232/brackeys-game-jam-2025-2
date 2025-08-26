@@ -10,6 +10,7 @@ namespace SGGames.Scripts.System
 {
     public class CardManager : MonoBehaviour, IBootStrap
     {
+        [SerializeField] private int m_currentTurnNumber;
         [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private int m_maxHandSize = 5;
         [SerializeField] private Transform[] m_handPositions;
@@ -21,9 +22,13 @@ namespace SGGames.Scripts.System
         private const float k_MovingToPositionDelay = 0.05f;
         private const float k_DiscardMoveTime = 0.3f;
         private const float k_ShowScoreTime = 0.3f;
+        
+        public int CurrentTurnNumber => m_currentTurnNumber;
 
         public void Install()
-        {m_cardPile.InitializePile();
+        {
+            m_currentTurnNumber = 0;
+            m_cardPile.InitializePile();
             DealInitialHand();
         }
 
@@ -159,6 +164,11 @@ namespace SGGames.Scripts.System
                 card2.SetCardIndex(card1Index);
                 card2.SetName();
             });
+        }
+
+        public void FinishTurn()
+        {
+            m_currentTurnNumber++;
         }
         
         /// <summary>

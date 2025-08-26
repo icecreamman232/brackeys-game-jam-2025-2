@@ -45,6 +45,8 @@ namespace SGGames.Scripts.UI
             yield return new WaitForSeconds(k_ShowScoreTime);
             m_scoreDisplayer.HideAll();
             InputSystem.actions.Enable();
+            
+            m_cardManager.FinishTurn();
         }
 
         private void DiscardButtonClicked()

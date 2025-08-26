@@ -13,12 +13,14 @@ namespace SGGames.Scripts.Data
     [CreateAssetMenu(fileName = "Card Data", menuName = "SGGames/Card Data")]
     public class CardData : ScriptableObject
     {
+        public string Name;
+        [TextArea(3, 10)]
+        public string Description;
         public CardInfo Info;
         public CardType Type;
         public Sprite Icon;
         public CardBehavior CardPrefab;
-        [TextArea(3, 10)]
-        public string Description;
+        
     }
 
     [Serializable]
