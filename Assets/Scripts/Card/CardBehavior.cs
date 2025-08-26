@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -18,11 +19,16 @@ namespace SGGames.Scripts.Card
         [SerializeField] private SpriteRenderer m_cardIcon;
         [SerializeField] private TextMeshPro m_atkPointText;
         [SerializeField] private TextMeshPro m_scoreDisplayer;
+        [SerializeField] private BoxCollider2D m_cardCollider;
         [SerializeField] protected bool m_isSelected;
+        private bool m_canSwawpWithOtherCard;
+        private bool m_isDragging;
         protected bool m_canClick = true;
         private const float k_SelectCardYOffset = -2f;
         private const float k_DeselectOffset = -2.5f;
         private const float k_MoveCardTweenDuration = 0.2f;
+        private Camera m_mainCamera;
+        private Vector3 m_startDraggingPosition;
         
         public CardState CardState => m_cardState;
         public int CardIndex => m_cardIndex;
@@ -30,7 +36,26 @@ namespace SGGames.Scripts.Card
         
         public void SetCardIndex(int index) => m_cardIndex = index;
         public int AttackPts => m_atkPoint;
+        public BoxCollider2D CardCollider => m_cardCollider;
         
+        public Func<CardBehavior, CardBehavior> IsOverlappedOnCard;
+        public Action SwapCardsAction;
+
+        private void Awake()
+        {
+            m_mainCamera = Camera.main;
+        }
+
+        private void Update()
+        {
+            if (m_isDragging)
+            {
+                var newPos = GetWorldMousePosition();
+                newPos.y -= 0.75f;
+                transform.position = newPos;
+            }
+        }
+
         public void SetAtkPoint(int atkPoint)
         {
             m_atkPoint = atkPoint;
@@ -38,10 +63,25 @@ namespace SGGames.Scripts.Card
         }
 
 
+        private void OnMouseDrag()
+        {
+            m_isDragging = true;
+            var overlappedCard = IsOverlappedOnCard?.Invoke(this);
+            if (overlappedCard!=null)
+            {
+                Debug.Log($"Overlapped on {overlappedCard.gameObject.name}");
+                m_canSwawpWithOtherCard = true;
+            }
+            else
+            {
+                m_canSwawpWithOtherCard = false;
+            }
+        }
+
         private void OnMouseDown()
         {
             if (!m_canClick) return;
-            
+
             if (!m_isSelected)
             {
                 OnSelectTween();
@@ -50,6 +90,22 @@ namespace SGGames.Scripts.Card
             {
                 OnDeselectTween();
             }
+        }
+
+        private void OnMouseUp()
+        {
+            m_isDragging = false;
+            
+            if (m_canSwawpWithOtherCard)
+            {
+                
+            }
+            else
+            {
+                transform.position = m_startDraggingPosition;
+            }
+
+            m_canSwawpWithOtherCard = false;
         }
 
         public void ResetSelection()
@@ -69,6 +125,14 @@ namespace SGGames.Scripts.Card
         public void ChangeCardState(CardState state)
         {
             m_cardState = state;
+        }
+
+        /// <summary>
+        /// Set current position as start dragging position.
+        /// </summary>
+        public void SetHandPosition()
+        {
+            m_startDraggingPosition = transform.position;
         }
         
         public virtual void OnSelect()
@@ -100,6 +164,14 @@ namespace SGGames.Scripts.Card
             m_scoreDisplayer.gameObject.SetActive(false);
         }
 
+        private Vector3 GetWorldMousePosition()
+        {
+            var mousePos = Input.mousePosition;
+            mousePos = m_mainCamera.ScreenToWorldPoint(mousePos);
+            mousePos.z = 0;
+            return mousePos;
+        }
+
         private void OnCompleteTween()
         {
             m_isSelected = !m_isSelected;
@@ -124,6 +196,16 @@ namespace SGGames.Scripts.Card
         {
             m_canClick = false;
             transform.LeanMoveLocalY(k_DeselectOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
+        }
+
+        private void OnDrawGizmos()
+        {
+            //if (m_isDragging)
+            {
+                Gizmos.color = Color.red;
+                var cardCenter = m_cardCollider.bounds.center;
+                Gizmos.DrawCube(cardCenter, Vector3.one);
+            }
         }
     }
 }

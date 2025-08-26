@@ -45,6 +45,7 @@ namespace SGGames.Scripts.System
             card.ChangeCardState(CardState.InHand);
             card.SetCardIndex(handIndex);
             card.name = $"{card.name} - Index {handIndex}";
+            card.IsOverlappedOnCard = IsCardOverlapping;
             
             // Ensure the hand list can accommodate the index
             while (m_cardsInHand.Count <= handIndex)
@@ -131,6 +132,32 @@ namespace SGGames.Scripts.System
             m_cardPile.AddCardsFromDiscard(discardedCards);
         }
 
+        /// <summary>
+        /// Check if this card is overlapping any other card.
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
+        private CardBehavior IsCardOverlapping(CardBehavior card)
+        {
+            Collider2D[] results = new Collider2D[3]; // Adjust size as needed
+            ContactFilter2D filter = new ContactFilter2D();
+            int count = Physics2D.OverlapBox(card.CardCollider.bounds.center, Vector3.one, 0,filter, results);
+    
+            for (int i = 0; i < count; i++)
+            {
+                // Skip if it's the same collider as the card we're checking
+                if (results[i] == card.CardCollider) continue;
+        
+                if (results[i].gameObject.TryGetComponent(out CardBehavior otherCard))
+                {
+                    return otherCard;
+                }
+            }
+    
+            return null;
+
+        }
+
         private void AnimateCardToDiscard(CardBehavior card)
         {
             card.transform.LeanMove(m_discardPile.transform.position, k_DiscardMoveTime)
@@ -149,7 +176,11 @@ namespace SGGames.Scripts.System
             card.transform.LeanMove(m_handPositions[handIndex].position, k_MovingToPositionTime)
                 .setEase(LeanTweenType.easeOutCubic)
                 .setDelay(delay)
-                .setOnComplete(()=> card.transform.position = m_handPositions[handIndex].position);
+                .setOnComplete(()=>
+                {
+                    card.transform.position = m_handPositions[handIndex].position;
+                    card.SetHandPosition();
+                });
         }
 
         private void AnimateShowScore(CardBehavior cardBehavior, Action onFinish)

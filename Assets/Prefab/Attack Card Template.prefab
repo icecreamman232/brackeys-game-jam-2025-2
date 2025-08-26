@@ -276,6 +276,7 @@ MonoBehaviour:
   m_cardIcon: {fileID: 4644864964324931158}
   m_atkPointText: {fileID: 8528536782898684519}
   m_scoreDisplayer: {fileID: 431695359044033803}
+  m_cardCollider: {fileID: 5769710129150658322}
   m_isSelected: 0
 --- !u!1 &3171124669987666085
 GameObject:
