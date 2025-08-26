@@ -32,6 +32,15 @@ namespace SGGames.Scripts.Card
         private CardBehavior m_overlappedCard;
         private string m_originalName;
         
+        // Add these new fields for drag detection
+        private Vector3 m_mouseDownPosition;
+        private float m_mouseDownTime;
+        private bool m_dragIntentDetected = false;
+        
+        // Drag detection thresholds
+        private const float k_DragDistanceThreshold = 0.5f; // Minimum distance to start dragging
+        private const float k_DragTimeThreshold = 0.2f;     // Minimum time before drag can start
+
         public CardState CardState => m_cardState;
         public int CardIndex => m_cardIndex;
         public bool IsSelected => m_isSelected;
@@ -73,18 +82,41 @@ namespace SGGames.Scripts.Card
 
         private void OnMouseDrag()
         {
-            m_isDragging = true;
-            var overlappedCard = IsOverlappedOnCard?.Invoke(this);
-            if (overlappedCard!=null)
+            if (!m_canClick) return;
+            
+            // Check if we should start dragging
+            if (!m_dragIntentDetected)
             {
-                Debug.Log($"Overlapped on {overlappedCard.gameObject.name}");
-                m_canSwawpWithOtherCard = true;
-                m_overlappedCard = overlappedCard;
+                float timeSinceMouseDown = Time.time - m_mouseDownTime;
+                float distanceFromStart = Vector3.Distance(GetWorldMousePosition(), m_mouseDownPosition);
+            
+                // Only start dragging if we've moved far enough OR held long enough
+                if (distanceFromStart > k_DragDistanceThreshold || timeSinceMouseDown > k_DragTimeThreshold)
+                {
+                    m_dragIntentDetected = true;
+                    m_isDragging = true;
+                    Debug.Log("Drag intent detected!");
+                }
+                else
+                {
+                    return; // Don't process drag yet
+                }
             }
-            else
+
+            // Only process drag logic if drag intent is confirmed
+            if (m_isDragging)
             {
-                m_canSwawpWithOtherCard = false;
-                m_overlappedCard = null;
+                var overlappedCard = IsOverlappedOnCard?.Invoke(this);
+                if (overlappedCard != null)
+                {
+                    m_canSwawpWithOtherCard = true;
+                    m_overlappedCard = overlappedCard;
+                }
+                else
+                {
+                    m_canSwawpWithOtherCard = false;
+                    m_overlappedCard = null;
+                }
             }
         }
 
@@ -92,6 +124,34 @@ namespace SGGames.Scripts.Card
         {
             if (!m_canClick) return;
 
+            // Store initial mouse position and time
+            m_mouseDownPosition = GetWorldMousePosition();
+            m_mouseDownTime = Time.time;
+            m_dragIntentDetected = false;
+
+            // Don't immediately select/deselect - wait to see if it's a drag
+        }
+
+        private void OnMouseUp()
+        {
+            // If no drag was detected, treat it as a click
+            if (!m_dragIntentDetected)
+            {
+                HandleClick();
+            }
+            else
+            {
+                HandleDragEnd();
+            }
+
+            // Reset drag detection state
+            m_dragIntentDetected = false;
+            m_isDragging = false;
+        }
+
+        private void HandleClick()
+        {
+            // Original click behavior
             if (!m_isSelected)
             {
                 OnSelectTween();
@@ -102,20 +162,19 @@ namespace SGGames.Scripts.Card
             }
         }
 
-        private void OnMouseUp()
+        private void HandleDragEnd()
         {
-            m_isDragging = false;
-            
+            // Original drag end behavior
             if (m_canSwawpWithOtherCard)
             {
                 SwapCardsAction?.Invoke(this, m_overlappedCard);
-                m_startDraggingPosition = transform.position;
             }
             else
             {
                 transform.position = m_startDraggingPosition;
             }
 
+            m_isSelected = false;
             m_canSwawpWithOtherCard = false;
             m_overlappedCard = null;
         }
@@ -142,9 +201,9 @@ namespace SGGames.Scripts.Card
         /// <summary>
         /// Set current position as start dragging position.
         /// </summary>
-        public void SetHandPosition()
+        public void SetHandPosition(Vector3 position)
         {
-            m_startDraggingPosition = transform.position;
+            m_startDraggingPosition = position;
         }
         
         public virtual void OnSelect()
@@ -174,6 +233,19 @@ namespace SGGames.Scripts.Card
         public void HideAtkPointHUD()
         {
             m_scoreDisplayer.gameObject.SetActive(false);
+        }
+
+        public void TweenCardToPosition(Vector3 position, Action onFinish)
+        {
+            m_canClick = false;
+            transform.LeanMove(position, k_MoveCardTweenDuration)
+                .setEase(LeanTweenType.easeOutCirc)
+                .setOnComplete(() =>
+                {
+                    transform.position = position;
+                    onFinish?.Invoke();
+                    m_canClick = true;
+                });
         }
 
         private Vector3 GetWorldMousePosition()
@@ -216,7 +288,7 @@ namespace SGGames.Scripts.Card
             {
                 Gizmos.color = Color.red;
                 var cardCenter = m_cardCollider.bounds.center;
-                Gizmos.DrawCube(cardCenter, Vector3.one);
+                Gizmos.DrawCube(cardCenter, m_cardCollider.size);
             }
         }
     }

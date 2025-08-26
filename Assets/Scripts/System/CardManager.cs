@@ -135,14 +135,27 @@ namespace SGGames.Scripts.System
 
         private void SwapCard(CardBehavior card1, CardBehavior card2)
         {
-            card1.transform.position = m_handPositions[card2.CardIndex].position;
-            card2.transform.position = m_handPositions[card1.CardIndex].position;
+            var prevCard1Pos = m_handPositions[card1.CardIndex].position;
+            var prevCard2Pos = m_handPositions[card2.CardIndex].position;
+            
             var card1Index = card1.CardIndex;
             var card2Index = card2.CardIndex;
-            card1.SetCardIndex(card2Index);
-            card2.SetCardIndex(card1Index);
-            card1.SetName();
-            card2.SetName();
+            
+            
+            card1.TweenCardToPosition(prevCard2Pos, () =>
+            {
+                card1.transform.position = prevCard2Pos;
+                card1.SetHandPosition(prevCard2Pos);
+                card1.SetCardIndex(card2Index);
+                card1.SetName();
+            });
+            card2.TweenCardToPosition(prevCard1Pos, () =>
+            {
+                card2.transform.position = prevCard1Pos;
+                card2.SetHandPosition(prevCard1Pos);
+                card2.SetCardIndex(card1Index);
+                card2.SetName();
+            });
         }
         
         /// <summary>
@@ -154,7 +167,7 @@ namespace SGGames.Scripts.System
         {
             Collider2D[] results = new Collider2D[3]; // Adjust size as needed
             ContactFilter2D filter = new ContactFilter2D();
-            int count = Physics2D.OverlapBox(card.CardCollider.bounds.center, Vector3.one, 0,filter, results);
+            int count = Physics2D.OverlapBox(card.CardCollider.bounds.center, card.CardCollider.size, 0,filter, results);
     
             for (int i = 0; i < count; i++)
             {
@@ -192,7 +205,7 @@ namespace SGGames.Scripts.System
                 .setOnComplete(()=>
                 {
                     card.transform.position = m_handPositions[handIndex].position;
-                    card.SetHandPosition();
+                    card.SetHandPosition(m_handPositions[handIndex].position);
                 });
         }
 
