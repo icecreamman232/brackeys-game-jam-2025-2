@@ -13,7 +13,8 @@ public class ItemManager : MonoBehaviour, IBootStrap
    [SerializeField] private ItemContainer m_itemContainer;
    [SerializeField] private Transform[] m_itemPositions;
    [SerializeField] private MultiplierDisplayer[] m_multiplierDisplayers;
-    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
+   [SerializeField] private ItemDescriptionDisplayer[] m_itemDescriptionDisplayers;
+   [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
    
    public void Install()
    {
@@ -32,6 +33,16 @@ public class ItemManager : MonoBehaviour, IBootStrap
    public void TriggerItem(Action<float> onUpdateMultiplierCounterAction, Action onFinish)
    {
       StartCoroutine(OnTriggerItemProcess(onUpdateMultiplierCounterAction, onFinish));
+   }
+
+   public void ShowItemDescription(ItemBehavior item)
+   {
+      m_itemDescriptionDisplayers[item.ItemIndex].ShowDescription(item.ItemData.Description);
+   }
+
+   public void HideItemDescription(ItemBehavior item)
+   {
+      m_itemDescriptionDisplayers[item.ItemIndex].HideDescription();
    }
 
    private IEnumerator OnTriggerItemProcess(Action<float> onUpdateMultiplierUIAction, Action onFinish)
@@ -72,6 +83,8 @@ public class ItemManager : MonoBehaviour, IBootStrap
       item.ItemIndex = currentIndex;
       item.transform.position = m_itemPositions[currentIndex].position;
       item.SetItemPosition(m_itemPositions[currentIndex].position);
+      item.ShowItemDescriptionAction = ShowItemDescription;
+      item.HideItemDescriptionAction = HideItemDescription;
       
       // Hook up the drag and drop functionality
       item.IsOverlappedOnItem = IsItemOverlapping;

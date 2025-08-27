@@ -28,6 +28,8 @@ public class ItemBehavior : MonoBehaviour, IItem
     protected (MultiplierType type, float value) DefaultItemValue => (m_itemData.MultiplierType,
         m_itemData.MultiplierType == MultiplierType.Multiply ? 1.0f : 0.0f);
     
+    public ItemData ItemData => m_itemData;
+    
     public int ItemIndex
     {
         get => m_itemIndex;
@@ -39,6 +41,8 @@ public class ItemBehavior : MonoBehaviour, IItem
     // Actions that ItemManager will hook into
     public Func<ItemBehavior, ItemBehavior> IsOverlappedOnItem;
     public Action<ItemBehavior, ItemBehavior> SwapItemsAction;
+    public Action<ItemBehavior> ShowItemDescriptionAction;
+    public Action<ItemBehavior> HideItemDescriptionAction;
     
     private void Awake()
     {
@@ -186,7 +190,11 @@ public class ItemBehavior : MonoBehaviour, IItem
     {
         if (!m_isDragging) // Only scale if not dragging
         {
-            transform.LeanScale(Vector3.one * 1.2f, 0.1f);
+            transform.LeanScale(Vector3.one * 1.2f, 0.1f)
+                .setOnComplete(() =>
+                {
+                    ShowItemDescriptionAction?.Invoke(this);
+                });
         }
     }
 
@@ -194,7 +202,9 @@ public class ItemBehavior : MonoBehaviour, IItem
     {
         if (!m_isDragging) // Only reset scale if not dragging
         {
+            LeanTween.cancel(this.gameObject,false);
             transform.localScale = Vector3.one;
+            HideItemDescriptionAction?.Invoke(this);
         }
     }
 
