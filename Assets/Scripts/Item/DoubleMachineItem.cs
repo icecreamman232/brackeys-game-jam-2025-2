@@ -12,7 +12,7 @@ namespace SGGames.Scripts.Item
                 return base.Use(cardManager);
             }
             
-            return (m_itemData.MultiplierType, 1.0f);
+            return DefaultItemValue;
         }
 
         private bool HasAtLeastTwoIdenticalCardsPlayed(CardManager cardManager)

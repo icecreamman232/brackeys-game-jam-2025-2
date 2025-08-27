@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
-  m_Name: Healthy Gut Item Data
+  m_Name: Odd Day Item Data
   m_EditorClassIdentifier: 
-  Name: Healthy Gut
-  Description: x1.2 multiply playing hand
-  Rarity: 1
-  MultiplierType: 1
-  MultiplierValue: 1.2
+  Name: Odd Day
+  Description: +3 mul if played even number cards (1, 3, 5)
+  Rarity: 0
+  MultiplierType: 0
+  MultiplierValue: 3
   Icon: {fileID: 1729840402284382006, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}

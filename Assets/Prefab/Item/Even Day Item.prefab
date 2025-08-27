@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1448711677918451805, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
       propertyPath: m_Name
-      value: Double Machine Item
+      value: Even Day Item
       objectReference: {fileID: 0}
     - target: {fileID: 2223658283352891548, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,11 +55,11 @@ PrefabInstance:
     - target: {fileID: 2566613340213612002, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
       propertyPath: m_itemData
       value: 
-      objectReference: {fileID: 11400000, guid: cb50fc9dda0171f479b79aedcd114525, type: 2}
+      objectReference: {fileID: 11400000, guid: 0c87ad79b338216438556cb3e23dacb0, type: 2}
     - target: {fileID: 3114872262600111719, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 148264454483829304, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
+      objectReference: {fileID: 1729840402284382006, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
     m_RemovedComponents:
     - {fileID: 2566613340213612002, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
     m_RemovedGameObjects: []
@@ -67,14 +67,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1448711677918451805, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6426696400806344712}
+      addedObject: {fileID: -9108572777794067594}
   m_SourcePrefab: {fileID: 100100000, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
 --- !u!1 &1719420555027810675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1448711677918451805, guid: 58a51868a3fe1814291f00666fc6d1fd, type: 3}
   m_PrefabInstance: {fileID: 271975724422402350}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6426696400806344712
+--- !u!114 &-9108572777794067594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,11 +83,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1719420555027810675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5abc0596e3494fb41874681c035869f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f020a36dd3e18843aae6b74bdc1b7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_itemIndex: 0
-  m_itemData: {fileID: 11400000, guid: cb50fc9dda0171f479b79aedcd114525, type: 2}
+  m_itemData: {fileID: 11400000, guid: 0c87ad79b338216438556cb3e23dacb0, type: 2}
   m_itemCollider: {fileID: 3283560778562283368}
 --- !u!61 &3283560778562283368 stripped
 BoxCollider2D:

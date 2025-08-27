@@ -24,6 +24,9 @@ public class ItemBehavior : MonoBehaviour, IItem
     private const float k_DragDistanceThreshold = 0.5f; // Minimum distance to start dragging
     private const float k_DragTimeThreshold = 0.2f;     // Minimum time before drag can start
 
+    protected (MultiplierType type, float value) DefaultItemValue => (m_itemData.MultiplierType,
+        m_itemData.MultiplierType == MultiplierType.Multiply ? 1.0f : 0.0f);
+    
     public int ItemIndex
     {
         get => m_itemIndex;
@@ -56,7 +59,6 @@ public class ItemBehavior : MonoBehaviour, IItem
         if (m_isDragging)
         {
             var newPos = GetWorldMousePosition();
-            //newPos.y -= 0.75f;
             transform.position = newPos;
         }
     }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
   m_Name: Double Machine Item Data
   m_EditorClassIdentifier: 
+  Name: Double Machine
+  Description: x2 multiply playing hand if there is at least 2 identical cards
   Rarity: 1
   MultiplierType: 1
   MultiplierValue: 2

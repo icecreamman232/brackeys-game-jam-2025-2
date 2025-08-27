@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Item Container
   m_EditorClassIdentifier: 
   CommonItems:
-  - {fileID: 6426696400806344712, guid: 257a1a09d24b6bb45a7acdfa9d9f138c, type: 3}
+  - {fileID: -9108572777794067594, guid: 3929859ab8d61ef42a5024c4ffd98e73, type: 3}
+  - {fileID: 514071866744464691, guid: 0c2edc33dfab265479d4bf5aed2f03db, type: 3}
   - {fileID: 2330666988085189836, guid: 9cf39903804db7a438fc8e203b4767b7, type: 3}
+  - {fileID: 6426696400806344712, guid: 257a1a09d24b6bb45a7acdfa9d9f138c, type: 3}
   UncommonItems:
   - {fileID: 2330666988085189836, guid: 9cf39903804db7a438fc8e203b4767b7, type: 3}
   - {fileID: 6426696400806344712, guid: 257a1a09d24b6bb45a7acdfa9d9f138c, type: 3}
