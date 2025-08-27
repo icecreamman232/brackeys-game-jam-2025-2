@@ -228,7 +228,7 @@ namespace SGGames.Scripts.Card
         public void ShowAtkPointHUD()
         {
             m_scoreDisplayer.gameObject.SetActive(true);
-            m_scoreDisplayer.text = m_atkPoint.ToString();
+            m_scoreDisplayer.text = $"+{m_atkPoint}";
         }
 
         public void HideAtkPointHUD()

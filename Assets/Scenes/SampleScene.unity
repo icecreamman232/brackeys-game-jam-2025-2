@@ -422,8 +422,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 9999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
+  m_sharedMaterial: {fileID: 2760996441849156086, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -570,15 +570,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
+  m_sharedMaterial: {fileID: 2760996441849156086, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281157606
-  m_fontColor: {r: 0.90196085, g: 0.2784314, b: 0.1764706, a: 1}
+    rgba: 4278922751
+  m_fontColor: {r: 1, g: 0.17702703, b: 0.042452812, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4550cdf9774e6f3498b4b04d801cf326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemyPrefab: {fileID: -8480237851779868008, guid: b48138a1ffc7b894da5e1522f9aabe0b, type: 3}
+  m_currentEnemy: {fileID: 0}
 --- !u!1 &509162291
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,7 +977,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.14901961, g: 0.1764706, b: 0.20392157, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1172,10 +1172,6 @@ PrefabInstance:
     - target: {fileID: 6753202728394843507, guid: 3e530001858dab040b95651e2d3209db, type: 3}
       propertyPath: m_hoverColor.r
       value: 0.7075472
-      objectReference: {fileID: 0}
-    - target: {fileID: 6753202728394843507, guid: 3e530001858dab040b95651e2d3209db, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6753202728394843507, guid: 3e530001858dab040b95651e2d3209db, type: 3}
       propertyPath: m_normalColor.b
@@ -2081,15 +2077,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
+  m_sharedMaterial: {fileID: 2760996441849156086, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4292577341
-  m_fontColor: {r: 0.23891956, g: 0.5321058, b: 0.8584906, a: 1}
+    rgba: 4294945280
+  m_fontColor: {r: 0, g: 0.6678457, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2220,8 +2216,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
+  m_sharedMaterial: {fileID: 2760996441849156086, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2245,8 +2241,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
