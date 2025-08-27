@@ -1,4 +1,5 @@
 using System;
+using SGGames.Scripts.Managers;
 using SGGames.Scripts.System;
 using UnityEngine;
 
@@ -62,6 +63,22 @@ public class ItemBehavior : MonoBehaviour, IItem
             transform.position = newPos;
         }
     }
+
+    public void PlayTriggerAnimation()
+    {
+        var originalLocal = transform.localPosition;
+        transform.LeanMoveLocalX(originalLocal.x - 0.15f, 0.1f)
+            .setEase(LeanTweenType.punch)
+            .setOnComplete(() =>
+            {
+                transform.LeanMoveLocalX(originalLocal.x + 0.15f, 0.1f)
+                    .setEase(LeanTweenType.punch)
+                    .setOnComplete(() =>
+                    {
+                        transform.localPosition = originalLocal;
+                    });
+            });
+    }
     
     public virtual (MultiplierType type, float value) Use(CardManager cardManager)
     {
@@ -78,6 +95,7 @@ public class ItemBehavior : MonoBehaviour, IItem
 
     private void OnMouseDrag()
     {
+        if (!InputManager.IsActivated) return;
         if (!m_canClick) return;
         
         // Check if we should start dragging
@@ -117,6 +135,7 @@ public class ItemBehavior : MonoBehaviour, IItem
 
     private void OnMouseDown()
     {
+        if (!InputManager.IsActivated) return;
         if (!m_canClick) return;
 
         // Store initial mouse position and time
@@ -127,6 +146,7 @@ public class ItemBehavior : MonoBehaviour, IItem
 
     private void OnMouseUp()
     {
+        if (!InputManager.IsActivated) return;
         // If drag was detected, handle drag end
         if (m_dragIntentDetected)
         {

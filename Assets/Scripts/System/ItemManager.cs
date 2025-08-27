@@ -12,7 +12,8 @@ public class ItemManager : MonoBehaviour, IBootStrap
    [SerializeField] private ScoreManager m_scoreManager;
    [SerializeField] private ItemContainer m_itemContainer;
    [SerializeField] private Transform[] m_itemPositions;
-   [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
+   [SerializeField] private MultiplierDisplayer[] m_multiplierDisplayers;
+    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
    
    public void Install()
    {
@@ -28,9 +29,9 @@ public class ItemManager : MonoBehaviour, IBootStrap
      
    }
 
-   public void TriggerItem(Action<float> onUpdateMultiplierUIAction, Action onFinish)
+   public void TriggerItem(Action<float> onUpdateMultiplierCounterAction, Action onFinish)
    {
-      StartCoroutine(OnTriggerItemProcess(onUpdateMultiplierUIAction, onFinish));
+      StartCoroutine(OnTriggerItemProcess(onUpdateMultiplierCounterAction, onFinish));
    }
 
    private IEnumerator OnTriggerItemProcess(Action<float> onUpdateMultiplierUIAction, Action onFinish)
@@ -39,6 +40,14 @@ public class ItemManager : MonoBehaviour, IBootStrap
       for (int i = 0; i < m_ownedItems.Count; i++)
       {
          var multiplierInfo = m_ownedItems[i].Use(m_cardManager);
+         
+         if (multiplierInfo.value > 0)
+         {
+            m_ownedItems[i].PlayTriggerAnimation();
+            m_multiplierDisplayers[i].ShowMultiplier(multiplierInfo.type, multiplierInfo.value);
+            yield return new WaitForSeconds(0.4f);
+         }
+         
          if (multiplierInfo.type == MultiplierType.Add)
          {
             totalMultiplier += multiplierInfo.value;

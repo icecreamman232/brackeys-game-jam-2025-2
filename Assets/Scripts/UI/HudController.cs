@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using SGGames.Scripts.Managers;
 using SGGames.Scripts.System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,14 +26,14 @@ namespace SGGames.Scripts.UI
 
         private void PlayButtonClicked()
         {
+            InputManager.SetActive(false);
             m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,
                 () =>
-            {
-                InputSystem.actions.Disable();
-                m_itemManager.TriggerItem(m_scoreDisplayer.AddMultiplier, ()=>
                 {
-                    StartCoroutine(OnProcessShowingFinalScore());
-                });
+                    m_itemManager.TriggerItem(m_scoreDisplayer.AddMultiplier, ()=>
+                    {
+                        StartCoroutine(OnProcessShowingFinalScore());
+                    });
             });
         }
 
@@ -43,7 +44,7 @@ namespace SGGames.Scripts.UI
             m_scoreDisplayer.ShowFinalScore(m_scoreManager.FinalScore);
             yield return new WaitForSeconds(k_ShowScoreTime);
             m_scoreDisplayer.HideAll();
-            InputSystem.actions.Enable();
+            InputManager.SetActive(true);
             
             m_cardManager.FinishTurn();
         }

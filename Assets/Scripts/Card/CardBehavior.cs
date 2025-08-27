@@ -1,5 +1,6 @@
 using System;
 using SGGames.Scripts.Data;
+using SGGames.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 
@@ -85,6 +86,7 @@ namespace SGGames.Scripts.Card
         
         private void OnMouseDrag()
         {
+            if (!InputManager.IsActivated) return;
             if (!m_canClick) return;
             
             // Check if we should start dragging
@@ -124,6 +126,7 @@ namespace SGGames.Scripts.Card
 
         private void OnMouseDown()
         {
+            if (!InputManager.IsActivated) return;
             if (!m_canClick) return;
 
             // Store initial mouse position and time
@@ -136,6 +139,7 @@ namespace SGGames.Scripts.Card
 
         private void OnMouseUp()
         {
+            if (!InputManager.IsActivated) return;
             // If no drag was detected, treat it as a click
             if (!m_dragIntentDetected)
             {
