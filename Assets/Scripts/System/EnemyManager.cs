@@ -1,21 +1,20 @@
+using SGGames.Scripts.Core;
 using UnityEngine;
 
 namespace SGGames.Scripts.System
 {
-    public class EnemyManager : MonoBehaviour, IBootStrap
+    public class EnemyManager : MonoBehaviour, IBootStrap, IGameService
     {
-        [SerializeField] private EnemyController m_enemyPrefab;
-        private EnemyController m_currentEnemy;
+        [SerializeField] private EnemyController m_currentEnemy;
 
-        private EnemyController CreateEnemy()
+        public void CreateEnemy(EnemyData data)
         {
-            var enemy = Instantiate(m_enemyPrefab, this.transform);
-            return enemy;
+            m_currentEnemy = Instantiate(data.EnemyPrefab, this.transform);
         }
 
         public void Install()
         {
-            m_currentEnemy = CreateEnemy();
+            ServiceLocator.RegisterService<EnemyManager>(this);
         }
 
         public void Uninstall()

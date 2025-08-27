@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using SGGames.Scripts.Managers;
 using SGGames.Scripts.System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace SGGames.Scripts.UI
 {
@@ -26,6 +24,8 @@ namespace SGGames.Scripts.UI
 
         private void PlayButtonClicked()
         {
+            if(!InputManager.IsActivated) return;
+            
             InputManager.SetActive(false);
             m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,
                 () =>
@@ -51,6 +51,7 @@ namespace SGGames.Scripts.UI
 
         private void DiscardButtonClicked()
         {
+            if(!InputManager.IsActivated) return;
             m_cardManager.DiscardSelectedCards();
         }
     }
