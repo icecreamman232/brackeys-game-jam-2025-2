@@ -293,6 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4d68fee46a28044a63072b30c5ea68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_cardVisualContainer: {fileID: 11400000, guid: 6fab483b3daf77c479c7870d5ec057ca, type: 2}
+  m_cardBG: {fileID: 712228002661509202}
+  m_atkPointBG: {fileID: 880834316530915532}
   m_atkPointText: {fileID: 8528536782898684519}
   m_cardName: {fileID: 8785984010785962330}
   m_cardDesc: {fileID: 4652621846533325729}

@@ -9,6 +9,13 @@ namespace SGGames.Scripts.Data
         Attack,
         Skill,
     }
+
+    public enum CardElement
+    {
+        Fire,
+        Water,
+        Thunder,
+    }
     
     [CreateAssetMenu(fileName = "Card Data", menuName = "SGGames/Card Data")]
     public class CardData : ScriptableObject
@@ -18,6 +25,7 @@ namespace SGGames.Scripts.Data
         public string Description;
         public CardInfo Info;
         public CardType Type;
+        public CardElement Element;
         public Sprite Icon;
         public CardBehavior CardPrefab;
         

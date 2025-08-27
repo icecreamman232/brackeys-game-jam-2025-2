@@ -184,6 +184,94 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: card_bg_flame
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 143
+        width: 96
+        height: 143
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 106cb2ee6c53f28408c8e08c3c6ae889
+      internalID: -1218738752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card_bg_thunder
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 143
+        width: 96
+        height: 143
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb39f59ba25f7654789501dc488e800b
+      internalID: -428922159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card_atk_point_thunder
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 123
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cc404286b926e1458babee0092e61e3
+      internalID: 49506600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card_atk_point_flame
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 123
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c40b439459ec6184287e01244648517c
+      internalID: -533024081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -199,7 +287,11 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       card_atk_point: -1150797853226429853
+      card_atk_point_flame: -533024081
+      card_atk_point_thunder: 49506600
       card_background: 5189691121816951081
+      card_bg_flame: -1218738752
+      card_bg_thunder: -428922159
       card_icon_bg: 4179361977775431376
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
