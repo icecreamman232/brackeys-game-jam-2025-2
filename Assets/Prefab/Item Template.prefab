@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_itemIndex: 0
   m_itemData: {fileID: 0}
+  m_itemCollider: {fileID: 3339363441409668678}
 --- !u!1 &9025098772699797247
 GameObject:
   m_ObjectHideFlags: 0
