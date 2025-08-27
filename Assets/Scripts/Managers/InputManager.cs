@@ -28,7 +28,7 @@ namespace SGGames.Scripts.Managers
             {
                 InputSystem.actions.Disable();
             }
-            Debug.Log("InputManager is " + (isActive ? "activated" : "deactivated"));
+            //Debug.Log("InputManager is " + (isActive ? "activated" : "deactivated"));
         }
         
         private void Update()

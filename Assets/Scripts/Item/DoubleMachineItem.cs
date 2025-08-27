@@ -25,12 +25,10 @@ namespace SGGames.Scripts.Item
                 {
                     if (selectedCards[i].CardData.Name == selectedCards[j].CardData.Name)
                     {
-                        Debug.Log("Activate Double Machine");
                         return true;
                     }
                 }
             }
-            Debug.Log("No Double Machine");
             return false;
         }
     }
