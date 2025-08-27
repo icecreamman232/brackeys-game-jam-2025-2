@@ -24,6 +24,9 @@ namespace SGGames.Scripts.System
         private const float k_ShowScoreTime = 0.3f;
         
         public int CurrentTurnNumber => m_currentTurnNumber;
+        
+        public List<CardBehavior> CardsInHand => m_cardsInHand;
+        public List<CardBehavior> SelectedCards => m_cardsInHand.Where(card=>card.IsSelected).ToList();
 
         public void Install()
         {
@@ -96,7 +99,7 @@ namespace SGGames.Scripts.System
             m_scoreManager.AddScoresFromCard(totalScore);
             onFinish?.Invoke();
             
-            DiscardSelectedCards();
+            //DiscardSelectedCards();
             
             InputSystem.actions.Enable();
         }
@@ -169,6 +172,7 @@ namespace SGGames.Scripts.System
         public void FinishTurn()
         {
             m_currentTurnNumber++;
+            DiscardSelectedCards();
         }
         
         /// <summary>

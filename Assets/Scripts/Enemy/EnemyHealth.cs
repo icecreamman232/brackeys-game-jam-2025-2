@@ -19,7 +19,6 @@ public class EnemyHealth : MonoBehaviour
             CurrentHealth = m_currentHealth,
             MaxHealth = m_maxHealth
         };
-        m_healthBarEvent.Raise(m_healthBarEventData);
         m_damageEvent.AddListener(TakeDamage);
     }
 

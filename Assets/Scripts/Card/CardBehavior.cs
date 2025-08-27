@@ -42,6 +42,7 @@ namespace SGGames.Scripts.Card
         private const float k_DragDistanceThreshold = 0.5f; // Minimum distance to start dragging
         private const float k_DragTimeThreshold = 0.2f;     // Minimum time before drag can start
 
+        public CardData CardData => m_cardData;
         public CardState CardState => m_cardState;
         public int CardIndex => m_cardIndex;
         public bool IsSelected => m_isSelected;
