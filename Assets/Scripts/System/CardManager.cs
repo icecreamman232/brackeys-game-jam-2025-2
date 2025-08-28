@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
-using SGGames.Scripts.Managers;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace SGGames.Scripts.System
 {
