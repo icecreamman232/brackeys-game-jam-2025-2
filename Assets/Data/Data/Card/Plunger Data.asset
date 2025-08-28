@@ -15,8 +15,9 @@ MonoBehaviour:
   Name: Plunger
   Description: Suck and unstuck
   Info:
+    Type: 0
+    EnergyCost: 2
     AttackPoint: 15
-  Type: 0
-  Element: 1
+    Element: 0
   Icon: {fileID: 7353190986194288448, guid: 4d506518612916549bce74798be43943, type: 3}
   CardPrefab: {fileID: 3135851394043013441, guid: d8051365d80177d438ff8541351b9233, type: 3}

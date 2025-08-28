@@ -8,4 +8,5 @@ public class SelectCardEventData
 {
     public int CardIndex;
     public bool IsSelected;
+    public int EnergyCost;
 }

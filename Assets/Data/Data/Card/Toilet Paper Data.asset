@@ -15,8 +15,9 @@ MonoBehaviour:
   Name: Paper Hero
   Description: Not all hero wears cape
   Info:
+    Type: 0
+    EnergyCost: 2
     AttackPoint: 9
-  Type: 0
-  Element: 0
+    Element: 2
   Icon: {fileID: 3844439038272575733, guid: 4d506518612916549bce74798be43943, type: 3}
   CardPrefab: {fileID: 3135851394043013441, guid: 7c5093f71442e6c428bd9161c5fbf480, type: 3}

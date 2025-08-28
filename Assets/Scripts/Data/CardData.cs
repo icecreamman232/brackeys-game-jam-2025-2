@@ -24,8 +24,6 @@ namespace SGGames.Scripts.Data
         [TextArea(3, 10)]
         public string Description;
         public CardInfo Info;
-        public CardType Type;
-        public CardElement Element;
         public Sprite Icon;
         public CardBehavior CardPrefab;
         
@@ -34,6 +32,9 @@ namespace SGGames.Scripts.Data
     [Serializable]
     public class CardInfo
     {
+        public CardType Type;
+        public int EnergyCost;
         public int AttackPoint;
+        public CardElement Element;
     }
 }

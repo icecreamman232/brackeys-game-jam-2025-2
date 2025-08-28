@@ -66,6 +66,8 @@ namespace SGGames.Scripts.Card
         public BoxCollider2D CardCollider => m_cardCollider;
         
         public Func<CardBehavior, CardBehavior> IsOverlappedOnCard;
+        public Func<int, bool> CanBeSelected;
+        public Action<int> UseEnergyAction;
         public Action<CardBehavior,CardBehavior> SwapCardsAction;
 
         private void Awake()
@@ -160,6 +162,10 @@ namespace SGGames.Scripts.Card
             // Original click behavior
             if (!m_isSelected)
             {
+                if (!CanBeSelected.Invoke(m_cardData.Info.EnergyCost))
+                {
+                    return;
+                }
                 OnSelectTween();
             }
             else
@@ -212,6 +218,7 @@ namespace SGGames.Scripts.Card
             m_selectCardEvent.Raise(new SelectCardEventData
             {
                 CardIndex = m_cardIndex,
+                EnergyCost = m_cardData.Info.EnergyCost,
                 IsSelected = true
             });
         }
@@ -221,6 +228,7 @@ namespace SGGames.Scripts.Card
             m_selectCardEvent.Raise(new SelectCardEventData
             {
                 CardIndex = m_cardIndex,
+                EnergyCost = m_cardData.Info.EnergyCost,
                 IsSelected = false
             });
         }

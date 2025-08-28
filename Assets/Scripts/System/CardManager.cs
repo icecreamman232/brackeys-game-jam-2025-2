@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
+using SGGames.Scripts.Core;
 using UnityEngine;
 
 namespace SGGames.Scripts.System
@@ -17,6 +18,7 @@ namespace SGGames.Scripts.System
         [SerializeField] private CardPile m_cardPile;
         [SerializeField] private DiscardPile m_discardPile;
         
+        private EnergyManager m_energyManager;
         private const float k_MovingToPositionTime = 0.7f;
         private const float k_MovingToPositionDelay = 0.05f;
         private const float k_DiscardMoveTime = 0.3f;
@@ -29,6 +31,7 @@ namespace SGGames.Scripts.System
 
         public void Install()
         {
+            m_energyManager = ServiceLocator.GetService<EnergyManager>();
             m_currentTurnNumber = 0;
             m_cardPile.InitializePile();
             DealInitialHand();
@@ -57,6 +60,7 @@ namespace SGGames.Scripts.System
             card.SetName();
             card.IsOverlappedOnCard = IsCardOverlapping;
             card.SwapCardsAction = SwapCard;
+            card.CanBeSelected = m_energyManager.CanSelectedThisCard;
             
             // Ensure the hand list can accommodate the index
             while (m_cardsInHand.Count <= handIndex)
@@ -170,6 +174,7 @@ namespace SGGames.Scripts.System
 
         public void FinishTurn()
         {
+            m_energyManager.Reset();
             m_currentTurnNumber++;
             DiscardSelectedCards();
         }
