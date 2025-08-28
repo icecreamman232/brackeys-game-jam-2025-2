@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Even Day Item Data
   m_EditorClassIdentifier: 
   Name: Even Day
-  Description: +3 mul if played even number cards (2, 4, 6)
+  Description: <color=#FF2D0B>+3 mul</color> if played even number cards (<color=orange>2</color>,
+    <color=orange>4</color>, <color=orange>6</color>)
   Rarity: 0
   MultiplierType: 0
   MultiplierValue: 3

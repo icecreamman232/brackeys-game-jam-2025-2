@@ -2,6 +2,7 @@ using System.Collections;
 using SGGames.Scripts.System;
 using TMPro;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace SGGames.Scripts.UI
 {
@@ -30,10 +31,13 @@ namespace SGGames.Scripts.UI
             StartCoroutine(AnimateNumberIncrease(startScore, targetScore, m_scoreText));
         }
         
-        public void AddMultiplier(float multiplier)
+        public void AddMultiplier(float startMul, float targetMul)
         {
             m_scoreCountingCanvasGroup.alpha = 1;
-            m_multiplierText.text = multiplier.ToString("F2");
+            m_multiplierText.rectTransform.LeanScale(Vector3.one * 1.2f, 0.1f)
+                .setEase(LeanTweenType.easeOutExpo)
+                .setLoopPingPong(1);
+            StartCoroutine(AnimateNumberIncrease(startMul, targetMul, m_multiplierText));
         }
 
         public void ShowFinalScore(int finalScore)
@@ -74,6 +78,35 @@ namespace SGGames.Scripts.UI
                 yield return null;
             }
             textDisplayer.text = targetValue.ToString();
+        }
+        
+        private IEnumerator AnimateNumberIncrease(float startValue, float targetValue, TextMeshProUGUI textDisplayer)
+        {
+            //Break if the value is the same
+            if (startValue == targetValue)
+            {
+                textDisplayer.text = targetValue.ToString("F2");
+                yield break;
+            }
+            float elapsedTime = 0;
+            float duration = CardManager.k_ShowScoreTime;
+            float start = startValue;
+            float target = targetValue;
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / duration;
+                float lerpValue = Mathf.Lerp(start, target, t);
+                textDisplayer.text = lerpValue.ToString("F2");
+                yield return null;
+            }
+            textDisplayer.text = targetValue.ToString("F2");
+        }
+
+        public void Reset()
+        {
+            m_scoreText.text = "0";
+            m_multiplierText.text = "1.0";
         }
     }
 }

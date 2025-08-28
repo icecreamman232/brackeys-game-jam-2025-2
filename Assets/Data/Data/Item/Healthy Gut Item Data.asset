@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Healthy Gut Item Data
   m_EditorClassIdentifier: 
   Name: Healthy Gut
-  Description: x1.2 multiply playing hand
+  Description: <color=#FF2D0B>x1.2 mul</color> playing hand
   Rarity: 1
   MultiplierType: 1
   MultiplierValue: 1.2

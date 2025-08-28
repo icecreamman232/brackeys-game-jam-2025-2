@@ -502,7 +502,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is a very long description of this card that i need to show to you
+  m_text: <color=#FF2D0B>+3 mul</color> if played even number cards (<color=orange>2</color>,
+    <color=orange>4</color>, <color=orange>6</color>)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e1133bec46a2df94cbd3d124cb12b6a3, type: 2}
   m_sharedMaterial: {fileID: 9162854282812151930, guid: e1133bec46a2df94cbd3d124cb12b6a3, type: 2}
@@ -529,8 +530,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.2
-  m_fontSizeBase: 1.2
+  m_fontSize: 1.5
+  m_fontSizeBase: 1.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

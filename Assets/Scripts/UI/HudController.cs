@@ -27,6 +27,7 @@ namespace SGGames.Scripts.UI
             if(!InputManager.IsActivated) return;
             
             InputManager.SetActive(false);
+            m_scoreDisplayer.Reset();
             m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,
                 () =>
                 {

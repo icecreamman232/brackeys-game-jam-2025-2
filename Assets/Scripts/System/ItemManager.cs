@@ -30,7 +30,7 @@ public class ItemManager : MonoBehaviour, IBootStrap
      
    }
 
-   public void TriggerItem(Action<float> onUpdateMultiplierCounterAction, Action onFinish)
+   public void TriggerItem(Action<float, float> onUpdateMultiplierCounterAction, Action onFinish)
    {
       StartCoroutine(OnTriggerItemProcess(onUpdateMultiplierCounterAction, onFinish));
    }
@@ -45,18 +45,18 @@ public class ItemManager : MonoBehaviour, IBootStrap
       m_itemDescriptionDisplayers[item.ItemIndex].HideDescription();
    }
 
-   private IEnumerator OnTriggerItemProcess(Action<float> onUpdateMultiplierUIAction, Action onFinish)
+   private IEnumerator OnTriggerItemProcess(Action<float, float> onUpdateMultiplierUIAction, Action onFinish)
    {
       var totalMultiplier = 1.0f;
       for (int i = 0; i < m_ownedItems.Count; i++)
       {
          var multiplierInfo = m_ownedItems[i].Use(m_cardManager);
          
-         if (multiplierInfo.value > 0)
+         if (multiplierInfo.value > 1.0f)
          {
             m_ownedItems[i].PlayTriggerAnimation();
             m_multiplierDisplayers[i].ShowMultiplier(multiplierInfo.type, multiplierInfo.value);
-            yield return new WaitForSeconds(0.4f);
+            //yield return new WaitForSeconds(0.4f);
          }
          
          if (multiplierInfo.type == MultiplierType.Add)
@@ -67,9 +67,18 @@ public class ItemManager : MonoBehaviour, IBootStrap
          {
             totalMultiplier *= multiplierInfo.value;
          }
-         Debug.Log($"Total Multiplier: {totalMultiplier}");
-         onUpdateMultiplierUIAction?.Invoke(totalMultiplier);
-         yield return new WaitForSeconds(0.2f);
+
+         if (multiplierInfo.value > 1.0f)
+         {
+            var mulForAnimation = totalMultiplier - 1;
+            if (mulForAnimation <= 1.0f)
+            {
+               mulForAnimation = 1.0f;
+            }
+         
+            onUpdateMultiplierUIAction?.Invoke(mulForAnimation, totalMultiplier);
+            yield return new WaitForSeconds(CardManager.k_ShowScoreTime + 0.2f + 0.2f);
+         }
       }
       
       m_scoreManager.AddMultiplier(totalMultiplier);

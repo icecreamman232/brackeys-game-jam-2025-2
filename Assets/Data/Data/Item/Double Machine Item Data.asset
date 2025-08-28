@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Double Machine Item Data
   m_EditorClassIdentifier: 
   Name: Double Machine
-  Description: x2 multiply playing hand if there is at least 2 identical cards
+  Description: <color=#FF2D0B>x2 mul</color> playing hand if there is at least <color=orange>2</color>
+    identical cards
   Rarity: 1
   MultiplierType: 1
   MultiplierValue: 2
