@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Imodium
   Description: Him - The last solution
   Info:
-    AttackPoint: 8
+    AttackPoint: 24
   Type: 0
   Element: 2
   Icon: {fileID: 693731428, guid: 4d506518612916549bce74798be43943, type: 3}

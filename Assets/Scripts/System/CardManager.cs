@@ -22,7 +22,7 @@ namespace SGGames.Scripts.System
         private const float k_MovingToPositionTime = 0.7f;
         private const float k_MovingToPositionDelay = 0.05f;
         private const float k_DiscardMoveTime = 0.3f;
-        private const float k_ShowScoreTime = 0.3f;
+        public const float k_ShowScoreTime = 0.3f;
         
         public int CurrentTurnNumber => m_currentTurnNumber;
         
@@ -77,12 +77,12 @@ namespace SGGames.Scripts.System
             }
         }
 
-        public void CountScoreFromSelectedCards(Action<int> addingScoreToUIAction, Action onFinish)
+        public void CountScoreFromSelectedCards(Action<int, int> addingScoreToUIAction, Action onFinish)
         {
             StartCoroutine(OnCountingScore(addingScoreToUIAction, onFinish));
         }
         
-        private IEnumerator OnCountingScore(Action<int> addingScoreToUIAction, Action onFinish)
+        private IEnumerator OnCountingScore(Action<int, int> addingScoreToUIAction, Action onFinish)
         {
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
             var totalScore = 0;
@@ -90,9 +90,15 @@ namespace SGGames.Scripts.System
             foreach (var card in selectedCards)
             {
                 totalScore += card.AttackPts;
-                addingScoreToUIAction?.Invoke(totalScore);
+                var startScoreForAnimation = totalScore - 10;
+                //Prevent negative score
+                if (startScoreForAnimation < 0)
+                {
+                    startScoreForAnimation = totalScore;
+                }
+                addingScoreToUIAction?.Invoke(startScoreForAnimation, totalScore);
                 AnimateShowScore(card, null);
-                yield return new WaitForSeconds(k_ShowScoreTime);
+                yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
             }
             
             m_scoreManager.AddScoresFromCard(totalScore);

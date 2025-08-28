@@ -159,6 +159,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: item-desc-bg
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 65
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 7, y: 7, z: 7, w: 7}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a37bd92a1cbca75459f516c8d7402132
+      internalID: 1961039591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white-round-corner-rect
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 65
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 7, y: 7, z: 7, w: 7}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da16ed7c81695f44d840aa74239f8798
+      internalID: 606868962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -175,6 +219,8 @@ TextureImporter:
     nameFileIdTable:
       button-clicked: 8545957714173672369
       button-normal: 7595667864703430088
+      item-desc-bg: 1961039591
+      white-round-corner-rect: 606868962
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

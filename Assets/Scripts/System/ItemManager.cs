@@ -37,7 +37,7 @@ public class ItemManager : MonoBehaviour, IBootStrap
 
    public void ShowItemDescription(ItemBehavior item)
    {
-      m_itemDescriptionDisplayers[item.ItemIndex].ShowDescription(item.ItemData.Description);
+      m_itemDescriptionDisplayers[item.ItemIndex].ShowDescription(item.ItemData.Name, item.ItemData.Description, item.ItemData.Rarity);
    }
 
    public void HideItemDescription(ItemBehavior item)

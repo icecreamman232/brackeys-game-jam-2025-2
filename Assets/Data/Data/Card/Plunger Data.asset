@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Plunger
   Description: Suck and unstuck
   Info:
-    AttackPoint: 5
+    AttackPoint: 15
   Type: 0
   Element: 1
   Icon: {fileID: 7353190986194288448, guid: 4d506518612916549bce74798be43943, type: 3}
