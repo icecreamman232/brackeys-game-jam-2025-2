@@ -10,6 +10,7 @@ namespace SGGames.Scripts.System
         public void CreateEnemy(EnemyData data)
         {
             m_currentEnemy = Instantiate(data.EnemyPrefab, this.transform);
+            m_currentEnemy.Health.OnDeath = OnEnemyDeath;
         }
 
         public void Install()
@@ -20,6 +21,15 @@ namespace SGGames.Scripts.System
         public void Uninstall()
         {
             m_currentEnemy = null;
+        }
+
+        private void OnEnemyDeath()
+        {
+            m_currentEnemy.Health.OnDeath = null;
+            Destroy(m_currentEnemy.gameObject);
+            m_currentEnemy = null;
+            var levelManager = ServiceLocator.GetService<LevelManager>();
+            levelManager.LoadNextLevel();
         }
     }
 }

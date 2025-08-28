@@ -362,6 +362,7 @@ MonoBehaviour:
   m_introCanvas: {fileID: 1286141957}
   m_enemies:
   - {fileID: 11400000, guid: a0b1f78b5da4e67499f3b27bf1cb44b5, type: 2}
+  - {fileID: 11400000, guid: 0b90d25c90d31c842a6f4fb44dbf7cc1, type: 2}
 --- !u!1 &300462406
 GameObject:
   m_ObjectHideFlags: 0

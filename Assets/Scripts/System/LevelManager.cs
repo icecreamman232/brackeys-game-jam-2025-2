@@ -20,6 +20,10 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
     private IEnumerator OnLoadFirstLevel()
     {
         InputManager.SetActive(false);
+        if (m_currentLevel >= m_enemies.Length)
+        {
+            m_currentLevel = m_enemies.Length - 1;       
+        }
         CreateEnemy();
         yield return StartCoroutine(PlayIntroAnimation());
         InputManager.SetActive(true);
@@ -33,18 +37,20 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
     
     private IEnumerator PlayIntroAnimation()
     {
-        m_introCanvas.PlayIntro(m_enemies[m_currentLevel].EnemyIcon, m_enemies[0].EnemyName);
+        m_introCanvas.PlayIntro(m_enemies[m_currentLevel].EnemyIcon, m_enemies[m_currentLevel].EnemyName);
         yield return new WaitForSeconds(k_IntroAnimDuration);
     }
 
     public void LoadNextLevel()
     {
+        Debug.Log("Load next level");
         StartCoroutine(OnLoadNextLevel());
     }
 
     private IEnumerator OnLoadNextLevel()
     {
         InputManager.SetActive(false);
+        m_currentLevel++;
         CreateEnemy();
         yield return StartCoroutine(PlayIntroAnimation());
         InputManager.SetActive(true);

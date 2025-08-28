@@ -22,7 +22,8 @@ public class EnemyHealthBar : MonoBehaviour
 
     private void UpdateHealthBar(EnemyHealthBarEventData data)
     {
+        //Debug.Log("Current health: " + data.CurrentHealth + " Max health: " + data.MaxHealth + "");
         m_healthBar.fillAmount = 1 - MathHelpers.Remap(data.CurrentHealth, 0, data.MaxHealth, 0, 1);
-        m_canvasGroup.alpha = m_healthBar.fillAmount > 0 ? 1 : 0;
+        m_canvasGroup.alpha = m_healthBar.fillAmount >= 0 ? 1 : 0;
     }
 }
