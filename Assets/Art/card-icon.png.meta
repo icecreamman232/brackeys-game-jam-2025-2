@@ -369,7 +369,7 @@ TextureImporter:
         width: 64
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -378,6 +378,94 @@ TextureImporter:
       bones: []
       spriteID: af04989c4078ef34f9ccfce182877674
       internalID: 1726884741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-gun-icon
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f67e212b9664c3458c7b8b5d6bd2b91
+      internalID: 368207146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: poison-perfume
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92b65caf76f6f8748897df9677df857c
+      internalID: -1869727571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left-hand-cleanse-god-icon
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf76ddc19a3ed0a46b0db1ab990c0cc7
+      internalID: 2069688721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right-hand-cleanse-god-icon
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41dde977e28795e44a122295a76d8b4a
+      internalID: -1099179596
       vertices: []
       indices: 
       edges: []
@@ -404,10 +492,14 @@ TextureImporter:
       dung-beetle-icon: 2035897528
       golden-toilet-paper-icon: 979490683
       leaves-icon: -5947906166468842675
+      left-hand-cleanse-god-icon: 2069688721
       old-bird-icon: -1375343736
       plunger-icon: 7353190986194288448
+      poison-perfume: -1869727571
+      right-hand-cleanse-god-icon: -1099179596
       syringe-icon: -1490837788
       toilet-paper-icon: 3844439038272575733
+      water-gun-icon: 368207146
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
