@@ -20,12 +20,15 @@ public enum CardComboRuleType
 public abstract class CardComboRule
 {
     private CardComboRuleType m_ruleType;
+    private int m_bonusEnergy;
     
     public CardComboRuleType RuleType => m_ruleType;
+    public int BonusEnergy => m_bonusEnergy;
     
-    public CardComboRule(CardComboRuleType ruleType)
+    public CardComboRule(CardComboRuleType ruleType, int bonusEnergy)
     {
         m_ruleType = ruleType;
+        m_bonusEnergy = bonusEnergy;
     }
     
     public abstract bool IsMatch(List<CardBehavior> selectedCards);

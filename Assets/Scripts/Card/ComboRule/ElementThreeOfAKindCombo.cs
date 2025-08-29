@@ -5,9 +5,9 @@ using SGGames.Scripts.Card;
 /// <summary>
 /// Rule 3 of A Kind: There is at least 3 cards that has same atk point and element
 /// </summary>
-public class ThreeOfAKindCombo : CardComboRule
+public class ElementThreeOfAKindCombo : CardComboRule
 {
-    public ThreeOfAKindCombo(CardComboRuleType ruleType) : base(ruleType)
+    public ElementThreeOfAKindCombo(CardComboRuleType ruleType, int bonusEnergy) : base(ruleType, bonusEnergy)
     {
     }
 

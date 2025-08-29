@@ -69,6 +69,8 @@ namespace SGGames.Scripts.Card
         public Func<int, bool> CanBeSelected;
         public Action<int> UseEnergyAction;
         public Action<CardBehavior,CardBehavior> SwapCardsAction;
+        public Action SelectAction;
+        public Action DeselectAction;
 
         private void Awake()
         {
@@ -215,6 +217,7 @@ namespace SGGames.Scripts.Card
         
         public virtual void OnSelect()
         {
+            SelectAction?.Invoke();
             m_selectCardEvent.Raise(new SelectCardEventData
             {
                 CardIndex = m_cardIndex,
@@ -225,6 +228,7 @@ namespace SGGames.Scripts.Card
         
         public virtual void OnDeselect()
         {
+            DeselectAction?.Invoke();
             m_selectCardEvent.Raise(new SelectCardEventData
             {
                 CardIndex = m_cardIndex,

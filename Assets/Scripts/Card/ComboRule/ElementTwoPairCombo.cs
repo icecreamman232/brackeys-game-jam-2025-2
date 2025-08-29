@@ -3,7 +3,7 @@ using SGGames.Scripts.Card;
 
 public class ElementTwoPairCombo : CardComboRule
 {
-    public ElementTwoPairCombo(CardComboRuleType ruleType) : base(ruleType)
+    public ElementTwoPairCombo(CardComboRuleType ruleType, int bonusEnergy) : base(ruleType, bonusEnergy)
     {
     }
 

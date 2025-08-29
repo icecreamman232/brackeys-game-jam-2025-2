@@ -9,14 +9,27 @@ public class CardComboValidator
     {
         m_cardComboRules = new CardComboRule[]
         {
-            new OnePairCombo(CardComboRuleType.OnePair),
-            new ElementOnePairCombo(CardComboRuleType.ElementOnePair),
-            new TwoPairCombo(CardComboRuleType.TwoPair),
-            new ElementTwoPairCombo(CardComboRuleType.ElementTwoPair),
-            new ThreeOfAKindCombo(CardComboRuleType.ElementThreeOfAKind),
-            new StraightCardCombo(CardComboRuleType.Straight), //Straight
-            new ElementStraightCardCombo(CardComboRuleType.ElementStraight), //Straight Flush
+            new ElementStraightCardCombo(CardComboRuleType.ElementStraight, 5), //Straight Flush
+            new StraightCardCombo(CardComboRuleType.Straight, 4), //Straight
+            new ElementThreeOfAKindCombo(CardComboRuleType.ElementThreeOfAKind, 3),
+            new ElementTwoPairCombo(CardComboRuleType.ElementTwoPair, 2),
+            new TwoPairCombo(CardComboRuleType.TwoPair, 1),
+            new ElementOnePairCombo(CardComboRuleType.ElementOnePair, 1),
+            new OnePairCombo(CardComboRuleType.OnePair, 0),
         };
+    }
+
+    public int GetComboBonusEnergy(CardComboRuleType ruleType)
+    {
+        foreach(var rule in m_cardComboRules)
+        {
+            if(rule.RuleType == ruleType)
+            {
+                return rule.BonusEnergy;
+            }
+        }
+        
+        return 0;
     }
 
     public CardComboRuleType IsMatch(List<CardBehavior> selectedCards)

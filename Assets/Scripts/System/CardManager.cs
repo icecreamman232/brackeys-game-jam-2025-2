@@ -17,7 +17,8 @@ namespace SGGames.Scripts.System
         [SerializeField] private List<CardBehavior> m_cardsInHand;
         [SerializeField] private CardPile m_cardPile;
         [SerializeField] private DiscardPile m_discardPile;
-        
+
+        private CardComboRuleType m_currentComboType = CardComboRuleType.None;
         private CardComboValidator m_cardComboValidator;
         private EnergyManager m_energyManager;
         private const float k_MovingToPositionTime = 0.7f;
@@ -63,6 +64,8 @@ namespace SGGames.Scripts.System
             card.IsOverlappedOnCard = IsCardOverlapping;
             card.SwapCardsAction = SwapCard;
             card.CanBeSelected = m_energyManager.CanSelectedThisCard;
+            card.SelectAction = OnCardSelected;
+            card.DeselectAction = OnCardDeselected;
             
             // Ensure the hand list can accommodate the index
             while (m_cardsInHand.Count <= handIndex)
@@ -83,8 +86,7 @@ namespace SGGames.Scripts.System
 
         public void CountScoreFromSelectedCards(Action<int, int> addingScoreToUIAction, Action onFinish)
         {
-            var comboType = m_cardComboValidator.IsMatch(SelectedCards);
-            Debug.Log($"Combo type: {comboType}");
+            m_currentComboType = CardComboRuleType.None;
             StartCoroutine(OnCountingScore(addingScoreToUIAction, onFinish));
         }
         
@@ -113,6 +115,8 @@ namespace SGGames.Scripts.System
 
         public void DiscardSelectedCards()
         {
+            m_currentComboType = CardComboRuleType.None;
+            m_energyManager.Reset();
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
             var emptySlot = new List<int>();
             foreach (var card in selectedCards)
@@ -208,6 +212,38 @@ namespace SGGames.Scripts.System
             return null;
 
         }
+
+        private void OnCardSelected()
+        {
+            UpdateComboBonus();
+        }
+
+        private void OnCardDeselected()
+        {
+            UpdateComboBonus();
+        }
+        
+        private void UpdateComboBonus()
+        {
+            CardComboRuleType newComboType = m_cardComboValidator.IsMatch(SelectedCards);
+    
+            // Remove previous combo bonus if we had one
+            if (m_currentComboType != CardComboRuleType.None)
+            {
+                var previousBonusEnergy = m_cardComboValidator.GetComboBonusEnergy(m_currentComboType);
+                m_energyManager.RemoveEnergy(previousBonusEnergy);
+            }
+    
+            // Add new combo bonus if we have one
+            if (newComboType != CardComboRuleType.None)
+            {
+                var bonusEnergy = m_cardComboValidator.GetComboBonusEnergy(newComboType);
+                m_energyManager.AddEnergy(bonusEnergy);
+            }
+    
+            m_currentComboType = newComboType;
+        }
+
 
         private void AnimateCardToDiscard(CardBehavior card)
         {

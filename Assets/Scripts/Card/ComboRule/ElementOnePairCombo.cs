@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using SGGames.Scripts.Card;
-using UnityEngine;
 
 public class ElementOnePairCombo : CardComboRule
 {
-    public ElementOnePairCombo(CardComboRuleType ruleType) : base(ruleType)
+    public ElementOnePairCombo(CardComboRuleType ruleType,int bonusEnergy) : base(ruleType, bonusEnergy)
     {
     }
 

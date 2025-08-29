@@ -13,7 +13,7 @@ public class EnergyManager : MonoBehaviour, IGameService, IBootStrap
     public bool CanSelectedThisCard(int energyCost)
     {
         return true;
-        return m_energyRemaining > 0 && energyCost <= m_energyRemaining;
+        return m_energyRemaining > 0;
     }
 
     public void Reset()
@@ -24,28 +24,18 @@ public class EnergyManager : MonoBehaviour, IGameService, IBootStrap
         m_energyHUDEvent.Raise(m_energyHUDInfo);
     }
 
-    public void UseEnergy(int energyCost)
+    public void RemoveEnergy(int energyCost)
     {
-        return;
         m_energyRemaining -= energyCost;
-        if (m_energyRemaining <= 0)
-        {
-            m_energyRemaining = 0;
-        }
         
         m_energyHUDInfo.CurrentEnergy = m_energyRemaining;
         m_energyHUDInfo.MaxEnergy = m_maxEnergy;
         m_energyHUDEvent.Raise(m_energyHUDInfo);
     }
     
-    public void RecoverEnergy(int energyRecovered)
+    public void AddEnergy(int energyRecovered)
     {
-        return;
         m_energyRemaining += energyRecovered;
-        if (m_energyRemaining > m_maxEnergy)
-        {
-            m_energyRemaining = m_maxEnergy;
-        }
         
         m_energyHUDInfo.CurrentEnergy = m_energyRemaining;
         m_energyHUDInfo.MaxEnergy = m_maxEnergy;
@@ -73,11 +63,11 @@ public class EnergyManager : MonoBehaviour, IGameService, IBootStrap
     {
         if (selectCardEventData.IsSelected)
         {
-            UseEnergy(selectCardEventData.EnergyCost);
+            RemoveEnergy(selectCardEventData.EnergyCost);
         }
         else
         {
-            RecoverEnergy(selectCardEventData.EnergyCost);    
+            AddEnergy(selectCardEventData.EnergyCost);    
         }
     }
 }

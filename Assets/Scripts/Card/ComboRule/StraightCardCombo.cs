@@ -6,7 +6,7 @@ using SGGames.Scripts.Card;
 /// </summary>
 public class StraightCardCombo: CardComboRule
 {
-    public StraightCardCombo(CardComboRuleType ruleType) : base(ruleType)
+    public StraightCardCombo(CardComboRuleType ruleType, int bonusEnergy) : base(ruleType, bonusEnergy)
     {
     }
 
