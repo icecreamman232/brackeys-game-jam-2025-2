@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
         }
         CreateEnemy();
         yield return StartCoroutine(PlayIntroAnimation());
+        ServiceLocator.GetService<CardManager>().DealFirstHands();
         InputManager.SetActive(true);
     }
 
@@ -57,6 +58,7 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
         }
         CreateEnemy();
         yield return StartCoroutine(PlayIntroAnimation());
+        ServiceLocator.GetService<CardManager>().DealFirstHands();
         InputManager.SetActive(true);
     }
 

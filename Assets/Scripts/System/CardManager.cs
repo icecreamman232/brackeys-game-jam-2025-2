@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace SGGames.Scripts.System
 {
-    public class CardManager : MonoBehaviour, IBootStrap
+    public class CardManager : MonoBehaviour, IBootStrap, IGameService
     {
         [SerializeField] private int m_currentTurnNumber;
         [SerializeField] private ScoreManager m_scoreManager;
@@ -17,6 +17,7 @@ namespace SGGames.Scripts.System
         [SerializeField] private List<CardBehavior> m_cardsInHand;
         [SerializeField] private CardPile m_cardPile;
         [SerializeField] private DiscardPile m_discardPile;
+        [SerializeField] private GameEvent m_gameEvent;
 
         private CardComboRuleType m_currentComboType = CardComboRuleType.None;
         private CardComboValidator m_cardComboValidator;
@@ -33,20 +34,23 @@ namespace SGGames.Scripts.System
 
         public void Install()
         {
+            ServiceLocator.RegisterService<CardManager>(this);
             m_energyManager = ServiceLocator.GetService<EnergyManager>();
+            m_gameEvent.AddListener(OnGameEventChanged);
             m_currentTurnNumber = 0;
             m_cardComboValidator = new CardComboValidator();
-            m_cardPile.InitializePile();
-            DealInitialHand();
         }
 
         public void Uninstall()
         {
-            
+            ServiceLocator.UnregisterService<CardManager>();
+            m_gameEvent.RemoveListener(OnGameEventChanged);
         }
 
-        private void DealInitialHand()
+        public void DealFirstHands()
         {
+            m_cardPile.InitializePile();
+            
             var cardsToDeal = m_cardPile.DrawCards(m_maxHandSize);
             for (int i = 0; i < cardsToDeal.Count; i++)
             {
@@ -56,6 +60,20 @@ namespace SGGames.Scripts.System
             }
         }
 
+        public void Reset()
+        {
+            StopAllCoroutines();
+            m_currentTurnNumber = 0;
+            m_cardPile.ResetPile();
+            m_discardPile.ResetPile();
+            foreach (var card in m_cardsInHand)
+            {
+                card.ResetSelection();
+                Destroy(card.gameObject);
+            }
+            m_cardsInHand.Clear();
+        }
+        
         private void AddCardToHand(CardBehavior card, int handIndex)
         {
             card.ChangeCardState(CardState.InHand);
@@ -243,7 +261,15 @@ namespace SGGames.Scripts.System
     
             m_currentComboType = newComboType;
         }
-
+        
+        private void OnGameEventChanged(GameEventType eventType)
+        {
+            if (eventType == GameEventType.Victory)
+            {
+                Reset();
+            }
+        }
+        
 
         private void AnimateCardToDiscard(CardBehavior card)
         {

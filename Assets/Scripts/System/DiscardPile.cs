@@ -41,4 +41,12 @@ public class DiscardPile : MonoBehaviour
         card.gameObject.SetActive(false);
     }
 
+    public void ResetPile()
+    {
+        foreach (var card in m_cardInDiscard)
+        {
+            Destroy(card.gameObject);       
+        }
+        m_cardInDiscard.Clear();
+    }
 }

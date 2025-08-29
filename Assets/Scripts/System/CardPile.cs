@@ -55,6 +55,15 @@ namespace SGGames.Scripts.Card
             }
         }
 
+        public void ResetPile()
+        {
+            foreach(var card in m_cardsInPile)
+            {
+                Destroy(card.gameObject);
+            }
+            m_cardsInPile.Clear();
+        }
+
         private void AddCardToPile(CardBehavior card)
         {
             if (card == null)

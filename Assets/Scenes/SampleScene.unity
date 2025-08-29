@@ -1843,6 +1843,7 @@ MonoBehaviour:
   m_cardsInHand: []
   m_cardPile: {fileID: 2008295626}
   m_discardPile: {fileID: 1655555930}
+  m_gameEvent: {fileID: 11400000, guid: 111420eb7606f594a83599265b3ec6a0, type: 2}
 --- !u!224 &729975916 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 858307673551341057, guid: d8c9aa68e70ac294db03d7aac97c45b5, type: 3}
