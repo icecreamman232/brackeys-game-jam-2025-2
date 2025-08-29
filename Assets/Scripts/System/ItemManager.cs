@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SGGames.Scripts.Core;
 using SGGames.Scripts.System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class ItemManager : MonoBehaviour, IBootStrap
+public class ItemManager : MonoBehaviour, IBootStrap, IGameService
 {
    [SerializeField] private CardManager m_cardManager;
    [SerializeField] private ScoreManager m_scoreManager;
@@ -16,10 +17,12 @@ public class ItemManager : MonoBehaviour, IBootStrap
    [SerializeField] private ItemDescriptionDisplayer[] m_itemDescriptionDisplayers;
    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
 
-   private const int k_DefaultNumberItem = 5;
+   private const int k_DefaultNumberItem = 2;
    
    public void Install()
    {
+      ServiceLocator.RegisterService<ItemManager>(this);
+      
       for (int i = 0; i < k_DefaultNumberItem; i++)
       {
          var item = GetRandomItem();
@@ -29,7 +32,7 @@ public class ItemManager : MonoBehaviour, IBootStrap
 
    public void Uninstall()
    {
-     
+      ServiceLocator.UnregisterService<ItemManager>();
    }
 
    public void TriggerItem(Action<float, float> onUpdateMultiplierCounterAction, Action onFinish)
@@ -45,6 +48,18 @@ public class ItemManager : MonoBehaviour, IBootStrap
    public void HideItemDescription(ItemBehavior item)
    {
       m_itemDescriptionDisplayers[item.ItemIndex].HideDescription();
+   }
+
+   public List<ItemData> GetRandomItems(int number)
+   {
+      var items = new List<ItemData>();
+      for (int i = 0; i < number; i++)
+      {
+         var item = GetRandomItem();
+         items.Add(item.ItemData);
+      }
+
+      return items;
    }
 
    private IEnumerator OnTriggerItemProcess(Action<float, float> onUpdateMultiplierUIAction, Action onFinish)

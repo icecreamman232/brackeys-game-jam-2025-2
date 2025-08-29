@@ -38,14 +38,15 @@ namespace SGGames.Scripts.System
                 m_gameEvent.Raise(GameEventType.Defeat);
             }
         }
-
+        
+        [ContextMenu("Kill Enemy")]
         private void OnEnemyDeath()
         {
+            m_currentEnemy.Health.OnTakeDamage = null;
             m_currentEnemy.Health.OnDeath = null;
             Destroy(m_currentEnemy.gameObject);
             m_currentEnemy = null;
-            var levelManager = ServiceLocator.GetService<LevelManager>();
-            levelManager.LoadNextLevel();
+            m_gameEvent.Raise(GameEventType.Victory);
         }
     }
 }
