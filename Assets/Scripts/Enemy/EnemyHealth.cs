@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     private bool m_canTakeHit = true;
 
     public Action OnDeath;
+    public Action OnTakeDamage;
 
     public void Initialize()
     {
@@ -39,6 +40,8 @@ public class EnemyHealth : MonoBehaviour
         m_healthBarEventData.CurrentHealth = m_currentHealth;
         m_healthBarEventData.MaxHealth = m_maxHealth;
         m_healthBarEvent.Raise(m_healthBarEventData);
+        
+        OnTakeDamage?.Invoke();
         
         if (m_currentHealth <= 0)
         {
