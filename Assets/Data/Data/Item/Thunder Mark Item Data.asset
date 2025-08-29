@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
-  m_Name: Stream Item Data
+  m_Name: Thunder Mark Item Data
   m_EditorClassIdentifier: 
-  Name: Stream
-  Description: <color=#FF2D0B>+0.5</color> mul for each water card played
+  Name: Thunder Mark
+  Description: <color=#FF2D0B>+0.5</color> mul for each thunder card played
   Rarity: 0
   MultiplierType: 0
   MultiplierValue: 0.5
-  Icon: {fileID: 1729840402284382006, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
+  Icon: {fileID: -576324556, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}

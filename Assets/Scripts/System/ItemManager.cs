@@ -15,12 +15,14 @@ public class ItemManager : MonoBehaviour, IBootStrap
    [SerializeField] private MultiplierDisplayer[] m_multiplierDisplayers;
    [SerializeField] private ItemDescriptionDisplayer[] m_itemDescriptionDisplayers;
    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
+
+   private const int k_DefaultNumberItem = 5;
    
    public void Install()
    {
-      //FOR TESTING
-      foreach (var item in m_itemContainer.CommonItems)
+      for (int i = 0; i < k_DefaultNumberItem; i++)
       {
+         var item = GetRandomItem();
          AddItem(item);
       }
    }
