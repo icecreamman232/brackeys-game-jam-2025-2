@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackCardList:
   - {fileID: 11400000, guid: 3fb1e6ed5be883b4cbc00546866e7091, type: 2}
+  - {fileID: 11400000, guid: 0b6086b480abed64d9f90f8fae82ee72, type: 2}
+  - {fileID: 11400000, guid: f9d613206afbd314ab3b72f0aefd05c4, type: 2}
+  - {fileID: 11400000, guid: 1081f883ea30c4843bd2667506fd8a73, type: 2}
   - {fileID: 11400000, guid: ee2a7f37fdb18c846bb648ceeff3c7b5, type: 2}
+  - {fileID: 11400000, guid: 09baeb3a8078cb44b857220c451f54ba, type: 2}
   - {fileID: 11400000, guid: b67c88b894f34ff45851588ed7f9de3d, type: 2}
   - {fileID: 11400000, guid: d35366bbcf514084eb6e157542b197ad, type: 2}
   - {fileID: 11400000, guid: 6e43b8b689fd12f45838a02a3645b446, type: 2}
