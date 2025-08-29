@@ -51,8 +51,6 @@ namespace SGGames.Scripts.Card
         public void SetCardIndex(int index)
         {
             m_cardIndex = index;
-            //Plus 1 to avoid index value 0
-            m_cardVisual.ChangeVisualLayer(index + 1);
         }
 
         public void SetName()
@@ -199,7 +197,7 @@ namespace SGGames.Scripts.Card
             m_isSelected = false;
             m_canSwawpWithOtherCard = false;
             m_overlappedCard = null;
-            m_cardVisual.ChangeVisualLayer(m_cardIndex + 1);
+            m_cardVisual.ResetToDefaultLayer();
         }
 
         public void ResetSelection()

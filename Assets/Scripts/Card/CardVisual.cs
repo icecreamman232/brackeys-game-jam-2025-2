@@ -45,15 +45,15 @@ public class CardVisual : MonoBehaviour
         }
     }
 
-    public void ChangeVisualLayer(int layerIndex)
+    public void ResetToDefaultLayer()
     {
         foreach (var visual in m_visualLayers)
         {
-            visual.sortingLayerName = $"Card {layerIndex}";
+            visual.sortingLayerName = "Default";
         }
         foreach (var text in m_visualTexts)
         {
-            text.sortingLayerID = SortingLayer.NameToID($"Card {layerIndex}");
+            text.sortingLayerID = SortingLayer.NameToID("Default");
         }
     }
 }
