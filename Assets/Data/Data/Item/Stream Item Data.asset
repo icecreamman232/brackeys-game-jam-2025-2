@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stream Item Data
   m_EditorClassIdentifier: 
   Name: Stream
-  Description: <color=#FF2D0B>+2</color> mul for each water card played
+  Description: <color=#FF2D0B>+0.5</color> mul for each water card played
   Rarity: 0
   MultiplierType: 0
   MultiplierValue: 0.5

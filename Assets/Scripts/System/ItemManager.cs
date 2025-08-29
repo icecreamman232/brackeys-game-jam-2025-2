@@ -52,12 +52,14 @@ public class ItemManager : MonoBehaviour, IBootStrap
       {
          var multiplierInfo = m_ownedItems[i].Use(m_cardManager);
          
-         if (multiplierInfo.value > 1.0f)
+         if (!(multiplierInfo.type == MultiplierType.Multiply && multiplierInfo.value <= 1.0f)
+             && !(multiplierInfo.type == MultiplierType.Add && multiplierInfo.value <= 0.0f))
          {
             m_ownedItems[i].PlayTriggerAnimation();
             m_multiplierDisplayers[i].ShowMultiplier(multiplierInfo.type, multiplierInfo.value);
             //yield return new WaitForSeconds(0.4f);
          }
+
          
          if (multiplierInfo.type == MultiplierType.Add)
          {
@@ -68,7 +70,8 @@ public class ItemManager : MonoBehaviour, IBootStrap
             totalMultiplier *= multiplierInfo.value;
          }
 
-         if (multiplierInfo.value > 1.0f)
+         if (!(multiplierInfo.type == MultiplierType.Multiply && multiplierInfo.value <= 1.0f)
+             && !(multiplierInfo.type == MultiplierType.Add && multiplierInfo.value <= 0.0f))
          {
             var mulForAnimation = totalMultiplier - 1;
             if (mulForAnimation <= 1.0f)
