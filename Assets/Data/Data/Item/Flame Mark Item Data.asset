@@ -18,3 +18,4 @@ MonoBehaviour:
   MultiplierType: 0
   MultiplierValue: 0.5
   Icon: {fileID: 520651532, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
+  ItemPrefab: {fileID: 3877052911855691724, guid: 78a4546341160ed4fa8ade1c83f5e159, type: 3}

@@ -26,13 +26,18 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
       for (int i = 0; i < k_DefaultNumberItem; i++)
       {
          var item = GetRandomItem();
-         AddItem(item);
+         CreateItem(item);
       }
    }
 
    public void Uninstall()
    {
       ServiceLocator.UnregisterService<ItemManager>();
+   }
+
+   public void AddItem(ItemData itemData)
+   {
+      CreateItem(itemData.ItemPrefab);
    }
 
    public void TriggerItem(Action<float, float> onUpdateMultiplierCounterAction, Action onFinish)
@@ -105,7 +110,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
       onFinish?.Invoke();
    }
    
-   private void AddItem(ItemBehavior itemPrefab)
+   private void CreateItem(ItemBehavior itemPrefab)
    {
       var currentIndex = m_ownedItems.Count;
       var item = Instantiate(itemPrefab);
@@ -124,7 +129,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
 
    private ItemBehavior GetRandomItem()
    {
-      return m_itemContainer.CommonItems[Random.Range(0, m_itemContainer.CommonItems.Count)];
+      return m_itemContainer.CommonItems[Random.Range(0, m_itemContainer.CommonItems.Count)].ItemPrefab;
    }
 
    /// <summary>

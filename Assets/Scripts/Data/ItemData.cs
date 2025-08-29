@@ -23,4 +23,5 @@ public class ItemData : ScriptableObject
     public MultiplierType MultiplierType;
     public float MultiplierValue;
     public Sprite Icon;
+    public ItemBehavior ItemPrefab;
 }

@@ -19,3 +19,4 @@ MonoBehaviour:
   MultiplierType: 1
   MultiplierValue: 2
   Icon: {fileID: 148264454483829304, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
+  ItemPrefab: {fileID: 6426696400806344712, guid: 257a1a09d24b6bb45a7acdfa9d9f138c, type: 3}
