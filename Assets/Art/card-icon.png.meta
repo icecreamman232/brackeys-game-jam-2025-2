@@ -193,7 +193,7 @@ TextureImporter:
         width: 64
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -202,6 +202,72 @@ TextureImporter:
       bones: []
       spriteID: 1f6419beb3ae5c14eba0a5a44d383aa1
       internalID: 693731428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: old-bird-icon
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dff5e650ca57e7f4ca7a87611b5e82ed
+      internalID: -1375343736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: syringe-icon
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df25c8015550fe429834b96ab5e8397
+      internalID: -1490837788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: golden-toilet-paper-icon
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c60d054ab513c97489e9ba05c73ba7cf
+      internalID: 979490683
       vertices: []
       indices: 
       edges: []
@@ -221,8 +287,11 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Imodium-icon: 693731428
+      golden-toilet-paper-icon: 979490683
       leaves-icon: -5947906166468842675
+      old-bird-icon: -1375343736
       plunger-icon: 7353190986194288448
+      syringe-icon: -1490837788
       toilet-paper-icon: 3844439038272575733
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
