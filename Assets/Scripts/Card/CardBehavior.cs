@@ -48,7 +48,12 @@ namespace SGGames.Scripts.Card
         public int CardIndex => m_cardIndex;
         public bool IsSelected => m_isSelected;
         
-        public void SetCardIndex(int index) => m_cardIndex = index;
+        public void SetCardIndex(int index)
+        {
+            m_cardIndex = index;
+            //Plus 1 to avoid index value 0
+            m_cardVisual.ChangeVisualLayer(index + 1);
+        }
 
         public void SetName()
         {
@@ -61,6 +66,7 @@ namespace SGGames.Scripts.Card
             m_atkPoint = m_cardData.Info.AttackPoint;
             m_cardVisual.ChangeCardVisual(m_cardData);
         }
+        
 
         public int AttackPts => m_atkPoint;
         public BoxCollider2D CardCollider => m_cardCollider;
@@ -104,6 +110,8 @@ namespace SGGames.Scripts.Card
                 {
                     m_dragIntentDetected = true;
                     m_isDragging = true;
+                    //Make card visual is on top of other card, regardless of the order of the card in the pile
+                    m_cardVisual.ChangeToDraggingVisual();
                 }
                 else
                 {
@@ -191,6 +199,7 @@ namespace SGGames.Scripts.Card
             m_isSelected = false;
             m_canSwawpWithOtherCard = false;
             m_overlappedCard = null;
+            m_cardVisual.ChangeVisualLayer(m_cardIndex + 1);
         }
 
         public void ResetSelection()

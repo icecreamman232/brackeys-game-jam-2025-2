@@ -80,7 +80,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &8528536782898684519
 MonoBehaviour:
@@ -304,6 +304,18 @@ MonoBehaviour:
   - {fileID: 6452892825749182004}
   - {fileID: 3180146534378048136}
   - {fileID: 4630823856007319104}
+  m_visualLayers:
+  - {fileID: 712228002661509202}
+  - {fileID: 4644864964324931158}
+  - {fileID: 4803074679156202415}
+  - {fileID: 880834316530915532}
+  - {fileID: 7529693473543544988}
+  - {fileID: 5263471493019322252}
+  - {fileID: 3175245638981188697}
+  m_visualTexts:
+  - {fileID: 8528536782898684519}
+  - {fileID: 8785984010785962330}
+  - {fileID: 4652621846533325729}
 --- !u!1 &2161425354236341275
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +327,7 @@ GameObject:
   - component: {fileID: 4478122673360757673}
   - component: {fileID: 880834316530915532}
   m_Layer: 0
-  m_Name: AtkPoint
+  m_Name: AtkPointBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,7 +392,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -1150797853226429853, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -666,7 +678,7 @@ GameObject:
   - component: {fileID: 7191931962667764932}
   - component: {fileID: 712228002661509202}
   m_Layer: 0
-  m_Name: Visual
+  m_Name: CardBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +745,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 5189691121816951081, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1083,8 +1095,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 3844439038272575733, guid: 4d506518612916549bce74798be43943, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -1883381983, guid: 4d506518612916549bce74798be43943, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

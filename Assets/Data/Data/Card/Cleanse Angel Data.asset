@@ -21,4 +21,4 @@ MonoBehaviour:
     AttackPoint: 3
     Element: 2
   Icon: {fileID: 237959111, guid: 4d506518612916549bce74798be43943, type: 3}
-  CardPrefab: {fileID: 3135851394043013441, guid: 7c5093f71442e6c428bd9161c5fbf480, type: 3}
+  CardPrefab: {fileID: 3135851394043013441, guid: 7f6bbd4a10097a74aa71975c3de25cf8, type: 3}

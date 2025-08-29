@@ -47,5 +47,23 @@ TagManager:
   - name: Enemy
     uniqueID: 4076929233
     locked: 0
+  - name: Card 1
+    uniqueID: 2332563911
+    locked: 0
+  - name: Card 2
+    uniqueID: 597546727
+    locked: 0
+  - name: Card 3
+    uniqueID: 2345248191
+    locked: 0
+  - name: Card 4
+    uniqueID: 3736773137
+    locked: 0
+  - name: Card 5
+    uniqueID: 1327150139
+    locked: 0
+  - name: Dragging Card
+    uniqueID: 2914503109
+    locked: 0
   m_RenderingLayers:
   - Default

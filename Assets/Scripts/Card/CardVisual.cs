@@ -14,6 +14,9 @@ public class CardVisual : MonoBehaviour
     [SerializeField] private TextMeshPro m_cardDesc;
     [SerializeField] private SpriteRenderer m_cardIcon;
     [SerializeField] private GameObject[] m_energyPoints;
+    [Header("Visual Layer")]
+    [SerializeField] private Renderer[] m_visualLayers;
+    [SerializeField] private TextMeshPro[] m_visualTexts;
     
     public void ChangeCardVisual(CardData data)
     {
@@ -27,6 +30,30 @@ public class CardVisual : MonoBehaviour
         for (int i = 0; i < data.Info.EnergyCost; i++)
         {
             m_energyPoints[i].SetActive(true);
+        }
+    }
+
+    public void ChangeToDraggingVisual()
+    {
+        foreach (var visual in m_visualLayers)
+        {
+            visual.sortingLayerName = "Dragging Card";
+        }
+        foreach (var text in m_visualTexts)
+        {
+            text.sortingLayerID = SortingLayer.NameToID("Dragging Card");
+        }
+    }
+
+    public void ChangeVisualLayer(int layerIndex)
+    {
+        foreach (var visual in m_visualLayers)
+        {
+            visual.sortingLayerName = $"Card {layerIndex}";
+        }
+        foreach (var text in m_visualTexts)
+        {
+            text.sortingLayerID = SortingLayer.NameToID($"Card {layerIndex}");
         }
     }
 }

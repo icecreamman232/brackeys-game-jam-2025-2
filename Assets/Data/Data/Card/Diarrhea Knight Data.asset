@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a5f317677c04d64c9018a2c228cd1e7, type: 3}
-  m_Name: Dung Beetle Data
+  m_Name: Diarrhea Knight Data
   m_EditorClassIdentifier: 
-  Name: Dung Beetle
-  Description: Roll roll around ma bois
+  Name: Diarrhea Knight
+  Description: For the King! We march!
   Info:
     Type: 0
-    EnergyCost: 1
-    AttackPoint: 1
+    EnergyCost: 2
+    AttackPoint: 3
     Element: 0
-  Icon: {fileID: 2035897528, guid: 4d506518612916549bce74798be43943, type: 3}
-  CardPrefab: {fileID: 3135851394043013441, guid: 8e89274d635deae48894d78f52abde7e, type: 3}
+  Icon: {fileID: 1726884741, guid: 4d506518612916549bce74798be43943, type: 3}
+  CardPrefab: {fileID: 3135851394043013441, guid: 509841e4419679841b60bc1013d308f3, type: 3}
