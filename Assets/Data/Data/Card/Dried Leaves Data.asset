@@ -17,7 +17,7 @@ MonoBehaviour:
   Info:
     Type: 0
     EnergyCost: 1
-    AttackPoint: 3
+    AttackPoint: 1
     Element: 1
   Icon: {fileID: -5947906166468842675, guid: 4d506518612916549bce74798be43943, type: 3}
   CardPrefab: {fileID: 3135851394043013441, guid: b7c0f28bfbcbfc44a8ffff286c6b611c, type: 3}

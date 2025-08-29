@@ -18,6 +18,7 @@ namespace SGGames.Scripts.System
         [SerializeField] private CardPile m_cardPile;
         [SerializeField] private DiscardPile m_discardPile;
         
+        private CardComboValidator m_cardComboValidator;
         private EnergyManager m_energyManager;
         private const float k_MovingToPositionTime = 0.7f;
         private const float k_MovingToPositionDelay = 0.05f;
@@ -33,6 +34,7 @@ namespace SGGames.Scripts.System
         {
             m_energyManager = ServiceLocator.GetService<EnergyManager>();
             m_currentTurnNumber = 0;
+            m_cardComboValidator = new CardComboValidator();
             m_cardPile.InitializePile();
             DealInitialHand();
         }
@@ -81,6 +83,8 @@ namespace SGGames.Scripts.System
 
         public void CountScoreFromSelectedCards(Action<int, int> addingScoreToUIAction, Action onFinish)
         {
+            var comboType = m_cardComboValidator.IsMatch(SelectedCards);
+            Debug.Log($"Combo type: {comboType}");
             StartCoroutine(OnCountingScore(addingScoreToUIAction, onFinish));
         }
         

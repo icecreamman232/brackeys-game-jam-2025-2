@@ -26,7 +26,7 @@ public class CardVisual : MonoBehaviour
         m_cardIcon.sprite = data.Icon;
         for (int i = 0; i < data.Info.EnergyCost; i++)
         {
-            m_energyPoints[i].gameObject.SetActive(true);
+            m_energyPoints[i].SetActive(true);
         }
     }
 }

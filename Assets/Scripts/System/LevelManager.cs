@@ -51,6 +51,10 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
     {
         InputManager.SetActive(false);
         m_currentLevel++;
+        if (m_currentLevel >= m_enemies.Length)
+        {
+            m_currentLevel = m_enemies.Length - 1;      
+        }
         CreateEnemy();
         yield return StartCoroutine(PlayIntroAnimation());
         InputManager.SetActive(true);
