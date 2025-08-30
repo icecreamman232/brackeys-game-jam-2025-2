@@ -15,14 +15,14 @@ public class LoseGameUI : MonoBehaviour
 
     private void Awake()
     {
-        m_mainMenuButton.OnClickAction = OnLoadToMainMenuAction;
+        m_mainMenuButton.OnClickAction = LoadToMainMenu;
         m_originalTitlePosition = m_titleTransform.localPosition;
         HidePanel();
     }
 
     private void LoadToMainMenu()
     {
-        
+        OnLoadToMainMenuAction?.Invoke();
     }
 
     [ContextMenu("Show Panel")]

@@ -1,4 +1,6 @@
+using SGGames.Scripts.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResultScreenUI : MonoBehaviour
 {
@@ -19,7 +21,9 @@ public class ResultScreenUI : MonoBehaviour
 
     private void LoadToMainMenu()
     {
-        
+        ServiceLocator.GetService<BootStrapHandler>().UninstallBootStrap();
+        ServiceLocator.ClearServices();
+        SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
     }
 
     private void OnGameEventChanged(GameEventType eventType)

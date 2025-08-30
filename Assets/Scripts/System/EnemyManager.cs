@@ -29,6 +29,7 @@ namespace SGGames.Scripts.System
         public void Uninstall()
         {
             m_currentEnemy = null;
+            ServiceLocator.UnregisterService<EnemyManager>();
         }
 
         private void OnDamageEnemy()
