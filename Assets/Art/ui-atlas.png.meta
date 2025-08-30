@@ -168,7 +168,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 7, y: 7, z: 7, w: 7}
       customData: 
       outline: []
@@ -190,7 +190,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 7, y: 7, z: 7, w: 7}
       customData: 
       outline: []
@@ -199,6 +199,50 @@ TextureImporter:
       bones: []
       spriteID: da16ed7c81695f44d840aa74239f8798
       internalID: 606868962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white-outline
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 130
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 7, y: 7, z: 7, w: 7}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bccbf88499a0f504188b20441f0a339c
+      internalID: -132448734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black-inner-bg
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 130
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 7, y: 7, z: 7, w: 7}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7b58fd21765c8146b570e086ed5752b
+      internalID: -1381897467
       vertices: []
       indices: 
       edges: []
@@ -217,9 +261,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      black-inner-bg: -1381897467
       button-clicked: 8545957714173672369
       button-normal: 7595667864703430088
       item-desc-bg: 1961039591
+      white-outline: -132448734
       white-round-corner-rect: 606868962
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

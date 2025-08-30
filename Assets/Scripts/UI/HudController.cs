@@ -13,6 +13,10 @@ namespace SGGames.Scripts.UI
         [SerializeField] private CardManager m_cardManager;
         [SerializeField] private ButtonController m_playButton;
         [SerializeField] private ButtonController m_discardButton;
+        [SerializeField] private ButtonController m_ruleInspectButton;
+        [SerializeField] private ButtonController m_closeRuleInspectButton;
+        [SerializeField] private CanvasGroup m_ruleInspectCanvasGroup;
+        [SerializeField] private RectTransform m_rulesInspectGroup;
         [SerializeField] private ScoreCountingDisplayer m_scoreDisplayer;
         
         private EnergyManager m_energyManager;
@@ -62,11 +66,29 @@ namespace SGGames.Scripts.UI
             if (!m_cardManager.CanDiscardManually) return;
             m_cardManager.DiscardSelectedCards(true);
         }
+        
+        private void ShowRuleInspect()
+        {
+            InputManager.SetActive(false);
+            m_rulesInspectGroup.localScale = Vector3.one * 0.8f;
+            m_closeRuleInspectButton.OnClickAction = HideRuleInspect;
+            m_ruleInspectCanvasGroup.Activate();
+            m_rulesInspectGroup.LeanScale(Vector3.one, 0.2f)
+                .setEase(LeanTweenType.easeOutCirc);
+        }
+
+        private void HideRuleInspect()
+        {
+            InputManager.SetActive(true);
+            m_closeRuleInspectButton.OnClickAction = null;
+            m_ruleInspectCanvasGroup.Deactivate();
+        }
 
         public void Install()
         {
             m_playButton.OnClickAction = PlayButtonClicked;
             m_discardButton.OnClickAction = DiscardButtonClicked;
+            m_ruleInspectButton.OnClickAction = ShowRuleInspect;
             
             m_cardManager = ServiceLocator.GetService<CardManager>();
             m_itemManager = ServiceLocator.GetService<ItemManager>();
