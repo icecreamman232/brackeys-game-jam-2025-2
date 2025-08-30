@@ -14,7 +14,6 @@ namespace SGGames.Scripts.UI
         [SerializeField] private ButtonController m_playButton;
         [SerializeField] private ButtonController m_discardButton;
         [SerializeField] private ScoreCountingDisplayer m_scoreDisplayer;
-        [SerializeField] private InfoPanelUI m_infoPanelUI;
         
         private const float k_ShowFinalScoreTime = 1f;
         
@@ -57,8 +56,6 @@ namespace SGGames.Scripts.UI
         {
             m_playButton.OnClickAction = PlayButtonClicked;
             m_discardButton.OnClickAction = DiscardButtonClicked;
-            
-            m_infoPanelUI.Initialize();
             
             m_cardManager = ServiceLocator.GetService<CardManager>();
             m_itemManager = ServiceLocator.GetService<ItemManager>();

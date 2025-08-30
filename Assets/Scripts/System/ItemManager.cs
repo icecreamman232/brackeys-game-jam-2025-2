@@ -40,6 +40,10 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    public void AddItem(ItemData itemData)
    {
       CreateItem(itemData.ItemPrefab);
+      if (itemData.ItemID == ItemID.RedPaper)
+      {
+         m_cardManager.AddDiscardNumber(1);
+      }
    }
 
    public bool HasItem(ItemID id)

@@ -71,7 +71,10 @@ namespace SGGames.Scripts.System
                 AddCardToHand(card, i);
                 AnimateCardToHand(card, i, k_MovingToPositionDelay * i);
             }
-            
+            if(m_itemManager.HasItem(ItemID.RedPaper))
+            {
+                AddDiscardNumber(1);
+            }
         }
 
         public void Reset()
@@ -87,6 +90,13 @@ namespace SGGames.Scripts.System
                 Destroy(card.gameObject);
             }
             m_cardsInHand.Clear();
+        }
+
+        public void AddDiscardNumber(int number)
+        {
+            m_currentDiscardNumber += number;
+            m_maxDiscardTime += number;
+            m_discardNumberEvent.Raise(m_currentDiscardNumber);
         }
         
         private void AddCardToHand(CardBehavior card, int handIndex)

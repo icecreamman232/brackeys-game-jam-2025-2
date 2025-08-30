@@ -3622,6 +3622,7 @@ MonoBehaviour:
   m_bootStrap:
   - {fileID: 2401291}
   - {fileID: 482539168}
+  - {fileID: 492377823}
   - {fileID: 457553676}
   - {fileID: 867436023}
   - {fileID: 723669628}
@@ -4896,7 +4897,6 @@ MonoBehaviour:
   m_playButton: {fileID: 1984840105}
   m_discardButton: {fileID: 238669678}
   m_scoreDisplayer: {fileID: 47363258}
-  m_infoPanelUI: {fileID: 492377823}
 --- !u!224 &1984840104 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 528701811135489594, guid: 3e530001858dab040b95651e2d3209db, type: 3}

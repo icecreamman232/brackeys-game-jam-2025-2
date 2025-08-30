@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class InfoPanelUI : MonoBehaviour
+public class InfoPanelUI : MonoBehaviour, IBootStrap
 {
     [SerializeField] private TextMeshProUGUI m_handNumberText;
     [SerializeField] private TextMeshProUGUI m_discardNumberText;
@@ -28,5 +28,15 @@ public class InfoPanelUI : MonoBehaviour
     private void UpdateHandNumber(int currentHandNumber)
     {
         m_handNumberText.text = currentHandNumber.ToString();
+    }
+
+    public void Install()
+    {
+        Initialize();
+    }
+
+    public void Uninstall()
+    {
+        
     }
 }
