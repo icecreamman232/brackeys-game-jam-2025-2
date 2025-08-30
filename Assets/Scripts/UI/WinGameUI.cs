@@ -65,7 +65,7 @@ public class WinGameUI : MonoBehaviour
     private void ShowItemSelection()
     {
         var itemManager = ServiceLocator.GetService<ItemManager>();
-        var itemSelections = itemManager.GetRandomItems(3);
+        var itemSelections = itemManager.GetRandomItemsWithoutDuplicates(3);
         for (int i = 0; i < itemSelections.Count; i++)
         {
             var itemData  = itemSelections[i];
