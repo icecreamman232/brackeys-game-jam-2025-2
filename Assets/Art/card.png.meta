@@ -281,7 +281,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -303,7 +303,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -312,6 +312,50 @@ TextureImporter:
       bones: []
       spriteID: 03610ccdf23cca644acf3c44ea6a72d7
       internalID: -62258267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: energy-icon
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 104
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5efa856a82f8cbd4ab8e65b7052fc093
+      internalID: -102502701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: energy-hud
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 96
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e3dae44c162a1341ba903062660db43
+      internalID: -977428205
       vertices: []
       indices: 
       edges: []
@@ -339,6 +383,8 @@ TextureImporter:
       card_bg_thunder: -428922159
       card_icon_bg: 4179361977775431376
       discard-pile-icon: -62258267
+      energy-hud: -977428205
+      energy-icon: -102502701
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

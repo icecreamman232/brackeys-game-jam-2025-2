@@ -8,6 +8,7 @@ namespace SGGames.Scripts.System
         [SerializeField] private int m_maxAttempts;
         [SerializeField] private int m_attemptNumber;
         [SerializeField] private GameEvent m_gameEvent;
+        [SerializeField] private HandNumberEvent m_handNumberEvent;
         
         private EnemyController m_currentEnemy;
 
@@ -17,6 +18,7 @@ namespace SGGames.Scripts.System
             m_currentEnemy.Health.OnDeath = OnEnemyDeath;
             m_currentEnemy.Health.OnTakeDamage = OnDamageEnemy;
             m_attemptNumber = m_maxAttempts;
+            m_handNumberEvent.Raise(m_attemptNumber);
         }
 
         public void Install()
@@ -32,6 +34,7 @@ namespace SGGames.Scripts.System
         private void OnDamageEnemy()
         {
             m_attemptNumber--;
+            m_handNumberEvent.Raise(m_attemptNumber);
             if (m_attemptNumber <= 0)
             {
                 //LOSE GAME HERE

@@ -10,6 +10,10 @@ namespace SGGames.Scripts.System
 {
     public class CardManager : MonoBehaviour, IBootStrap, IGameService
     {
+        [Header("Discard")]
+        [SerializeField] private int m_maxDiscardTime;
+        [SerializeField] private int m_currentDiscardNumber;
+        [SerializeField] private DiscardNumberEvent m_discardNumberEvent;
         [SerializeField] private int m_currentTurnNumber;
         [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private ItemManager m_itemManager;
@@ -31,6 +35,7 @@ namespace SGGames.Scripts.System
         public const float k_ShowScoreTime = 0.3f;
 
         public Action UpdateScoreToFinalScoreUIAction;
+        public bool CanDiscardManually => m_currentDiscardNumber > 0;
         
         public int CurrentTurnNumber => m_currentTurnNumber;
         public int NumberComboHasBeenPlayed => m_cardComboValidator.ComboHasBeenPlayed;
@@ -45,6 +50,8 @@ namespace SGGames.Scripts.System
             m_gameEvent.AddListener(OnGameEventChanged);
             m_currentTurnNumber = 0;
             m_cardComboValidator = new CardComboValidator();
+            m_currentDiscardNumber = m_maxDiscardTime;
+            m_discardNumberEvent.Raise(m_currentDiscardNumber);
         }
 
         public void Uninstall()
@@ -166,7 +173,7 @@ namespace SGGames.Scripts.System
             yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
         }
 
-        public void DiscardSelectedCards()
+        public void DiscardSelectedCards(bool isManualDiscard)
         {
             m_currentComboType = CardComboRuleType.None;
             m_energyManager.Reset();
@@ -182,6 +189,16 @@ namespace SGGames.Scripts.System
             }
             
             FillEmptySlots(emptySlot);
+
+            if (isManualDiscard)
+            {
+                m_currentDiscardNumber--;
+                m_discardNumberEvent.Raise(m_currentDiscardNumber);
+                if (m_currentDiscardNumber <= 0)
+                {
+                    m_currentDiscardNumber = 0;
+                }
+            }
         }
 
         private void FillEmptySlots(List<int> emptySlot)
@@ -240,7 +257,7 @@ namespace SGGames.Scripts.System
         {
             m_energyManager.Reset();
             m_currentTurnNumber++;
-            DiscardSelectedCards();
+            DiscardSelectedCards(false);
         }
         
         /// <summary>

@@ -1,6 +1,7 @@
+using SGGames.Scripts.Core;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour, IBootStrap
+public class ScoreManager : MonoBehaviour, IBootStrap, IGameService
 {
     [SerializeField] private int m_finalScore;
     [SerializeField] private int m_score;
@@ -38,6 +39,7 @@ public class ScoreManager : MonoBehaviour, IBootStrap
     public void Install()
     {
         m_damageEnemyInfo = new DamageEnemyInfo();
+        ServiceLocator.RegisterService<ScoreManager>(this);
     }
 
     public void Uninstall()
