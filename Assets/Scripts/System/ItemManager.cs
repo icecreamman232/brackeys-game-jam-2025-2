@@ -17,18 +17,17 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    [SerializeField] private MultiplierDisplayer[] m_multiplierDisplayers;
    [SerializeField] private ItemDescriptionDisplayer[] m_itemDescriptionDisplayers;
    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
-
+   
    private BanhMiItem m_banhMiItemRef;
    private const int k_DefaultNumberItem = 2;
    
    public void Install()
    {
       ServiceLocator.RegisterService<ItemManager>(this);
-      
-      for (int i = 0; i < 1; i++)
+      var listItem = GetRandomItemsWithoutDuplicates(k_DefaultNumberItem);
+      for (int i = 0; i < listItem.Count; i++)
       {
-         var item = GetRandomItem();
-         CreateItem(item);
+         CreateItem(listItem[i].ItemPrefab);
       }
    }
 
@@ -55,6 +54,70 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    {
       StartCoroutine(OnTriggerItemProcess(onUpdateMultiplierCounterAction, onFinish));
    }
+   
+   public List<ItemData> GetRandomItemsWithoutDuplicates(int number)
+   {
+       // Create a HashSet of owned item IDs for O(1) lookup
+       var ownedItemIDs = new HashSet<ItemID>();
+       for (int i = 0; i < m_ownedItems.Count; i++)
+       {
+           ownedItemIDs.Add(m_ownedItems[i].ItemData.ItemID);
+       }
+       
+       // Create array of available items (only those not owned)
+       var availableItems = new ItemData[
+           m_itemContainer.CommonItems.Count + 
+           m_itemContainer.UncommonItems.Count + 
+           m_itemContainer.RareItems.Count];
+       
+       int availableCount = 0;
+       
+       // Add common items that aren't owned
+       for (int i = 0; i < m_itemContainer.CommonItems.Count; i++)
+       {
+           if (!ownedItemIDs.Contains(m_itemContainer.CommonItems[i].ItemID))
+           {
+               availableItems[availableCount++] = m_itemContainer.CommonItems[i];
+           }
+       }
+       
+       // Add uncommon items that aren't owned
+       for (int i = 0; i < m_itemContainer.UncommonItems.Count; i++)
+       {
+           if (!ownedItemIDs.Contains(m_itemContainer.UncommonItems[i].ItemID))
+           {
+               availableItems[availableCount++] = m_itemContainer.UncommonItems[i];
+           }
+       }
+       
+       // Add rare items that aren't owned
+       for (int i = 0; i < m_itemContainer.RareItems.Count; i++)
+       {
+           if (!ownedItemIDs.Contains(m_itemContainer.RareItems[i].ItemID))
+           {
+               availableItems[availableCount++] = m_itemContainer.RareItems[i];
+           }
+       }
+       
+       // Clamp the requested number to available items
+       var itemsToSelect = Mathf.Min(number, availableCount);
+       var result = new List<ItemData>(itemsToSelect);
+       
+       // Use Fisher-Yates shuffle to select random items without duplicates
+       for (int i = 0; i < itemsToSelect; i++)
+       {
+           var randomIndex = Random.Range(i, availableCount);
+           
+           // Add the selected item to result
+           result.Add(availableItems[randomIndex]);
+           
+           // Swap the selected item to the front (already processed area)
+           (availableItems[i], availableItems[randomIndex]) = (availableItems[randomIndex], availableItems[i]);
+       }
+       
+       return result;
+   }
+
 
    public void ShowItemDescription(ItemBehavior item)
    {
@@ -73,18 +136,6 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    public void HideItemDescription(ItemBehavior item)
    {
       m_itemDescriptionDisplayers[item.ItemIndex].HideDescription();
-   }
-
-   public List<ItemData> GetRandomItems(int number)
-   {
-      var items = new List<ItemData>();
-      for (int i = 0; i < number; i++)
-      {
-         var item = GetRandomItem();
-         items.Add(item.ItemData);
-      }
-
-      return items;
    }
 
    public void RandomNewBanhMiCondition()
@@ -164,13 +215,6 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
       m_ownedItems.Add(item);
    }
 
-   private ItemBehavior GetRandomItem()
-   {
-      //FOR TESTING
-      //return m_itemContainer.CommonItems[0].ItemPrefab;
-      
-      return m_itemContainer.CommonItems[Random.Range(0, m_itemContainer.CommonItems.Count)].ItemPrefab;
-   }
 
    /// <summary>
    /// Check if this item is overlapping any other item.
