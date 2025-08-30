@@ -18,6 +18,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    [SerializeField] private ItemDescriptionDisplayer[] m_itemDescriptionDisplayers;
    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
 
+   private BanhMiItem m_banhMiItemRef;
    private const int k_DefaultNumberItem = 2;
    
    public void Install()
@@ -53,7 +54,16 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
 
    public void ShowItemDescription(ItemBehavior item)
    {
-      m_itemDescriptionDisplayers[item.ItemIndex].ShowDescription(item.ItemData.Name, item.ItemData.Description, item.ItemData.Rarity);
+      if (item is BanhMiItem)
+      {
+         var banhMiDesc = GetDescForBanhMi((BanhMiItem)item);
+         m_itemDescriptionDisplayers[item.ItemIndex].ShowDescription(item.ItemData.Name, banhMiDesc, item.ItemData.Rarity);
+      }
+      else
+      {
+         m_itemDescriptionDisplayers[item.ItemIndex].ShowDescription(item.ItemData.Name, item.ItemData.Description, item.ItemData.Rarity);
+      }
+      
    }
 
    public void HideItemDescription(ItemBehavior item)
@@ -71,6 +81,12 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
       }
 
       return items;
+   }
+
+   public void RandomNewBanhMiCondition()
+   {
+      if (m_banhMiItemRef == null) return;
+      m_banhMiItemRef.RandomNewConditionType();
    }
 
    private IEnumerator OnTriggerItemProcess(Action<float, float> onUpdateMultiplierUIAction, Action onFinish)
@@ -136,7 +152,11 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
       // Hook up the drag and drop functionality
       item.IsOverlappedOnItem = IsItemOverlapping;
       item.SwapItemsAction = SwapItems;
-      
+
+      if (item.ItemData.ItemID == ItemID.BanhMi)
+      {
+         m_banhMiItemRef = (BanhMiItem)item;
+      }
       m_ownedItems.Add(item);
    }
 
@@ -198,5 +218,13 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
          item2.SetItemPosition(prevItem1Pos);
          item2.ItemIndex = item1Index;
       });
+   }
+
+   private string GetDescForBanhMi(BanhMiItem banhMiItem)
+   {
+      var desc = banhMiItem.ItemData.Description;
+      var customDesc = ((BanhMiItemData)banhMiItem.ItemData).RandomConditionDescription[(int)banhMiItem.CurrentCondition.conditionType];
+      desc = desc.Replace("[random_condition]", $"<color=orange>{banhMiItem.CurrentCondition.numberRequired}<color> {customDesc}");
+      return desc;
    }
 }

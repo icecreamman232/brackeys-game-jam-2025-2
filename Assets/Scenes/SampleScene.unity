@@ -1833,6 +1833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_currentTurnNumber: 0
   m_scoreManager: {fileID: 867436023}
+  m_itemManager: {fileID: 1516102850}
   m_maxHandSize: 5
   m_handPositions:
   - {fileID: 372755206}
@@ -2701,7 +2702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1286141952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4477,6 +4478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MultiplierDisplayer-1
       objectReference: {fileID: 0}
+    - target: {fileID: 714384823071321587, guid: d8c9aa68e70ac294db03d7aac97c45b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 858307673551341057, guid: d8c9aa68e70ac294db03d7aac97c45b5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4662,6 +4667,10 @@ PrefabInstance:
     - target: {fileID: 3919140763820698083, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
       propertyPath: m_Name
       value: Win Lose Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3919140763820698083, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5782119344574665189, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
       propertyPath: m_Pivot.x

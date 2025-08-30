@@ -12,6 +12,7 @@ namespace SGGames.Scripts.System
     {
         [SerializeField] private int m_currentTurnNumber;
         [SerializeField] private ScoreManager m_scoreManager;
+        [SerializeField] private ItemManager m_itemManager;
         [SerializeField] private int m_maxHandSize = 5;
         [SerializeField] private Transform[] m_handPositions;
         [SerializeField] private List<CardBehavior> m_cardsInHand;
@@ -20,7 +21,7 @@ namespace SGGames.Scripts.System
         [SerializeField] private GameEvent m_gameEvent;
 
         
-        private Action<int, int> m_addingScoreToUIAction;
+        private Action<int, int> m_addingScoreToScoreDisplayAction;
         private CardComboRuleType m_currentComboType = CardComboRuleType.None;
         private CardComboValidator m_cardComboValidator;
         private EnergyManager m_energyManager;
@@ -63,6 +64,7 @@ namespace SGGames.Scripts.System
                 AddCardToHand(card, i);
                 AnimateCardToHand(card, i, k_MovingToPositionDelay * i);
             }
+            
         }
 
         public void Reset()
@@ -117,9 +119,9 @@ namespace SGGames.Scripts.System
 
         public void CountScoreFromSelectedCards(Action<int, int> addingScoreToUIAction, Action onFinish)
         {
-            if (m_addingScoreToUIAction == null)
+            if (m_addingScoreToScoreDisplayAction == null)
             {
-                m_addingScoreToUIAction = addingScoreToUIAction;
+                m_addingScoreToScoreDisplayAction = addingScoreToUIAction;
             }
             m_currentComboType = CardComboRuleType.None;
             StartCoroutine(OnCountingScore(addingScoreToUIAction, onFinish));
@@ -140,7 +142,7 @@ namespace SGGames.Scripts.System
                     startScoreForAnimation = totalScore;
                 }
                 addingScoreToUIAction?.Invoke(startScoreForAnimation, totalScore);
-                AnimateShowScore(card, null);
+                AnimateShowScoreOnCard(card, null);
                 yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
             }
             
@@ -159,8 +161,8 @@ namespace SGGames.Scripts.System
             {
                 startScoreForAnimation = currentScore;
             }
-            m_addingScoreToUIAction?.Invoke(startScoreForAnimation, currentScore);
-            AnimateShowScore(card, null);
+            m_addingScoreToScoreDisplayAction?.Invoke(startScoreForAnimation, currentScore);
+            AnimateShowScoreOnCard(card, null);
             yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
         }
 
@@ -198,6 +200,9 @@ namespace SGGames.Scripts.System
                 AddCardToHand(card, slotIndex);
                 AnimateCardToHand(card, slotIndex, k_MovingToPositionDelay * i);
             }
+            
+            //Random new Banh Mi condition after every turn
+            m_itemManager.RandomNewBanhMiCondition();
         }
 
         private void ReshuffleDiscardIntoPile()
@@ -329,7 +334,7 @@ namespace SGGames.Scripts.System
                 });
         }
 
-        private void AnimateShowScore(CardBehavior cardBehavior, Action onFinish)
+        private void AnimateShowScoreOnCard(CardBehavior cardBehavior, Action onFinish)
         {
             cardBehavior.ShowAtkPointHUD();
             cardBehavior.gameObject.LeanDelayedCall(

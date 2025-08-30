@@ -17,6 +17,7 @@ public enum ItemID
 {
     AncientScript, DoubleMachine, EvenDay, OddDay, FlameMark,
     OceanMark, ThunderMark, HealthyGut, MegaSpeaker,
+    MagicWand, BanhMi,
 }
 
 [CreateAssetMenu(fileName = "Item Data", menuName = "SGGames/Item Data")]
