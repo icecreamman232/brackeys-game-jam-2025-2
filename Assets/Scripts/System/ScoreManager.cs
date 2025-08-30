@@ -25,9 +25,34 @@ public class ScoreManager : MonoBehaviour, IBootStrap, IGameService
         m_multiplier += multiplier;
     }
 
-    public void FinishScoreCounting()
+    public void ApplyEnergyDrain(int currentEnergy, int currentMaxEnergy)
+    {
+        var percent = (float) Mathf.Abs(currentEnergy) / currentMaxEnergy;
+        var reduceMultiplier = 0f;
+        
+        if (percent < 0.25f)
+        {
+            reduceMultiplier = 0.75f;
+        }
+        else if (percent > 0.25f && percent < 1f)
+        {
+            reduceMultiplier = 0.5f;
+        }
+        else
+        {
+            reduceMultiplier = 0.25f;
+        }
+        var afterScore = m_finalScore * reduceMultiplier;
+        m_finalScore = Mathf.RoundToInt(afterScore);
+    }
+
+    public void CalculateFinalScore()
     {
         m_finalScore = Mathf.RoundToInt(m_score * m_multiplier);
+    }
+    
+    public void FinishScoreCounting()
+    {
         //Send damage value to enemy
         m_damageEnemyInfo.Damage = m_finalScore;
         m_damageEnemyEvent?.Raise(m_damageEnemyInfo);

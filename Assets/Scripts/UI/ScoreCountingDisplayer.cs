@@ -14,6 +14,8 @@ namespace SGGames.Scripts.UI
         [Header("Final Score")]
         [SerializeField] private CanvasGroup m_finalScoreCanvasGroup;
         [SerializeField] private TextMeshProUGUI m_finalScoreText;
+        [Header("Energy Drain")]
+        [SerializeField] private TextMeshProUGUI m_energyDrainText;
         
         private void Start()
         {
@@ -54,6 +56,18 @@ namespace SGGames.Scripts.UI
         {
             m_scoreCountingCanvasGroup.alpha = 0;
             m_finalScoreCanvasGroup.alpha = 0;
+        }
+
+        public void PlayEnergyDrainAnimation()
+        {
+            m_energyDrainText.rectTransform.localScale = Vector3.one;
+            m_energyDrainText.gameObject.SetActive(true);
+            m_energyDrainText.rectTransform.LeanScale(Vector3.one * 1.2f, 0.5f)
+                .setEase(LeanTweenType.punch)
+                .setOnComplete(() =>
+                {
+                    m_energyDrainText.gameObject.SetActive(false);
+                });
         }
 
         private IEnumerator AnimateNumberIncrease(int startValue, int targetValue, TextMeshProUGUI textDisplayer)

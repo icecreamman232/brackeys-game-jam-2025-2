@@ -15,6 +15,7 @@ namespace SGGames.Scripts.UI
         [SerializeField] private ButtonController m_discardButton;
         [SerializeField] private ScoreCountingDisplayer m_scoreDisplayer;
         
+        private EnergyManager m_energyManager;
         private const float k_ShowFinalScoreTime = 1f;
         
         private void PlayButtonClicked()
@@ -36,9 +37,19 @@ namespace SGGames.Scripts.UI
         private IEnumerator OnProcessShowingFinalScore()
         {
             m_scoreDisplayer.HideScoreCounting();
-            m_scoreManager.FinishScoreCounting();
+            m_scoreManager.CalculateFinalScore();
             m_scoreDisplayer.ShowFinalScore(m_scoreManager.FinalScore);
+            if (m_energyManager.IsEnergyDrain)
+            {
+                m_scoreDisplayer.PlayEnergyDrainAnimation();
+                yield return new WaitForSeconds(0.5f);
+                var energyInfo = m_energyManager.EnergyInfo;
+                m_scoreManager.ApplyEnergyDrain(energyInfo.current, energyInfo.max);
+                m_scoreDisplayer.ShowFinalScore(m_scoreManager.FinalScore);
+            }
+            
             yield return new WaitForSeconds(k_ShowFinalScoreTime);
+            m_scoreManager.FinishScoreCounting();
             m_scoreDisplayer.HideAll();
             InputManager.SetActive(true);
             
@@ -60,6 +71,7 @@ namespace SGGames.Scripts.UI
             m_cardManager = ServiceLocator.GetService<CardManager>();
             m_itemManager = ServiceLocator.GetService<ItemManager>();
             m_scoreManager = ServiceLocator.GetService<ScoreManager>();
+            m_energyManager = ServiceLocator.GetService<EnergyManager>();
         }
 
         public void Uninstall()
