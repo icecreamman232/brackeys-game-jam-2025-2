@@ -5623,6 +5623,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5600185613629639756, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
+      propertyPath: m_cardPile
+      value: 
+      objectReference: {fileID: 2008295626}
     - target: {fileID: 5782119344574665189, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
       propertyPath: m_Pivot.x
       value: 0

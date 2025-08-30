@@ -55,12 +55,22 @@ namespace SGGames.Scripts.Card
             }
         }
         
-        public void AddNewCard()
+        public void AddNewCard(CardData data)
         {
-            var data = GetRandomCard();
             var newCard = CreateCard(data);
             AddCardToPile(newCard);
             Debug.Log($"New card {data.Name} added");
+        }
+
+        public List<CardData> GetCardsData(int number)
+        {
+            var cardsData = new List<CardData>();
+            for (int i = 0; i < number; i++)
+            {
+                var card = GetRandomCard();
+                cardsData.Add(card);
+            }
+            return cardsData;   
         }
 
         public void ResetPile()

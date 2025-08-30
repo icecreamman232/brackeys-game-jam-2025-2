@@ -167,7 +167,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    private ItemBehavior GetRandomItem()
    {
       //FOR TESTING
-      return m_itemContainer.CommonItems[0].ItemPrefab;
+      //return m_itemContainer.CommonItems[0].ItemPrefab;
       
       return m_itemContainer.CommonItems[Random.Range(0, m_itemContainer.CommonItems.Count)].ItemPrefab;
    }
