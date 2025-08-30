@@ -272,6 +272,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: card-pile-icon
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 222
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ac2ac5375ed83148a6544ac9fb51f40
+      internalID: 968870334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: discard-pile-icon
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 222
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03610ccdf23cca644acf3c44ea6a72d7
+      internalID: -62258267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -286,6 +330,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      card-pile-icon: 968870334
       card_atk_point: -1150797853226429853
       card_atk_point_flame: -533024081
       card_atk_point_thunder: 49506600
@@ -293,6 +338,7 @@ TextureImporter:
       card_bg_flame: -1218738752
       card_bg_thunder: -428922159
       card_icon_bg: 4179361977775431376
+      discard-pile-icon: -62258267
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

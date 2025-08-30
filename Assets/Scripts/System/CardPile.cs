@@ -54,6 +54,14 @@ namespace SGGames.Scripts.Card
                 AddCardToPile(newCard);
             }
         }
+        
+        public void AddNewCard()
+        {
+            var data = GetRandomCard();
+            var newCard = CreateCard(data);
+            AddCardToPile(newCard);
+            Debug.Log($"New card {data.Name} added");
+        }
 
         public void ResetPile()
         {
