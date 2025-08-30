@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Item Container
   m_EditorClassIdentifier: 
   CommonItems:
+  - {fileID: 11400000, guid: 9f9263e295d5a5248864ef3a5b7bd3c2, type: 2}
   - {fileID: 11400000, guid: cb50fc9dda0171f479b79aedcd114525, type: 2}
   - {fileID: 11400000, guid: 0c87ad79b338216438556cb3e23dacb0, type: 2}
   - {fileID: 11400000, guid: 8eead4f16bf8d3d4b937c13419409dc6, type: 2}

@@ -3,7 +3,10 @@ using SGGames.Scripts.Card;
 
 public class CardComboValidator
 {
+    private int m_comboHasBeenPlayed = 0;
     private CardComboRule[] m_cardComboRules;
+    
+    public int ComboHasBeenPlayed => m_comboHasBeenPlayed;
 
     public CardComboValidator()
     {
@@ -17,6 +20,11 @@ public class CardComboValidator
             new ElementOnePairCombo(CardComboRuleType.ElementOnePair, 1),
             new OnePairCombo(CardComboRuleType.OnePair, 0),
         };
+    }
+
+    public void ResetComboCounter()
+    {
+        m_comboHasBeenPlayed = 0;
     }
 
     public int GetComboBonusEnergy(CardComboRuleType ruleType)
@@ -38,6 +46,7 @@ public class CardComboValidator
         {
             if(rule.IsMatch(selectedCards))
             {
+                m_comboHasBeenPlayed++;
                 return rule.RuleType;
             }
         }

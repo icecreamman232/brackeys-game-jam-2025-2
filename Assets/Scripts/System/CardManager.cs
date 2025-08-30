@@ -28,6 +28,7 @@ namespace SGGames.Scripts.System
         public const float k_ShowScoreTime = 0.3f;
         
         public int CurrentTurnNumber => m_currentTurnNumber;
+        public int NumberComboHasBeenPlayed => m_cardComboValidator.ComboHasBeenPlayed;
         
         public List<CardBehavior> CardsInHand => m_cardsInHand;
         public List<CardBehavior> SelectedCards => m_cardsInHand.Where(card=>card.IsSelected).ToList();
@@ -63,6 +64,7 @@ namespace SGGames.Scripts.System
         public void Reset()
         {
             StopAllCoroutines();
+            m_cardComboValidator.ResetComboCounter();
             m_currentTurnNumber = 0;
             m_cardPile.ResetPile();
             m_discardPile.ResetPile();
