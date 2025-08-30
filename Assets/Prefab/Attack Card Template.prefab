@@ -301,9 +301,9 @@ MonoBehaviour:
   m_cardDesc: {fileID: 4652621846533325729}
   m_cardIcon: {fileID: 4803074679156202415}
   m_energyPoints:
-  - {fileID: 6452892825749182004}
-  - {fileID: 3180146534378048136}
   - {fileID: 4630823856007319104}
+  - {fileID: 3180146534378048136}
+  - {fileID: 6452892825749182004}
   m_visualLayers:
   - {fileID: 712228002661509202}
   - {fileID: 4644864964324931158}
@@ -596,7 +596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2119496545692275409
 Transform:
   m_ObjectHideFlags: 0
@@ -944,12 +944,12 @@ GameObject:
   - component: {fileID: 2269177165253897055}
   - component: {fileID: 3175245638981188697}
   m_Layer: 0
-  m_Name: EnergyPts-3
+  m_Name: EnergyPts-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2269177165253897055
 Transform:
   m_ObjectHideFlags: 0
@@ -1328,12 +1328,12 @@ GameObject:
   - component: {fileID: 7747945869785073439}
   - component: {fileID: 7529693473543544988}
   m_Layer: 0
-  m_Name: EnergyPts-1
+  m_Name: EnergyPts-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7747945869785073439
 Transform:
   m_ObjectHideFlags: 0
