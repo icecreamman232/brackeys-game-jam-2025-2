@@ -13,9 +13,16 @@ public enum ItemRarity
     Rare,
 }
 
+public enum ItemID
+{
+    AncientScript, DoubleMachine, EvenDay, OddDay, FlameMark,
+    OceanMark, ThunderMark, HealthyGut, MegaSpeaker,
+}
+
 [CreateAssetMenu(fileName = "Item Data", menuName = "SGGames/Item Data")]
 public class ItemData : ScriptableObject
 {
+    public ItemID ItemID;
     public string Name;
     [TextArea(3, 10)]
     public string Description;

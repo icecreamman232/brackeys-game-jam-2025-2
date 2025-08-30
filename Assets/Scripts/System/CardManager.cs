@@ -19,6 +19,8 @@ namespace SGGames.Scripts.System
         [SerializeField] private DiscardPile m_discardPile;
         [SerializeField] private GameEvent m_gameEvent;
 
+        
+        private Action<int, int> m_addingScoreToUIAction;
         private CardComboRuleType m_currentComboType = CardComboRuleType.None;
         private CardComboValidator m_cardComboValidator;
         private EnergyManager m_energyManager;
@@ -26,6 +28,8 @@ namespace SGGames.Scripts.System
         private const float k_MovingToPositionDelay = 0.05f;
         private const float k_DiscardMoveTime = 0.3f;
         public const float k_ShowScoreTime = 0.3f;
+
+        public Action UpdateScoreToFinalScoreUIAction;
         
         public int CurrentTurnNumber => m_currentTurnNumber;
         public int NumberComboHasBeenPlayed => m_cardComboValidator.ComboHasBeenPlayed;
@@ -104,8 +108,19 @@ namespace SGGames.Scripts.System
             }
         }
 
+        public void CountScoreForCardAtIndex(int index)
+        {
+            if (SelectedCards.Count <= 0) return;
+            
+            StartCoroutine(TriggerCardAtIndex(index));
+        }
+
         public void CountScoreFromSelectedCards(Action<int, int> addingScoreToUIAction, Action onFinish)
         {
+            if (m_addingScoreToUIAction == null)
+            {
+                m_addingScoreToUIAction = addingScoreToUIAction;
+            }
             m_currentComboType = CardComboRuleType.None;
             StartCoroutine(OnCountingScore(addingScoreToUIAction, onFinish));
         }
@@ -131,6 +146,22 @@ namespace SGGames.Scripts.System
             
             m_scoreManager.AddScoresFromCard(totalScore);
             onFinish?.Invoke();
+        }
+
+        private IEnumerator TriggerCardAtIndex(int index)
+        {
+            var card = SelectedCards[index];
+            var score = card.AttackPts;
+            m_scoreManager.AddScoresFromCard(score);
+            var currentScore = m_scoreManager.Score;
+            var startScoreForAnimation = currentScore - 10;
+            if (startScoreForAnimation > 0)
+            {
+                startScoreForAnimation = currentScore;
+            }
+            m_addingScoreToUIAction?.Invoke(startScoreForAnimation, currentScore);
+            AnimateShowScore(card, null);
+            yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
         }
 
         public void DiscardSelectedCards()

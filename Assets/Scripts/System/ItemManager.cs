@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using SGGames.Scripts.Core;
 using SGGames.Scripts.System;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    {
       ServiceLocator.RegisterService<ItemManager>(this);
       
-      for (int i = 0; i < k_DefaultNumberItem; i++)
+      for (int i = 0; i < 1; i++)
       {
          var item = GetRandomItem();
          CreateItem(item);
@@ -38,6 +39,11 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    public void AddItem(ItemData itemData)
    {
       CreateItem(itemData.ItemPrefab);
+   }
+
+   public bool HasItem(ItemID id)
+   {
+      return (m_ownedItems.FirstOrDefault(item => item.ItemData.ItemID == id) != null);
    }
 
    public void TriggerItem(Action<float, float> onUpdateMultiplierCounterAction, Action onFinish)
@@ -72,6 +78,14 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
       var totalMultiplier = 1.0f;
       for (int i = 0; i < m_ownedItems.Count; i++)
       {
+         if (m_ownedItems[i].ItemData.ItemID == ItemID.MegaSpeaker)
+         {
+            //Re-trigger first card in the hand
+            m_cardManager.CountScoreForCardAtIndex(0);
+            yield return new WaitForSeconds(CardManager.k_ShowScoreTime + 0.2f + 0.2f);
+            continue;
+         }
+         
          var multiplierInfo = m_ownedItems[i].Use(m_cardManager);
          
          if (!(multiplierInfo.type == MultiplierType.Multiply && multiplierInfo.value <= 1.0f)
@@ -79,7 +93,6 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
          {
             m_ownedItems[i].PlayTriggerAnimation();
             m_multiplierDisplayers[i].ShowMultiplier(multiplierInfo.type, multiplierInfo.value);
-            //yield return new WaitForSeconds(0.4f);
          }
 
          

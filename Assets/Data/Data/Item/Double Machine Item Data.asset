@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
   m_Name: Double Machine Item Data
   m_EditorClassIdentifier: 
+  ItemID: 1
   Name: Double Machine
   Description: <color=#FF2D0B>x2 mul</color> playing hand if there is at least <color=orange>2</color>
     identical cards

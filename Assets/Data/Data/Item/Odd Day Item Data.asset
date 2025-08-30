@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
   m_Name: Odd Day Item Data
   m_EditorClassIdentifier: 
+  ItemID: 3
   Name: Odd Day
   Description: <color=#FF2D0B>+3</color> mul if played even number cards (<color=orange>1</color>,
     <color=orange>3</color>, <color=orange>5</color>)

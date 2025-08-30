@@ -2,7 +2,6 @@ using System.Collections;
 using SGGames.Scripts.System;
 using TMPro;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace SGGames.Scripts.UI
 {

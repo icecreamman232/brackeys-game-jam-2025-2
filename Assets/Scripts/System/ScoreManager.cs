@@ -8,7 +8,10 @@ public class ScoreManager : MonoBehaviour, IBootStrap
     [SerializeField] private DamageEnemyEvent m_damageEnemyEvent;
 
     private DamageEnemyInfo m_damageEnemyInfo;
-    
+    /// <summary>
+    /// Score that is in counting process not the final score that has been multiplied.
+    /// </summary>
+    public int Score => m_score;
     public int FinalScore => m_finalScore;
     
     public void AddScoresFromCard(int score)
@@ -24,10 +27,12 @@ public class ScoreManager : MonoBehaviour, IBootStrap
     public void FinishScoreCounting()
     {
         m_finalScore = Mathf.RoundToInt(m_score * m_multiplier);
-        
         //Send damage value to enemy
         m_damageEnemyInfo.Damage = m_finalScore;
         m_damageEnemyEvent?.Raise(m_damageEnemyInfo);
+        
+        //Reset counting score
+        m_score = 0;
     }
 
     public void Install()

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
   m_Name: Healthy Gut Item Data
   m_EditorClassIdentifier: 
+  ItemID: 7
   Name: Healthy Gut
   Description: <color=#FF2D0B>x1.2 mul</color> playing hand
   Rarity: 1

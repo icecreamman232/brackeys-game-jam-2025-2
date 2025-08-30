@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using SGGames.Scripts.Core;
 using SGGames.Scripts.Managers;
 using SGGames.Scripts.System;
 using UnityEngine;
@@ -21,12 +23,12 @@ namespace SGGames.Scripts.UI
             m_playButton.OnClickAction = PlayButtonClicked;
             m_discardButton.OnClickAction = DiscardButtonClicked;
         }
-
+        
         private void PlayButtonClicked()
         {
             if(!InputManager.IsActivated) return;
-            
             InputManager.SetActive(false);
+            
             m_scoreDisplayer.Reset();
             m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,
                 () =>
