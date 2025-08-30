@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
 using SGGames.Scripts.Core;
+using SGGames.Scripts.Managers;
 using UnityEngine;
 
 namespace SGGames.Scripts.System
@@ -42,6 +43,17 @@ namespace SGGames.Scripts.System
         
         public List<CardBehavior> CardsInHand => m_cardsInHand;
         public List<CardBehavior> SelectedCards => m_cardsInHand.Where(card=>card.IsSelected).ToList();
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonUp(1) && InputManager.IsActivated)
+            {
+                foreach (var card in SelectedCards)
+                {
+                    card.ResetSelection();
+                }
+            }
+        }
 
         public void Install()
         {

@@ -391,7 +391,7 @@ TextureImporter:
         width: 64
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -413,7 +413,7 @@ TextureImporter:
         width: 64
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -435,7 +435,7 @@ TextureImporter:
         width: 64
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -457,7 +457,7 @@ TextureImporter:
         width: 64
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -466,6 +466,94 @@ TextureImporter:
       bones: []
       spriteID: 41dde977e28795e44a122295a76d8b4a
       internalID: -1099179596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left-leg-cleanse-god
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef4b9ddc503b71f41a7b0becde2052a7
+      internalID: 1202625667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mind-cleanse-god
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edfcdf8a1660bae44866cb4075aabf40
+      internalID: -246372316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right-leg-cleanse-god
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0e34d8eabccfc342891204fc968ad3b
+      internalID: 1528133223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: diaper-god-icon
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7774b1ae8a96f94883a31a73f20b8ca
+      internalID: -1522644557
       vertices: []
       indices: 
       edges: []
@@ -487,16 +575,20 @@ TextureImporter:
       Diapear-wizard-icon: 1055877551
       Imodium-icon: 693731428
       cleanse-angle-icon: 237959111
+      diaper-god-icon: -1522644557
       diarrhea-knight-icon: 1726884741
       diarrhea-soldier-icon: -1883381983
       dung-beetle-icon: 2035897528
       golden-toilet-paper-icon: 979490683
       leaves-icon: -5947906166468842675
       left-hand-cleanse-god-icon: 2069688721
+      left-leg-cleanse-god: 1202625667
+      mind-cleanse-god: -246372316
       old-bird-icon: -1375343736
       plunger-icon: 7353190986194288448
       poison-perfume: -1869727571
       right-hand-cleanse-god-icon: -1099179596
+      right-leg-cleanse-god: 1528133223
       syringe-icon: -1490837788
       toilet-paper-icon: 3844439038272575733
       water-gun-icon: 368207146
