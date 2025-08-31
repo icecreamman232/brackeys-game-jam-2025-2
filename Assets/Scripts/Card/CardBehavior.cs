@@ -65,6 +65,24 @@ namespace SGGames.Scripts.Card
             m_atkPoint = m_cardData.Info.AttackPoint;
             m_cardVisual.ChangeCardVisual(m_cardData);
         }
+
+        public void SetCanClick(bool canClick)
+        {
+            m_canClick = canClick;
+        }
+
+        public void BringCardToFront(bool toFront)
+        {
+            if (toFront)
+            {
+                m_cardVisual.ChangeToDraggingVisual();
+            }
+            else
+            {
+                m_cardVisual.ResetToDefaultLayer();
+            }
+        }
+        
         
 
         public int AttackPts => m_atkPoint;
@@ -304,15 +322,5 @@ namespace SGGames.Scripts.Card
             m_canClick = false;
             transform.LeanMoveLocalY(k_DeselectOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
         }
-
-        // private void OnDrawGizmos()
-        // {
-        //     //if (m_isDragging)
-        //     {
-        //         Gizmos.color = Color.red;
-        //         var cardCenter = m_cardCollider.bounds.center;
-        //         Gizmos.DrawCube(cardCenter, m_cardCollider.size);
-        //     }
-        // }
     }
 }

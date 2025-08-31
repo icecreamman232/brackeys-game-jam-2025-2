@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c4850db0866144fa9c45a6a35add84, type: 3}
   m_Name: Poopy Soldier 4 - Boss Data
   m_EditorClassIdentifier: 
-  EnemyName: Poopy Soldier
+  EnemyName: Diarrhea Lord
   EnemyPrefab: {fileID: 4755298100970185588, guid: 8057db29dd3937e45a89c4322f0c7e2a, type: 3}
   EnemyIcon: {fileID: 3680619090928529440, guid: 2c17e5b274321dd4ea5362878841ed9a, type: 3}

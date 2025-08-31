@@ -1708,8 +1708,6 @@ MonoBehaviour:
   m_introCanvas: {fileID: 1286141957}
   m_enemies:
   - {fileID: 11400000, guid: a0b1f78b5da4e67499f3b27bf1cb44b5, type: 2}
-  - {fileID: 11400000, guid: 0b90d25c90d31c842a6f4fb44dbf7cc1, type: 2}
-  - {fileID: 11400000, guid: 59e5bec4f7f9ed6409f2d60aa6f56893, type: 2}
   - {fileID: 11400000, guid: d44c4a644ae7197449a336d21159bf8f, type: 2}
 --- !u!1 &285165160
 GameObject:
@@ -7440,6 +7438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e194a4e2107773428b46b74c0d30438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_unintallOnDestroy: 0
   m_bootStrap:
   - {fileID: 2401291}
   - {fileID: 482539168}

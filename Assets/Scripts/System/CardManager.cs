@@ -362,10 +362,14 @@ namespace SGGames.Scripts.System
 
         private void AnimateCardToDiscard(CardBehavior card)
         {
+            card.BringCardToFront(true);
+            card.SetCanClick(false);
             card.transform.LeanMove(m_discardPile.transform.position, k_DiscardMoveTime)
                 .setEase(LeanTweenType.easeOutCirc)
                 .setOnComplete(() => 
                 {
+                    card.BringCardToFront(false);
+                    card.SetCanClick(true);
                     m_discardPile.AddCardToDiscard(card);
                     m_discardPile.PositionCardAtDiscard(card);
                 });
@@ -374,12 +378,16 @@ namespace SGGames.Scripts.System
         
         private void AnimateCardToHand(CardBehavior card, int handIndex, float delay)
         {
+            card.BringCardToFront(true);
+            card.SetCanClick(false);
             card.gameObject.SetActive(true);
             card.transform.LeanMove(m_handPositions[handIndex].position, k_MovingToPositionTime)
                 .setEase(LeanTweenType.easeOutCubic)
                 .setDelay(delay)
                 .setOnComplete(()=>
                 {
+                    card.SetCanClick(true);
+                    card.BringCardToFront(false);
                     card.transform.position = m_handPositions[handIndex].position;
                     card.SetHandPosition(m_handPositions[handIndex].position);
                 });
