@@ -188,6 +188,7 @@ public class ItemBehavior : MonoBehaviour, IItem
 
     private void OnMouseEnter()
     {
+        if (!InputManager.IsActivated) return;
         if (!m_isDragging) // Only scale if not dragging
         {
             transform.LeanScale(Vector3.one * 1.2f, 0.1f)
@@ -200,6 +201,7 @@ public class ItemBehavior : MonoBehaviour, IItem
 
     private void OnMouseExit()
     {
+        if (!InputManager.IsActivated) return;
         if (!m_isDragging) // Only reset scale if not dragging
         {
             LeanTween.cancel(this.gameObject,false);

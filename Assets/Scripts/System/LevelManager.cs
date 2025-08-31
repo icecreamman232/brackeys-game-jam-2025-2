@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
         yield return StartCoroutine(PlayIntroAnimation());
         ServiceLocator.GetService<CardManager>().DealFirstHands();
         InputManager.SetActive(true);
+        ServiceLocator.GetService<TutorialManager>().StartTutorial();
     }
 
     private void CreateEnemy()
