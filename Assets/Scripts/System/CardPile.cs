@@ -9,7 +9,8 @@ namespace SGGames.Scripts.Card
     {
         [SerializeField] private CardManager m_cardManager;
         [SerializeField] private CardContainer m_cardContainer;
-
+        
+        private List<CardData> m_usedCards = new List<CardData>(); // Track used cards
         private List<CardBehavior> m_cardsInPile = new List<CardBehavior>();
         private const int k_DefaultCardCollectionSize = 12;
         
@@ -102,7 +103,33 @@ namespace SGGames.Scripts.Card
         /// <returns></returns>
         private CardData GetRandomCard()
         {
-            return m_cardContainer.AttackCardList[Random.Range(0, m_cardContainer.AttackCardList.Length)];
+            // If all cards have been used, reset the used cards list
+            if (m_usedCards.Count >= m_cardContainer.AttackCardList.Length)
+            {
+                m_usedCards.Clear();
+            }
+
+            // Create a list of available cards (not yet used)
+            var availableCards = new List<CardData>();
+            foreach (var card in m_cardContainer.AttackCardList)
+            {
+                if (!m_usedCards.Contains(card))
+                {
+                    availableCards.Add(card);
+                }
+            }
+
+            // If no cards available (shouldn't happen due to reset above), fallback to original behavior
+            if (availableCards.Count == 0)
+            {
+                return m_cardContainer.AttackCardList[Random.Range(0, m_cardContainer.AttackCardList.Length)];
+            }
+
+            // Select a random card from available cards
+            var selectedCard = availableCards[Random.Range(0, availableCards.Count)];
+            m_usedCards.Add(selectedCard);
+
+            return selectedCard;
         }
 
         private CardBehavior CreateCard(CardData data)
