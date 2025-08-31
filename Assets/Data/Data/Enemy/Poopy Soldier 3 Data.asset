@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26c4850db0866144fa9c45a6a35add84, type: 3}
-  m_Name: Poopy Soldier 2 Data
+  m_Name: Poopy Soldier 3 Data
   m_EditorClassIdentifier: 
   EnemyName: Poopy Soldier
-  EnemyPrefab: {fileID: 4755298100970185588, guid: ee33fffe16d78434ead9d60ad3c72f47, type: 3}
-  EnemyIcon: {fileID: 297761703447499198, guid: 2c17e5b274321dd4ea5362878841ed9a, type: 3}
+  EnemyPrefab: {fileID: 4755298100970185588, guid: 22fbc09f537958c4db3f5a9c74719ec1, type: 3}
+  EnemyIcon: {fileID: 4334783836991956000, guid: 6e25f2dd9e34b45448e31acb9b99ec91, type: 3}

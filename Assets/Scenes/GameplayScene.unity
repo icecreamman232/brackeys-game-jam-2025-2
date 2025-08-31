@@ -1709,6 +1709,8 @@ MonoBehaviour:
   m_enemies:
   - {fileID: 11400000, guid: a0b1f78b5da4e67499f3b27bf1cb44b5, type: 2}
   - {fileID: 11400000, guid: 0b90d25c90d31c842a6f4fb44dbf7cc1, type: 2}
+  - {fileID: 11400000, guid: 59e5bec4f7f9ed6409f2d60aa6f56893, type: 2}
+  - {fileID: 11400000, guid: d44c4a644ae7197449a336d21159bf8f, type: 2}
 --- !u!1 &285165160
 GameObject:
   m_ObjectHideFlags: 0
@@ -7251,7 +7253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1286141952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12704,7 +12706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3919140763820698083, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5600185613629639756, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
       propertyPath: m_cardPile
