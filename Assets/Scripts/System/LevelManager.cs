@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using SGGames.Scripts.Core;
 using SGGames.Scripts.Managers;
@@ -11,6 +12,10 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
     private int m_currentLevel = 0;
     
     private const float k_IntroAnimDuration = 1.833f;
+
+    public Sprite GetEnemyAvatar => m_enemies[m_currentLevel].EnemyIcon;
+
+    public Action<Sprite> UpdateEnemyAvatar;
     
     public void LoadFirstLevel()
     {
@@ -34,6 +39,7 @@ public class LevelManager : MonoBehaviour, IGameService, IBootStrap
     {
         var enemyManager = ServiceLocator.GetService<EnemyManager>();
         enemyManager.CreateEnemy(m_enemies[m_currentLevel]);
+        UpdateEnemyAvatar?.Invoke(m_enemies[m_currentLevel].EnemyIcon);
     }
     
     private IEnumerator PlayIntroAnimation()

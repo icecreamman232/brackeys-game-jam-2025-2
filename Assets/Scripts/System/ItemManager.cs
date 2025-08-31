@@ -18,6 +18,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    [SerializeField] private ItemDescriptionDisplayer[] m_itemDescriptionDisplayers;
    [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
    
+   private GameplaySoundManager m_gameplaySoundManager;
    private BanhMiItem m_banhMiItemRef;
    private const int k_DefaultNumberItem = 2;
    
@@ -153,6 +154,11 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
          {
             //Re-trigger first card in the hand
             m_cardManager.CountScoreForCardAtIndex(0);
+            if (m_gameplaySoundManager == null)
+            {
+               m_gameplaySoundManager = ServiceLocator.GetService<GameplaySoundManager>();
+            }
+            m_gameplaySoundManager.PlaySfx(SFX.ScoreCounting);
             yield return new WaitForSeconds(CardManager.k_ShowScoreTime + 0.2f + 0.2f);
             continue;
          }
@@ -164,6 +170,11 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
          {
             m_ownedItems[i].PlayTriggerAnimation();
             m_multiplierDisplayers[i].ShowMultiplier(multiplierInfo.type, multiplierInfo.value);
+            if (m_gameplaySoundManager == null)
+            {
+               m_gameplaySoundManager = ServiceLocator.GetService<GameplaySoundManager>();
+            }
+            m_gameplaySoundManager.PlaySfx(SFX.MulCounting);
          }
 
          

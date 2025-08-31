@@ -29,6 +29,7 @@ namespace SGGames.Scripts.System
         private Action<int, int> m_addingScoreToScoreDisplayAction;
         private CardComboRuleType m_currentComboType = CardComboRuleType.None;
         private CardComboValidator m_cardComboValidator;
+        private GameplaySoundManager m_gameplaySoundManager;
         private EnergyManager m_energyManager;
         private const float k_MovingToPositionTime = 0.7f;
         private const float k_MovingToPositionDelay = 0.05f;
@@ -172,6 +173,11 @@ namespace SGGames.Scripts.System
                 }
                 addingScoreToUIAction?.Invoke(startScoreForAnimation, totalScore);
                 AnimateShowScoreOnCard(card, null);
+                if (m_gameplaySoundManager == null)
+                {
+                    m_gameplaySoundManager = ServiceLocator.GetService<GameplaySoundManager>();
+                }
+                m_gameplaySoundManager.PlaySfx(SFX.ScoreCounting);
                 yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
             }
             
@@ -376,6 +382,9 @@ namespace SGGames.Scripts.System
         private void AnimateShowScoreOnCard(CardBehavior cardBehavior, Action onFinish)
         {
             cardBehavior.ShowAtkPointHUD();
+            cardBehavior.transform.LeanScale(Vector3.one * 1.1f, 0.15f)
+                .setEase(LeanTweenType.punch)
+                .setLoopPingPong(1);
             cardBehavior.gameObject.LeanDelayedCall(
                 k_ShowScoreTime,
                 () =>

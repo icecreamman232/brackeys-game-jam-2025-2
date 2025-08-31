@@ -6,6 +6,8 @@ using UnityEngine;
 public enum SFX
 {
     ClickCard,
+    ScoreCounting,
+    MulCounting,
 }
 
 [Serializable]
@@ -15,7 +17,7 @@ public class SFXData
     public AudioClip Clip;
 }
 
-public class GameplaySoundManager : MonoBehaviour, IGameService
+public class GameplaySoundManager : MonoBehaviour, IGameService, IBootStrap
 {
     [Header("SFX")]
     [SerializeField] private AudioSource m_sfxSource_1;
@@ -27,19 +29,6 @@ public class GameplaySoundManager : MonoBehaviour, IGameService
     private int m_currentBGMIndex;
     private Dictionary<SFX,SFXData> m_sfxDictionary;
     
-    private void Awake()
-    {
-        ServiceLocator.RegisterService<GameplaySoundManager>(this);
-        m_sfxDictionary = new Dictionary<SFX, SFXData>();
-        foreach (var data in m_sfxData)
-        {
-            m_sfxDictionary.Add(data.SFXID, data);
-        }
-        
-        m_bgmSource.loop = false;
-        PlayBGM();
-    }
-
     private void Update()
     {
         // Check if BGM has finished playing and automatically play next
@@ -73,12 +62,27 @@ public class GameplaySoundManager : MonoBehaviour, IGameService
     }
 
 
-    public void PlaySFX(SFX sfxID)
+    public void PlaySfx(SFX sfxID)
     {
-        if (!m_sfxSource_1.isPlaying)
+        m_sfxSource_1.clip = m_sfxDictionary[sfxID].Clip;
+        m_sfxSource_1.Play(); 
+    }
+
+    public void Install()
+    {
+        ServiceLocator.RegisterService<GameplaySoundManager>(this);
+        m_sfxDictionary = new Dictionary<SFX, SFXData>();
+        foreach (var data in m_sfxData)
         {
-            m_sfxSource_1.clip = m_sfxDictionary[sfxID].Clip;
-            m_sfxSource_1.Play();       
+            m_sfxDictionary.Add(data.SFXID, data);
         }
+        
+        m_bgmSource.loop = false;
+        PlayBGM();
+    }
+
+    public void Uninstall()
+    {
+        
     }
 }

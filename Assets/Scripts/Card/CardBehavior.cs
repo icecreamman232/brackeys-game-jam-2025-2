@@ -140,7 +140,7 @@ namespace SGGames.Scripts.Card
             if (!InputManager.IsActivated) return;
             if (!m_canClick) return;
             
-            ServiceLocator.GetService<GameplaySoundManager>().PlaySFX(SFX.ClickCard);
+            ServiceLocator.GetService<GameplaySoundManager>().PlaySfx(SFX.ClickCard);
 
             // Store initial mouse position and time
             m_mouseDownPosition = GetWorldMousePosition();

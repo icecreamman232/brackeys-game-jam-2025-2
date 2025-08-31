@@ -1,3 +1,4 @@
+using System.Collections;
 using SGGames.Scripts.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,14 +11,21 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] private RectTransform m_bottomIcon;
     [SerializeField] private EnemyHealthBarEvent m_enemyHealthBarEvent;
 
-    private void Start()
+    private IEnumerator Start()
     {
         m_enemyHealthBarEvent.AddListener(UpdateHealthBar);
+        yield return new WaitUntil(() => ServiceLocator.HasService<LevelManager>());
+        ServiceLocator.GetService<LevelManager>().UpdateEnemyAvatar = UpdateEnemyIcon;
     }
 
     private void OnDestroy()
     {
         m_enemyHealthBarEvent.RemoveListener(UpdateHealthBar);
+    }
+
+    private void UpdateEnemyIcon(Sprite icon)
+    {
+        m_enemyIcon.sprite = icon;
     }
 
     private void UpdateHealthBar(EnemyHealthBarEventData data)

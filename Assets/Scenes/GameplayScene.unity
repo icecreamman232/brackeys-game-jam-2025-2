@@ -2791,6 +2791,10 @@ MonoBehaviour:
   m_sfxData:
   - SFXID: 0
     Clip: {fileID: 8300000, guid: 4c454e9d263f7e541a5ce636f2e45fd3, type: 3}
+  - SFXID: 1
+    Clip: {fileID: 8300000, guid: 149f755b2e76f9e4aa3b0d6164be7028, type: 3}
+  - SFXID: 2
+    Clip: {fileID: 8300000, guid: f28aedd8a6554434aa52a5cf603be114, type: 3}
   m_bgmSource: {fileID: 1853044399}
   m_bgm:
   - {fileID: 8300000, guid: 24332955614d5ef4889bd30eb4e51718, type: 3}
@@ -5604,7 +5608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_canvasGroup: {fileID: 1019156474}
   m_healthBar: {fileID: 2070791345}
-  m_enemyIcon: {fileID: 0}
+  m_enemyIcon: {fileID: 691468190}
   m_bottomIcon: {fileID: 651244986}
   m_enemyHealthBarEvent: {fileID: 11400000, guid: abe70dd51a074424e848e77f8e26b9ff, type: 2}
 --- !u!225 &1019156474
@@ -7622,6 +7626,7 @@ MonoBehaviour:
   - {fileID: 1516102850}
   - {fileID: 282994451}
   - {fileID: 1966525294}
+  - {fileID: 451758882}
 --- !u!4 &1410301819
 Transform:
   m_ObjectHideFlags: 0
@@ -10378,7 +10383,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
