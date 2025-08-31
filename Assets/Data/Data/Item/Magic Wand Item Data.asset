@@ -18,5 +18,5 @@ MonoBehaviour:
   Rarity: 1
   MultiplierType: 0
   MultiplierValue: 0.5
-  Icon: {fileID: -576324556, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
+  Icon: {fileID: -865406374, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
   ItemPrefab: {fileID: 2456092363534137616, guid: bd340677cc9adf94390c1097577b709a, type: 3}
