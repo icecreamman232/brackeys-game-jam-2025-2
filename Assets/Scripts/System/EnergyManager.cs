@@ -12,7 +12,7 @@ public class EnergyManager : MonoBehaviour, IGameService, IBootStrap
     
     public (int current, int max) EnergyInfo => (m_energyRemaining, m_maxEnergy);
     
-    public bool IsEnergyDrain => m_energyRemaining <= 0;
+    public bool IsEnergyDrain => m_energyRemaining < 0;
     
     public bool CanSelectedThisCard(int energyCost)
     {
