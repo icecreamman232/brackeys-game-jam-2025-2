@@ -283,7 +283,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
    {
       var desc = banhMiItem.ItemData.Description;
       var customDesc = ((BanhMiItemData)banhMiItem.ItemData).RandomConditionDescription[(int)banhMiItem.CurrentCondition.conditionType];
-      desc = desc.Replace("[random_condition]", $"<color=orange>{banhMiItem.CurrentCondition.numberRequired}<color> {customDesc}");
+      desc = desc.Replace("[random_condition]", $"<color=orange>{banhMiItem.CurrentCondition.numberRequired}</color> {customDesc}");
       return desc;
    }
 }
