@@ -1,4 +1,5 @@
 using System;
+using SGGames.Scripts.Core;
 using SGGames.Scripts.Data;
 using SGGames.Scripts.Managers;
 using TMPro;
@@ -138,6 +139,8 @@ namespace SGGames.Scripts.Card
         {
             if (!InputManager.IsActivated) return;
             if (!m_canClick) return;
+            
+            ServiceLocator.GetService<GameplaySoundManager>().PlaySFX(SFX.ClickCard);
 
             // Store initial mouse position and time
             m_mouseDownPosition = GetWorldMousePosition();

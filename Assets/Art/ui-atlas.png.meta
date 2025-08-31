@@ -247,6 +247,72 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: enemy-hp-bar-fg
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 130
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 10, z: 12, w: 10}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca1d6008ffa3da24fb8b8a4a1e98a7ef
+      internalID: 1022626201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-hp-bar-bg
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 65
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 10, z: 12, w: 10}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d0919a8e397b14e88b0723b125bb33
+      internalID: 1296103393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: diaper-ui-icon
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ddcf2e1c032c9340941ae413dfa7033
+      internalID: 1106837557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -264,6 +330,9 @@ TextureImporter:
       black-inner-bg: -1381897467
       button-clicked: 8545957714173672369
       button-normal: 7595667864703430088
+      diaper-ui-icon: 1106837557
+      enemy-hp-bar-bg: 1296103393
+      enemy-hp-bar-fg: 1022626201
       item-desc-bg: 1961039591
       white-outline: -132448734
       white-round-corner-rect: 606868962
