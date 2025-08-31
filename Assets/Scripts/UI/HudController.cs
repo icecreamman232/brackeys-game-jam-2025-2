@@ -8,6 +8,7 @@ namespace SGGames.Scripts.UI
 {
     public class HudController : MonoBehaviour, IBootStrap
     {
+        [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private ItemManager m_itemManager;
         [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private CardManager m_cardManager;
@@ -26,6 +27,12 @@ namespace SGGames.Scripts.UI
         {
             if(!InputManager.IsActivated) return;
             InputManager.SetActive(false);
+
+            if (m_cardManager.SelectedCards.Count <= 0)
+            {
+                m_playSFXEvent.Raise(SFX.ButtonCancel);
+                return;
+            }
             
             m_scoreDisplayer.Reset();
             m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,

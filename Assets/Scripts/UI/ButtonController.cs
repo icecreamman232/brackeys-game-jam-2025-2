@@ -7,6 +7,7 @@ namespace SGGames.Scripts.UI
 {
     public class ButtonController : Selectable, IPointerClickHandler
     {
+        [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private Sprite m_normalSprite;
         [SerializeField] private Sprite m_onClickSprite;
         [SerializeField] private Color m_normalColor;
@@ -22,6 +23,7 @@ namespace SGGames.Scripts.UI
         public override void OnPointerDown(PointerEventData eventData)
         {
             ((Image)targetGraphic).sprite = m_onClickSprite;
+            m_playSFXEvent.Raise(SFX.ButtonClick);
             base.OnPointerDown(eventData);
         }
 

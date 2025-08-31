@@ -8,6 +8,8 @@ public enum SFX
     ClickCard,
     ScoreCounting,
     MulCounting,
+    ButtonClick,
+    ButtonCancel
 }
 
 [Serializable]
@@ -20,6 +22,7 @@ public class SFXData
 public class GameplaySoundManager : MonoBehaviour, IGameService, IBootStrap
 {
     [Header("SFX")]
+    [SerializeField] private PlaySFXEvent m_playSFXEvent;
     [SerializeField] private AudioSource m_sfxSource_1;
     [SerializeField] private SFXData[] m_sfxData;
     [Header("BGM")]
@@ -71,6 +74,7 @@ public class GameplaySoundManager : MonoBehaviour, IGameService, IBootStrap
     public void Install()
     {
         ServiceLocator.RegisterService<GameplaySoundManager>(this);
+        m_playSFXEvent.AddListener(PlaySfx);
         m_sfxDictionary = new Dictionary<SFX, SFXData>();
         foreach (var data in m_sfxData)
         {
@@ -83,6 +87,6 @@ public class GameplaySoundManager : MonoBehaviour, IGameService, IBootStrap
 
     public void Uninstall()
     {
-        
+        m_playSFXEvent.RemoveListener(PlaySfx);
     }
 }

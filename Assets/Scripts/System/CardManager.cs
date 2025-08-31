@@ -12,6 +12,7 @@ namespace SGGames.Scripts.System
     public class CardManager : MonoBehaviour, IBootStrap, IGameService
     {
         [Header("Discard")]
+        [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private int m_maxDiscardTime;
         [SerializeField] private int m_currentDiscardNumber;
         [SerializeField] private DiscardNumberEvent m_discardNumberEvent;
@@ -203,6 +204,11 @@ namespace SGGames.Scripts.System
 
         public void DiscardSelectedCards(bool isManualDiscard)
         {
+            if (SelectedCards.Count <= 0)
+            {
+                m_playSFXEvent.Raise(SFX.ButtonCancel);
+                return;
+            }
             m_currentComboType = CardComboRuleType.None;
             m_energyManager.Reset();
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();

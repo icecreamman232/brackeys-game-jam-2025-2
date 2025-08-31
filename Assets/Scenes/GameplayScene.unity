@@ -2787,6 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe1e927bcbb10e479bb1786e5aff974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
   m_sfxSource_1: {fileID: 1088350058}
   m_sfxData:
   - SFXID: 0
@@ -2795,6 +2796,10 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 149f755b2e76f9e4aa3b0d6164be7028, type: 3}
   - SFXID: 2
     Clip: {fileID: 8300000, guid: f28aedd8a6554434aa52a5cf603be114, type: 3}
+  - SFXID: 3
+    Clip: {fileID: 8300000, guid: 2725545c21947db41a5e039d5b23a580, type: 3}
+  - SFXID: 4
+    Clip: {fileID: 8300000, guid: 42b1b319f0eb9dc46aa58a2b1df09d84, type: 3}
   m_bgmSource: {fileID: 1853044399}
   m_bgm:
   - {fileID: 8300000, guid: 24332955614d5ef4889bd30eb4e51718, type: 3}
@@ -4559,6 +4564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5784abb6482ea7a4da83aee8039c91bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
   m_maxDiscardTime: 5
   m_currentDiscardNumber: 0
   m_discardNumberEvent: {fileID: 11400000, guid: d7c3b1de8d2941d45815c520f9419cf1, type: 2}
@@ -11200,6 +11206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aca351f0916d8d418cd03a6b2197525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
   m_itemManager: {fileID: 1516102850}
   m_scoreManager: {fileID: 867436023}
   m_cardManager: {fileID: 723669628}

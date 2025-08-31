@@ -78,6 +78,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5968119673375974739}
+  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
   m_normalSprite: {fileID: 7595667864703430088, guid: 76dac487510fc6348893ad30df4a3046, type: 3}
   m_onClickSprite: {fileID: 8545957714173672369, guid: 76dac487510fc6348893ad30df4a3046, type: 3}
   m_normalColor: {r: 0.23891956, g: 0.5321058, b: 0.8584906, a: 1}
