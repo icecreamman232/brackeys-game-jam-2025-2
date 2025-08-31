@@ -52,7 +52,7 @@ namespace SGGames.Scripts.System
             {
                 foreach (var card in SelectedCards)
                 {
-                    card.ResetSelection();
+                    card.ResetSelection(shouldReturnEnergy:true);
                 }
             }
         }

@@ -88,5 +88,6 @@ public class GameplaySoundManager : MonoBehaviour, IGameService, IBootStrap
     public void Uninstall()
     {
         m_playSFXEvent.RemoveListener(PlaySfx);
+        ServiceLocator.UnregisterService<GameplaySoundManager>();
     }
 }

@@ -221,13 +221,17 @@ namespace SGGames.Scripts.Card
             m_cardVisual.ResetToDefaultLayer();
         }
 
-        public void ResetSelection()
+        public void ResetSelection(bool shouldReturnEnergy = false)
         {
             m_canClick = true;
             m_isSelected = false;
             var currentLocal = transform.localPosition;
             currentLocal.y = k_DeselectOffset;
             transform.localPosition = currentLocal;
+            if (shouldReturnEnergy)
+            {
+                OnDeselect();
+            }
         }
         
         public void ChangeCardState(CardState state)
