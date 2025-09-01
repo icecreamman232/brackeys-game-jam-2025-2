@@ -147,7 +147,7 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
 
    private IEnumerator OnTriggerItemProcess(Action<float, float> onUpdateMultiplierUIAction, Action onFinish)
    {
-      var totalMultiplier = 1.0f;
+      var totalMultiplier = 0.0f;
       for (int i = 0; i < m_ownedItems.Count; i++)
       {
          if (m_ownedItems[i].ItemData.ItemID == ItemID.MegaSpeaker)
@@ -184,7 +184,18 @@ public class ItemManager : MonoBehaviour, IBootStrap, IGameService
          }
          else
          {
+            //If multiplier is 0, set it to 1.0f for multiplication
+            if (totalMultiplier == 0)
+            {
+               totalMultiplier = 1.0f;
+            }
             totalMultiplier *= multiplierInfo.value;
+         }
+
+         //If total multiplier is smaller than 1, we add 1 so it wont be a reduce to player score
+         if (totalMultiplier <= 1.0f)
+         {
+            totalMultiplier += 1.0f;
          }
 
          if (!(multiplierInfo.type == MultiplierType.Multiply && multiplierInfo.value <= 1.0f)

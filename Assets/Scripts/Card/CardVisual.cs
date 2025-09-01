@@ -33,7 +33,7 @@ public class CardVisual : MonoBehaviour
         }
     }
 
-    public void ChangeToDraggingVisual()
+    public void BringCardToFront()
     {
         foreach (var visual in m_visualLayers)
         {

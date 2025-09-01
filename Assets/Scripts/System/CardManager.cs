@@ -120,7 +120,6 @@ namespace SGGames.Scripts.System
             card.SetName();
             card.IsOverlappedOnCard = IsCardOverlapping;
             card.SwapCardsAction = SwapCard;
-            card.CanBeSelected = m_energyManager.CanSelectedThisCard;
             card.SelectAction = OnCardSelected;
             card.DeselectAction = OnCardDeselected;
             

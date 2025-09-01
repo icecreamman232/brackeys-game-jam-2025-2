@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eeb2c8841ab8e148b47d31296713a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
   m_cardData: {fileID: 0}
   m_cardVisual: {fileID: 1034943498109058756}
   m_cardState: 0

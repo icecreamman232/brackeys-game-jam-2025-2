@@ -1,5 +1,4 @@
 using System;
-using SGGames.Scripts.Core;
 using SGGames.Scripts.Data;
 using SGGames.Scripts.Managers;
 using TMPro;
@@ -15,7 +14,7 @@ namespace SGGames.Scripts.Card
     }
     public class CardBehavior : MonoBehaviour
     {
-        [SerializeField] private CardData m_cardData;
+        [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private CardVisual m_cardVisual;
         [SerializeField] private CardState m_cardState = CardState.InPile;
         [SerializeField] private int m_cardIndex;
@@ -24,15 +23,15 @@ namespace SGGames.Scripts.Card
         [SerializeField] private TextMeshPro m_scoreDisplayer;
         [SerializeField] private BoxCollider2D m_cardCollider;
         [SerializeField] protected bool m_isSelected;
+        
+        private CardData m_cardData;
+        private CardBehavior m_overlappedCard;
         private bool m_canSwawpWithOtherCard;
         private bool m_isDragging;
-        protected bool m_canClick = true;
-        private const float k_SelectCardYOffset = -2f;
-        private const float k_DeselectOffset = -2.5f;
-        private const float k_MoveCardTweenDuration = 0.2f;
+        private bool m_canClick = true;
+        
         private Camera m_mainCamera;
         private Vector3 m_startDraggingPosition;
-        private CardBehavior m_overlappedCard;
         private string m_originalName;
         
         // Add these new fields for drag detection
@@ -43,20 +42,30 @@ namespace SGGames.Scripts.Card
         // Drag detection thresholds
         private const float k_DragDistanceThreshold = 0.5f; // Minimum distance to start dragging
         private const float k_DragTimeThreshold = 0.2f;     // Minimum time before drag can start
-
+        
+        //Const for card positioning
+        private const float k_SelectCardYOffset = -2f;
+        private const float k_DeselectOffset = -2.5f;
+        private const float k_MoveCardTweenDuration = 0.2f;
+        
+        public BoxCollider2D CardCollider => m_cardCollider;
         public CardData CardData => m_cardData;
-        public CardState CardState => m_cardState;
         public int CardIndex => m_cardIndex;
         public bool IsSelected => m_isSelected;
+        public int AttackPts => m_atkPoint;
         
-        public void SetCardIndex(int index)
-        {
-            m_cardIndex = index;
-        }
+        public Func<CardBehavior, CardBehavior> IsOverlappedOnCard;
+        public Action<CardBehavior,CardBehavior> SwapCardsAction;
+        public Action SelectAction;
+        public Action DeselectAction;
+        
+        public void SetCardIndex(int index) => m_cardIndex = index;
+        
+        public void SetName() => this.gameObject.name = $"{m_originalName} Index {m_cardIndex}";
 
-        public void SetName()
+        public void ChangeCardState(CardState state)
         {
-            this.gameObject.name = $"{m_originalName} Index {m_cardIndex}";
+            m_cardState = state;
         }
         
         public void SetData(CardData cardData)
@@ -75,26 +84,15 @@ namespace SGGames.Scripts.Card
         {
             if (toFront)
             {
-                m_cardVisual.ChangeToDraggingVisual();
+                m_cardVisual.BringCardToFront();
             }
             else
             {
                 m_cardVisual.ResetToDefaultLayer();
             }
         }
+        #region Unity Cycle Methods
         
-        
-
-        public int AttackPts => m_atkPoint;
-        public BoxCollider2D CardCollider => m_cardCollider;
-        
-        public Func<CardBehavior, CardBehavior> IsOverlappedOnCard;
-        public Func<int, bool> CanBeSelected;
-        public Action<int> UseEnergyAction;
-        public Action<CardBehavior,CardBehavior> SwapCardsAction;
-        public Action SelectAction;
-        public Action DeselectAction;
-
         private void Awake()
         {
             m_mainCamera = Camera.main;
@@ -103,13 +101,15 @@ namespace SGGames.Scripts.Card
 
         private void Update()
         {
-            if (m_isDragging)
-            {
-                var newPos = GetWorldMousePosition();
-                newPos.y -= 0.75f;
-                transform.position = newPos;
-            }
+            if (!m_isDragging) return;
+            var newPos = GetWorldMousePosition();
+            newPos.y -= 0.75f;
+            transform.position = newPos;
         }
+        
+        #endregion
+        
+        #region Mouse Events Handling
         
         private void OnMouseDrag()
         {
@@ -127,8 +127,8 @@ namespace SGGames.Scripts.Card
                 {
                     m_dragIntentDetected = true;
                     m_isDragging = true;
-                    //Make card visual is on top of other card, regardless of the order of the card in the pile
-                    m_cardVisual.ChangeToDraggingVisual();
+                    //Make card visual is on top of the other card, regardless of the order of the card in the pile
+                    m_cardVisual.BringCardToFront();
                 }
                 else
                 {
@@ -158,7 +158,7 @@ namespace SGGames.Scripts.Card
             if (!InputManager.IsActivated) return;
             if (!m_canClick) return;
             
-            ServiceLocator.GetService<GameplaySoundManager>().PlaySfx(SFX.ClickCard);
+            m_playSFXEvent.Raise(SFX.ClickCard);
 
             // Store initial mouse position and time
             m_mouseDownPosition = GetWorldMousePosition();
@@ -191,10 +191,6 @@ namespace SGGames.Scripts.Card
             // Original click behavior
             if (!m_isSelected)
             {
-                if (!CanBeSelected.Invoke(m_cardData.Info.EnergyCost))
-                {
-                    return;
-                }
                 OnSelectTween();
             }
             else
@@ -234,41 +230,10 @@ namespace SGGames.Scripts.Card
             }
         }
         
-        public void ChangeCardState(CardState state)
-        {
-            m_cardState = state;
-        }
-
-        /// <summary>
-        /// Set current position as start dragging position.
-        /// </summary>
-        public void SetHandPosition(Vector3 position)
-        {
-            m_startDraggingPosition = position;
-        }
+        #endregion
         
-        public virtual void OnSelect()
-        {
-            SelectAction?.Invoke();
-            m_selectCardEvent.Raise(new SelectCardEventData
-            {
-                CardIndex = m_cardIndex,
-                EnergyCost = m_cardData.Info.EnergyCost,
-                IsSelected = true
-            });
-        }
+        #region Score/Atk Pts Display
         
-        public virtual void OnDeselect()
-        {
-            DeselectAction?.Invoke();
-            m_selectCardEvent.Raise(new SelectCardEventData
-            {
-                CardIndex = m_cardIndex,
-                EnergyCost = m_cardData.Info.EnergyCost,
-                IsSelected = false
-            });
-        }
-
         public void ShowAtkPointHUD()
         {
             m_scoreDisplayer.gameObject.SetActive(true);
@@ -279,6 +244,48 @@ namespace SGGames.Scripts.Card
         {
             m_scoreDisplayer.gameObject.SetActive(false);
         }
+        
+        #endregion
+        
+        /// <summary>
+        /// Set current position as start dragging position.
+        /// </summary>
+        public void SetHandPosition(Vector3 position)
+        {
+            m_startDraggingPosition = position;
+        }
+        
+        protected virtual void OnSelect()
+        {
+            SelectAction?.Invoke();
+            m_selectCardEvent.Raise(new SelectCardEventData
+            {
+                CardIndex = m_cardIndex,
+                EnergyCost = m_cardData.Info.EnergyCost,
+                IsSelected = true
+            });
+        }
+        
+        protected virtual void OnDeselect()
+        {
+            DeselectAction?.Invoke();
+            m_selectCardEvent.Raise(new SelectCardEventData
+            {
+                CardIndex = m_cardIndex,
+                EnergyCost = m_cardData.Info.EnergyCost,
+                IsSelected = false
+            });
+        }
+
+        private Vector3 GetWorldMousePosition()
+        {
+            var mousePos = Input.mousePosition;
+            mousePos = m_mainCamera.ScreenToWorldPoint(mousePos);
+            mousePos.z = 0;
+            return mousePos;
+        }
+        
+        #region Tweening
 
         public void TweenCardToPosition(Vector3 position, Action onFinish)
         {
@@ -292,15 +299,7 @@ namespace SGGames.Scripts.Card
                     m_canClick = true;
                 });
         }
-
-        private Vector3 GetWorldMousePosition()
-        {
-            var mousePos = Input.mousePosition;
-            mousePos = m_mainCamera.ScreenToWorldPoint(mousePos);
-            mousePos.z = 0;
-            return mousePos;
-        }
-
+        
         private void OnCompleteTween()
         {
             m_isSelected = !m_isSelected;
@@ -314,7 +313,7 @@ namespace SGGames.Scripts.Card
                 OnDeselect();
             }
         }
-
+        
         private void OnSelectTween()
         {
             m_canClick = false;
@@ -326,5 +325,7 @@ namespace SGGames.Scripts.Card
             m_canClick = false;
             transform.LeanMoveLocalY(k_DeselectOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
         }
+        
+        #endregion  
     }
 }

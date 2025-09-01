@@ -43,12 +43,15 @@ public class ScoreManager : MonoBehaviour, IBootStrap, IGameService
             reduceMultiplier = 0.25f;
         }
         var afterScore = m_finalScore * reduceMultiplier;
+        //Debug.Log($"Energy Drain : previous score {m_finalScore} * {reduceMultiplier} = {afterScore}");
         m_finalScore = Mathf.RoundToInt(afterScore);
+        
     }
 
     public void CalculateFinalScore()
     {
-        m_finalScore = Mathf.RoundToInt(m_score * m_multiplier);
+        m_finalScore = Mathf.CeilToInt(m_score * (m_multiplier == 0 ? 1 : m_multiplier));
+        //Debug.Log($"Score {m_score} * Multiplier {m_multiplier} = Final Score {m_finalScore}");
     }
     
     public void FinishScoreCounting()
@@ -59,6 +62,8 @@ public class ScoreManager : MonoBehaviour, IBootStrap, IGameService
         
         //Reset counting score
         m_score = 0;
+        m_finalScore = 0;
+        m_multiplier = 0;
     }
 
     public void Install()
