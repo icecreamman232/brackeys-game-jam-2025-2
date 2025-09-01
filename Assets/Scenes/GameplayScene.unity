@@ -3278,7 +3278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e8479e4405c644aab13a353ef8e779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxEnergy: 3
+  m_maxEnergy: 5
   m_energyRemaining: 0
   m_selectCardEvent: {fileID: 11400000, guid: 9492163a1c62d464aac181cd905b48be, type: 2}
   m_energyHUDEvent: {fileID: 11400000, guid: fb3bfb14499fba74586255cc1a4ef9c7, type: 2}
@@ -14882,6 +14882,14 @@ PrefabInstance:
     - target: {fileID: 5782119344574665189, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827706199760010687, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -30.57251
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827706199760010687, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13.292236
       objectReference: {fileID: 0}
     - target: {fileID: 8173290003504535590, guid: ec8bffc34f25ca146b3a309321a0d555, type: 3}
       propertyPath: m_IsActive

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Left Hand Cleanse God Data
   m_EditorClassIdentifier: 
   Name: Left Hand Cleanse God
-  Description: This is his divine left hand which has been lost after Great Battle.
+  Description: The divine left hand
   Info:
     Type: 0
     EnergyCost: 3

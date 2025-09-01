@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Cleanse Angel Data
   m_EditorClassIdentifier: 
   Name: Cleanse Angel
-  Description: The more power he has, the more painful he has to endure...in the
-    bottom.
+  Description: The Angle of Diaper! Pray to him!
   Info:
     Type: 0
     EnergyCost: 2

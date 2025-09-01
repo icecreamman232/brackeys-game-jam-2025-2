@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: What a fragrant death!
   Info:
     Type: 0
-    EnergyCost: 2
+    EnergyCost: 1
     AttackPoint: 2
     Element: 1
   Icon: {fileID: -1869727571, guid: 4d506518612916549bce74798be43943, type: 3}

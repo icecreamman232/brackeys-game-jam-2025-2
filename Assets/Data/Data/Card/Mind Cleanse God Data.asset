@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mind Cleanse God Data
   m_EditorClassIdentifier: 
   Name: Mind Cleanse God
-  Description: This is his divine mind which has been lost after Great Battle.
+  Description: The divine mind
   Info:
     Type: 0
     EnergyCost: 3

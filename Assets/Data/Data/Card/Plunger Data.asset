@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Suck and unstuck
   Info:
     Type: 0
-    EnergyCost: 2
+    EnergyCost: 1
     AttackPoint: 2
     Element: 0
   Icon: {fileID: 7353190986194288448, guid: 4d506518612916549bce74798be43943, type: 3}

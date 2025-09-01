@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Left Leg Cleanse God Data
   m_EditorClassIdentifier: 
   Name: Left Leg Cleanse God
-  Description: This is his divine left leg which has been lost after Great Battle.
+  Description: The divine left leg
   Info:
     Type: 0
     EnergyCost: 3
