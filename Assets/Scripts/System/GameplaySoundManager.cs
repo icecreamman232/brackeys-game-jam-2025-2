@@ -37,9 +37,14 @@ public class GameplaySoundManager : MonoBehaviour, IGameService, IBootStrap
         // Check if BGM has finished playing and automatically play next
         if (m_bgmSource.clip != null && !m_bgmSource.isPlaying && m_bgm.Length > 0)
         {
-            PlayNextBGM();
+            // Only advance if we're at or near the end of the clip
+            // This prevents advancing when audio is paused due to focus loss
+            float timeRemaining = m_bgmSource.clip.length - m_bgmSource.time;
+            if (timeRemaining <= 0.1f) // Small tolerance for timing precision
+            {
+                PlayNextBGM();
+            }
         }
-
     }
 
     public void StopBGM()
