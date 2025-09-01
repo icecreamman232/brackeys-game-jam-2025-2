@@ -1,4 +1,5 @@
 using System;
+using SGGames.Scripts.Item;
 using SGGames.Scripts.Managers;
 using SGGames.Scripts.System;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class ItemBehavior : MonoBehaviour, IItem
     [SerializeField] protected ItemData m_itemData;
     [SerializeField] private BoxCollider2D m_itemCollider;
 
+    private ItemVisualHelper m_itemVisualHelper;
     private bool m_isDragging;
     private bool m_canClick = true;
     private Camera m_mainCamera;
@@ -57,6 +59,9 @@ public class ItemBehavior : MonoBehaviour, IItem
                 m_itemCollider = gameObject.AddComponent<BoxCollider2D>();
             }
         }
+
+        m_itemVisualHelper = GetComponent<ItemVisualHelper>();
+        m_itemVisualHelper.SetItemVisual(m_itemData);
     }
 
     private void Update()

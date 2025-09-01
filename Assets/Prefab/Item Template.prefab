@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2223658283352891548}
   - component: {fileID: 3339363441409668678}
   - component: {fileID: 2566613340213612002}
+  - component: {fileID: 6698887561467108177}
   m_Layer: 9
   m_Name: Item Template
   m_TagString: Untagged
@@ -95,6 +96,19 @@ MonoBehaviour:
   m_itemIndex: 0
   m_itemData: {fileID: 0}
   m_itemCollider: {fileID: 3339363441409668678}
+--- !u!114 &6698887561467108177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448711677918451805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41194cc25287f364c889c966b0a1f3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_itemIcon: {fileID: 3114872262600111719}
 --- !u!1 &9025098772699797247
 GameObject:
   m_ObjectHideFlags: 0
