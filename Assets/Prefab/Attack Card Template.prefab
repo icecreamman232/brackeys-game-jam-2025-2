@@ -361,17 +361,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eeb2c8841ab8e148b47d31296713a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cardAnimation: {fileID: 7971502538767567443}
-  m_cardInputHandler: {fileID: -4838570686343896687}
-  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
-  m_cardVisual: {fileID: 1034943498109058756}
   m_cardState: 0
   m_cardIndex: 0
   m_atkPoint: 0
-  m_selectCardEvent: {fileID: 11400000, guid: 9492163a1c62d464aac181cd905b48be, type: 2}
+  m_isSelected: 0
   m_scoreDisplayer: {fileID: 431695359044033803}
   m_cardCollider: {fileID: 5769710129150658322}
-  m_isSelected: 0
+  m_cardAnimation: {fileID: 7971502538767567443}
+  m_cardInputHandler: {fileID: -4838570686343896687}
+  m_cardVisual: {fileID: 1034943498109058756}
+  m_countScoreEvent: {fileID: 11400000, guid: 48e476658fb746040a61a8f188e6a48a, type: 2}
+  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
+  m_selectCardEvent: {fileID: 11400000, guid: 9492163a1c62d464aac181cd905b48be, type: 2}
 --- !u!114 &1034943498109058756
 MonoBehaviour:
   m_ObjectHideFlags: 0

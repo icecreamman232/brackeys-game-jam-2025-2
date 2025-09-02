@@ -46,6 +46,13 @@ namespace SGGames.Scripts.Card
                     onFinish?.Invoke();
                 });
         }
+
+        public void AnimateShowScoreOnCard()
+        {
+            transform.LeanScale(Vector3.one * 1.1f, 0.15f)
+                .setEase(LeanTweenType.punch)
+                .setLoopPingPong(1);
+        }
         
         private void OnCompleteSelectTween()
         {

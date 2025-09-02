@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
 using SGGames.Scripts.Core;
+using SGGames.Scripts.Event;
 using SGGames.Scripts.Item;
 using SGGames.Scripts.Managers;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace SGGames.Scripts.System
         [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private DiscardNumberEvent m_discardNumberEvent;
         [SerializeField] private GameEvent m_gameEvent;
+        [SerializeField] private CountScoreEvent m_countScoreEvent;
         [Header("Components")]
         [SerializeField] private CardPile m_cardPile;
         [SerializeField] private DiscardPile m_discardPile;
@@ -212,7 +214,13 @@ namespace SGGames.Scripts.System
                     startScoreForAnimation = totalScore;
                 }
                 addingScoreToUIAction?.Invoke(startScoreForAnimation, totalScore);
-                AnimateShowScoreOnCard(card, null);
+                m_countScoreEvent.Raise(new CountScoreEventData
+                {
+                    //No need to insert score since card itself has score data
+                    Score = -1,
+                    PositionIndex = card.CardIndex,
+                    EntityType = EntityType.Card
+                });
                 m_playSFXEvent.Raise(SFX.ScoreCounting);
                 yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
             }
@@ -233,7 +241,14 @@ namespace SGGames.Scripts.System
                 startScoreForAnimation = currentScore;
             }
             m_addingScoreToScoreDisplayAction?.Invoke(startScoreForAnimation, currentScore);
-            AnimateShowScoreOnCard(card, null);
+            m_countScoreEvent.Raise(new CountScoreEventData
+            {
+                //No need to insert score since card itself has score data
+                Score = -1, 
+                PositionIndex = index,
+                EntityType = EntityType.Card
+            });
+
             yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
         }
         
@@ -392,21 +407,6 @@ namespace SGGames.Scripts.System
                     card.transform.position = m_handPositions[handIndex].position;
                     card.SetHandPosition(m_handPositions[handIndex].position);
                     card.Animation.SetOriginalPosition();
-                });
-        }
-
-        private void AnimateShowScoreOnCard(CardBehavior cardBehavior, Action onFinish)
-        {
-            cardBehavior.ShowAtkPointHUD();
-            cardBehavior.transform.LeanScale(Vector3.one * 1.1f, 0.15f)
-                .setEase(LeanTweenType.punch)
-                .setLoopPingPong(1);
-            cardBehavior.gameObject.LeanDelayedCall(
-                k_ShowScoreTime,
-                () =>
-                {
-                    cardBehavior.HideAtkPointHUD();
-                    onFinish?.Invoke();
                 });
         }
     }

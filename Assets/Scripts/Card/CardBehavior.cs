@@ -1,5 +1,7 @@
 using System;
 using SGGames.Scripts.Data;
+using SGGames.Scripts.Event;
+using SGGames.Scripts.System;
 using TMPro;
 using UnityEngine;
 
@@ -23,6 +25,7 @@ namespace SGGames.Scripts.Card
         [SerializeField] private CardInputHandler m_cardInputHandler;
         [SerializeField] private CardVisual m_cardVisual;
         [Header("Events")]
+        [SerializeField] private CountScoreEvent m_countScoreEvent;
         [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private SelectCardEvent m_selectCardEvent;
         
@@ -89,10 +92,14 @@ namespace SGGames.Scripts.Card
 
             m_cardAnimation.OnCompletedSelectTween += OnCompleteTween;
             m_cardAnimation.OnCompletedDeselectTween += OnCompleteTween;
+            
+            m_countScoreEvent.AddListener(OnReceiveCountScoreEvent);
         }
 
         private void OnDestroy()
         {
+            m_countScoreEvent.RemoveListener(OnReceiveCountScoreEvent);
+            
             m_cardInputHandler.OnMouseDownOnCard -= HandleMouseDown;
             m_cardInputHandler.OnCardClicked -= HandleClick;
             m_cardInputHandler.OnDragStarted -= HandleDragStart;
@@ -171,6 +178,16 @@ namespace SGGames.Scripts.Card
         public void HideAtkPointHUD()
         {
             m_scoreDisplayer.gameObject.SetActive(false);
+        }
+
+        private void OnReceiveCountScoreEvent(CountScoreEventData eventData)
+        {
+            if (eventData.EntityType != EntityType.Card) return;
+            if(eventData.PositionIndex != m_cardIndex) return;
+
+            ShowAtkPointHUD();
+            m_cardAnimation.AnimateShowScoreOnCard();
+            gameObject.LeanDelayedCall(CardManager.k_ShowScoreTime, HideAtkPointHUD);
         }
         
         #endregion

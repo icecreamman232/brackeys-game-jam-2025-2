@@ -5359,6 +5359,7 @@ MonoBehaviour:
   m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
   m_discardNumberEvent: {fileID: 11400000, guid: d7c3b1de8d2941d45815c520f9419cf1, type: 2}
   m_gameEvent: {fileID: 11400000, guid: 111420eb7606f594a83599265b3ec6a0, type: 2}
+  m_countScoreEvent: {fileID: 11400000, guid: 48e476658fb746040a61a8f188e6a48a, type: 2}
   m_cardPile: {fileID: 2008295626}
   m_discardPile: {fileID: 1655555930}
   m_maxDiscardTime: 5
