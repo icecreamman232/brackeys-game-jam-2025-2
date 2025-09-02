@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
 using SGGames.Scripts.Core;
+using SGGames.Scripts.Item;
 using SGGames.Scripts.Managers;
 using UnityEngine;
 
@@ -390,6 +391,7 @@ namespace SGGames.Scripts.System
                     card.BringCardToFront(false);
                     card.transform.position = m_handPositions[handIndex].position;
                     card.SetHandPosition(m_handPositions[handIndex].position);
+                    card.Animation.SetOriginalPosition();
                 });
         }
 

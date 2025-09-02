@@ -5364,8 +5364,6 @@ MonoBehaviour:
   m_maxDiscardTime: 5
   m_currentDiscardNumber: 0
   m_currentTurnNumber: 0
-  m_scoreManager: {fileID: 867436023}
-  m_itemManager: {fileID: 1516102850}
   m_maxHandSize: 5
   m_handPositions:
   - {fileID: 372755206}
@@ -9583,6 +9581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e06547b0c08d942be3ef24a2092573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
   m_cardManager: {fileID: 723669628}
   m_scoreManager: {fileID: 867436023}
   m_itemContainer: {fileID: 11400000, guid: 1d77948dd097be745ae7ce242e7c7457, type: 2}
