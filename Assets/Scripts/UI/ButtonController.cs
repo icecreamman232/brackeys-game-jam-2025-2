@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace SGGames.Scripts.UI
 {
-    public class ButtonController : Selectable, IPointerClickHandler
+    public class ButtonController : Selectable
     {
         [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private Sprite m_normalSprite;
@@ -14,11 +14,6 @@ namespace SGGames.Scripts.UI
         [SerializeField] private Color m_hoverColor;
         
         public Action OnClickAction;
-        
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            OnClickButton();
-        }
 
         public override void OnPointerDown(PointerEventData eventData)
         {
@@ -31,6 +26,7 @@ namespace SGGames.Scripts.UI
         {
             ((Image)targetGraphic).sprite = m_normalSprite;
             base.OnPointerUp(eventData);
+            OnClickButton();
         }
 
         public override void OnPointerEnter(PointerEventData eventData)

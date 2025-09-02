@@ -72,6 +72,7 @@ public class GameplaySoundManager : MonoBehaviour, IGameService, IBootStrap
 
     public void PlaySfx(SFX sfxID)
     {
+        if (m_sfxSource_1 == null) return;
         m_sfxSource_1.clip = m_sfxDictionary[sfxID].Clip;
         m_sfxSource_1.Play(); 
     }

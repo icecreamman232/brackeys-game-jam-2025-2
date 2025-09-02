@@ -1,10 +1,8 @@
-using System;
 using SGGames.Scripts.Core;
 using UnityEngine;
 
 public class BootStrapHandler : MonoBehaviour, IGameService
 {
-    [SerializeField] private bool m_unintallOnDestroy = false;
     [SerializeField] private MonoBehaviour[] m_bootStrap;
 
     private void Awake()
@@ -20,14 +18,6 @@ public class BootStrapHandler : MonoBehaviour, IGameService
             {
                 bootStrap.Install();
             }
-        }
-    }
-    
-    private void OnDestroy()
-    {
-        if (m_unintallOnDestroy)
-        {
-            UninstallBootStrap();
         }
     }
 

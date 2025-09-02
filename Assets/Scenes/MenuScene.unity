@@ -601,6 +601,7 @@ MonoBehaviour:
   m_verstionText: {fileID: 2129518892}
   m_playButton: {fileID: 728835149}
   m_backgroundPatternScroll: {fileID: 675533184}
+  m_bootStrap: {fileID: 969961338}
 --- !u!114 &675533184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,7 +855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e194a4e2107773428b46b74c0d30438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_unintallOnDestroy: 1
   m_bootStrap:
   - {fileID: 365761557}
 --- !u!4 &969961339

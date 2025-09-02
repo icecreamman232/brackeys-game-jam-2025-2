@@ -9,6 +9,7 @@ public class MainMenuCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_verstionText;
     [SerializeField] private ButtonController m_playButton;
     [SerializeField] private BackgroundPatternScroll m_backgroundPatternScroll;
+    [SerializeField] private BootStrapHandler m_bootStrap;
     
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class MainMenuCanvas : MonoBehaviour
 
     private void LoadGameplay()
     {
+        m_bootStrap.UninstallBootStrap();
         SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
     }
 }
