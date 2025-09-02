@@ -116,6 +116,7 @@ public class ItemBehavior : MonoBehaviour, IItem
             // Only start dragging if we've moved far enough OR held long enough
             if (distanceFromStart > k_DragDistanceThreshold || timeSinceMouseDown > k_DragTimeThreshold)
             {
+                HideItemDescriptionAction?.Invoke(this);
                 m_dragIntentDetected = true;
                 m_isDragging = true;
             }
@@ -194,25 +195,23 @@ public class ItemBehavior : MonoBehaviour, IItem
     private void OnMouseEnter()
     {
         if (!InputManager.IsActivated) return;
-        if (!m_isDragging) // Only scale if not dragging
-        {
-            transform.LeanScale(Vector3.one * 1.2f, 0.1f)
-                .setOnComplete(() =>
-                {
-                    ShowItemDescriptionAction?.Invoke(this);
-                });
-        }
+        if (!m_canClick) return;
+        if (m_isDragging) return; // Only scale if not dragging
+        transform.LeanScale(Vector3.one * 1.2f, 0.1f)
+            .setOnComplete(() =>
+            {
+                ShowItemDescriptionAction?.Invoke(this);
+            });
     }
 
     private void OnMouseExit()
     {
         if (!InputManager.IsActivated) return;
-        if (!m_isDragging) // Only reset scale if not dragging
-        {
-            LeanTween.cancel(this.gameObject,false);
-            transform.localScale = Vector3.one;
-            HideItemDescriptionAction?.Invoke(this);
-        }
+        if (!m_canClick) return;
+        if (m_isDragging) return;// Only reset scale if not dragging
+        LeanTween.cancel(this.gameObject,false);
+        transform.localScale = Vector3.one;
+        HideItemDescriptionAction?.Invoke(this);
     }
 
     public void TweenItemToPosition(Vector3 position, Action onFinish)
