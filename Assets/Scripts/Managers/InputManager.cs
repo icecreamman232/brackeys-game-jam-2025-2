@@ -7,7 +7,7 @@ namespace SGGames.Scripts.Managers
 {
     public class InputManager : MonoBehaviour, IGameService, IBootStrap
     {
-        [SerializeField] private Camera m_camera;
+        private static Camera m_camera;
         private InputAction m_moveAction;
         private InputAction m_attackAction;
 
@@ -31,6 +31,14 @@ namespace SGGames.Scripts.Managers
             //Debug.Log("InputManager is " + (isActive ? "activated" : "deactivated"));
         }
         
+        public static Vector3 GetWorldMousePosition()
+        {
+            var mousePos = Input.mousePosition;
+            mousePos = m_camera.ScreenToWorldPoint(mousePos);
+            mousePos.z = 0;
+            return mousePos;
+        }
+        
         private void Update()
         {
             if (!IsActivated) return;
@@ -40,6 +48,7 @@ namespace SGGames.Scripts.Managers
         
         public void Install()
         {
+            m_camera = Camera.main;
             ServiceLocator.RegisterService<InputManager>(this);
             m_moveAction = InputSystem.actions.FindAction("Move");
             IsActivated = true;
