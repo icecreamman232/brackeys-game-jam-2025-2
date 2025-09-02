@@ -116,7 +116,7 @@ namespace SGGames.Scripts.System
         private void AddCardToHand(CardBehavior card, int handIndex)
         {
             card.ChangeCardState(CardState.InHand);
-            card.SetCardIndex(handIndex);
+            card.CardIndex = handIndex;
             card.SetName();
             card.IsOverlappedOnCard = IsCardOverlapping;
             card.SwapCardsAction = SwapCard;
@@ -270,19 +270,24 @@ namespace SGGames.Scripts.System
             var card2Index = card2.CardIndex;
             
             
-            card1.TweenCardToPosition(prevCard2Pos, () =>
+            card1.Input.CanClick = false;
+            card2.Input.CanClick = false;
+            
+            card1.Animation.TweenCardToPosition(prevCard2Pos, () =>
             {
                 card1.transform.position = prevCard2Pos;
                 card1.SetHandPosition(prevCard2Pos);
-                card1.SetCardIndex(card2Index);
+                card1.CardIndex = card2Index;
                 card1.SetName();
+                card1.Input.CanClick = true;
             });
-            card2.TweenCardToPosition(prevCard1Pos, () =>
+            card2.Animation.TweenCardToPosition(prevCard1Pos, () =>
             {
                 card2.transform.position = prevCard1Pos;
                 card2.SetHandPosition(prevCard1Pos);
-                card2.SetCardIndex(card1Index);
+                card2.CardIndex = card1Index;
                 card2.SetName();
+                card2.Input.CanClick = true;
             });
         }
 
@@ -362,13 +367,13 @@ namespace SGGames.Scripts.System
         private void AnimateCardToDiscard(CardBehavior card)
         {
             card.BringCardToFront(true);
-            card.SetCanClick(false);
+            card.Input.CanClick = false;
             card.transform.LeanMove(m_discardPile.transform.position, k_DiscardMoveTime)
                 .setEase(LeanTweenType.easeOutCirc)
                 .setOnComplete(() => 
                 {
                     card.BringCardToFront(false);
-                    card.SetCanClick(true);
+                    card.Input.CanClick = true;
                     m_discardPile.AddCardToDiscard(card);
                     m_discardPile.PositionCardAtDiscard(card);
                 });
@@ -378,14 +383,14 @@ namespace SGGames.Scripts.System
         private void AnimateCardToHand(CardBehavior card, int handIndex, float delay)
         {
             card.BringCardToFront(true);
-            card.SetCanClick(false);
+            card.Input.CanClick = false;
             card.gameObject.SetActive(true);
             card.transform.LeanMove(m_handPositions[handIndex].position, k_MovingToPositionTime)
                 .setEase(LeanTweenType.easeOutCubic)
                 .setDelay(delay)
                 .setOnComplete(()=>
                 {
-                    card.SetCanClick(true);
+                    card.Input.CanClick = true;
                     card.BringCardToFront(false);
                     card.transform.position = m_handPositions[handIndex].position;
                     card.SetHandPosition(m_handPositions[handIndex].position);

@@ -7,12 +7,11 @@ namespace SGGames.Scripts.Card
 {
     public enum CardState
     {
-        InPile,
-        InHand,
-        InDiscard,
+        InPile, InHand, InDiscard,
     }
     public class CardBehavior : MonoBehaviour
     {
+        [SerializeField] private CardAnimation m_cardAnimation;
         [SerializeField] private CardInputHandler m_cardInputHandler;
         [SerializeField] private PlaySFXEvent m_playSFXEvent;
         [SerializeField] private CardVisual m_cardVisual;
@@ -27,16 +26,19 @@ namespace SGGames.Scripts.Card
         private CardData m_cardData;
         private string m_originalName;
         
-        //Const for card positioning
-        private const float k_SelectCardYOffset = -2f;
-        private const float k_DeselectOffset = -2.5f;
-        private const float k_MoveCardTweenDuration = 0.2f;
-        
         public BoxCollider2D CardCollider => m_cardCollider;
         public CardData CardData => m_cardData;
-        public int CardIndex => m_cardIndex;
+        public int CardIndex
+        {
+            get => m_cardIndex;
+            set => m_cardIndex = value;
+        }
+
         public bool IsSelected => m_isSelected;
         public int AttackPts => m_atkPoint;
+        
+        public CardAnimation Animation => m_cardAnimation;
+        public CardInputHandler Input => m_cardInputHandler;
         
         public Func<CardBehavior, CardBehavior> IsOverlappedOnCard
         {
@@ -46,8 +48,6 @@ namespace SGGames.Scripts.Card
         public Action<CardBehavior,CardBehavior> SwapCardsAction;
         public Action SelectAction;
         public Action DeselectAction;
-        
-        public void SetCardIndex(int index) => m_cardIndex = index;
         
         public void SetName() => this.gameObject.name = $"{m_originalName} Index {m_cardIndex}";
 
@@ -62,12 +62,7 @@ namespace SGGames.Scripts.Card
             m_atkPoint = m_cardData.Info.AttackPoint;
             m_cardVisual.ChangeCardVisual(m_cardData);
         }
-
-        public void SetCanClick(bool canClick)
-        {
-            m_cardInputHandler.CanClick = canClick;
-        }
-
+        
         public void BringCardToFront(bool toFront)
         {
             if (toFront)
@@ -88,6 +83,9 @@ namespace SGGames.Scripts.Card
             m_cardInputHandler.OnCardClicked += HandleClick;
             m_cardInputHandler.OnDragStarted += HandleDragStart;
             m_cardInputHandler.OnDragEnded += HandleDragEnd;
+
+            m_cardAnimation.OnCompletedSelectTween += OnCompleteTween;
+            m_cardAnimation.OnCompletedDeselectTween += OnCompleteTween;
         }
 
         private void OnDestroy()
@@ -96,6 +94,9 @@ namespace SGGames.Scripts.Card
             m_cardInputHandler.OnCardClicked -= HandleClick;
             m_cardInputHandler.OnDragStarted -= HandleDragStart;
             m_cardInputHandler.OnDragEnded -= HandleDragEnd;
+            
+            m_cardAnimation.OnCompletedSelectTween -= OnCompleteTween;
+            m_cardAnimation.OnCompletedDeselectTween -= OnCompleteTween;
         }
         
         #endregion
@@ -112,11 +113,13 @@ namespace SGGames.Scripts.Card
             // Original click behavior
             if (!m_isSelected)
             {
-                OnSelectTween();
+                m_cardInputHandler.CanClick = false;
+                m_cardAnimation.PlaySelectAnimation();
             }
             else
             {
-                OnDeselectTween();
+                m_cardInputHandler.CanClick = false;
+                m_cardAnimation.PlayDeselectAnimation();
             }
         }
         
@@ -145,9 +148,7 @@ namespace SGGames.Scripts.Card
         {
             m_cardInputHandler.CanClick = true;
             m_isSelected = false;
-            var currentLocal = transform.localPosition;
-            currentLocal.y = k_DeselectOffset;
-            transform.localPosition = currentLocal;
+            m_cardAnimation.ResetAnimation();
             if (shouldReturnEnergy)
             {
                 OnDeselect();
@@ -200,23 +201,6 @@ namespace SGGames.Scripts.Card
                 IsSelected = false
             });
         }
-        
-        
-        #region Tweening
-
-        public void TweenCardToPosition(Vector3 position, Action onFinish)
-        {
-            m_cardInputHandler.CanClick = false;
-            transform.LeanMove(position, k_MoveCardTweenDuration)
-                .setEase(LeanTweenType.easeOutCirc)
-                .setOnComplete(() =>
-                {
-                    transform.position = position;
-                    onFinish?.Invoke();
-                    m_cardInputHandler.CanClick = true;
-                });
-        }
-        
         private void OnCompleteTween()
         {
             m_isSelected = !m_isSelected;
@@ -230,19 +214,5 @@ namespace SGGames.Scripts.Card
                 OnDeselect();
             }
         }
-        
-        private void OnSelectTween()
-        {
-            m_cardInputHandler.CanClick = false;
-            transform.LeanMoveLocalY(k_SelectCardYOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
-        }
-        
-        private void OnDeselectTween()
-        {
-            m_cardInputHandler.CanClick = false;
-            transform.LeanMoveLocalY(k_DeselectOffset, k_MoveCardTweenDuration).setEase(LeanTweenType.easeOutCirc).setOnComplete(OnCompleteTween);
-        }
-        
-        #endregion  
     }
 }

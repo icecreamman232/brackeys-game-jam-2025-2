@@ -137,7 +137,7 @@ namespace SGGames.Scripts.Card
             var newCard = Instantiate(data.CardPrefab);
             newCard.transform.position = this.transform.position;
             newCard.SetData(data);
-            newCard.SetCardIndex(-1);
+            newCard.CardIndex = -1;
             newCard.gameObject.SetActive(false);
             return newCard;
         }

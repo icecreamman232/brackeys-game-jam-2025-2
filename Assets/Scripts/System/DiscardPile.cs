@@ -11,7 +11,7 @@ public class DiscardPile : MonoBehaviour
     {
         m_cardInDiscard.Add(card);
         card.ChangeCardState(CardState.InDiscard);
-        card.SetCardIndex(-1);
+        card.CardIndex = -1;
         card.ResetSelection();
     }
     
