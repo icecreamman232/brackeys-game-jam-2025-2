@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 5769710129150658322}
   - component: {fileID: 5466925117698070943}
   - component: {fileID: 1034943498109058756}
+  - component: {fileID: -4838570686343896687}
   m_Layer: 0
   m_Name: Attack Card Template
   m_TagString: Untagged
@@ -359,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eeb2c8841ab8e148b47d31296713a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_cardInputHandler: {fileID: -4838570686343896687}
   m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
-  m_cardData: {fileID: 0}
   m_cardVisual: {fileID: 1034943498109058756}
   m_cardState: 0
   m_cardIndex: 0
@@ -406,6 +407,19 @@ MonoBehaviour:
   - {fileID: 8528536782898684519}
   - {fileID: 8785984010785962330}
   - {fileID: 4652621846533325729}
+--- !u!114 &-4838570686343896687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745853023209117915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436567f0ba11f7949bae23cefcad6318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_card: {fileID: 5466925117698070943}
 --- !u!1 &2161425354236341275
 GameObject:
   m_ObjectHideFlags: 0
