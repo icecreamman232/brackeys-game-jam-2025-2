@@ -347,7 +347,7 @@ TextureImporter:
         width: 13
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -356,6 +356,72 @@ TextureImporter:
       bones: []
       spriteID: 8e3dae44c162a1341ba903062660db43
       internalID: -977428205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-card
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 373
+        width: 140
+        height: 213
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26a018e3f26f82645bbc5666bdec2cde
+      internalID: -1454669489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-card-atk-pts-bg
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 342
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1413339abf40a84438126efc62580f48
+      internalID: -1241175361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-card-atk-pts-bg-2
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 342
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4064ecd8909ba8140ab1b39f32f70ac2
+      internalID: -1330767034
       vertices: []
       indices: 
       edges: []
@@ -385,6 +451,9 @@ TextureImporter:
       discard-pile-icon: -62258267
       energy-hud: -977428205
       energy-icon: -102502701
+      water-card: -1454669489
+      water-card-atk-pts-bg: -1241175361
+      water-card-atk-pts-bg-2: -1330767034
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
