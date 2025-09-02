@@ -26,14 +26,14 @@ namespace SGGames.Scripts.UI
         private void PlayButtonClicked()
         {
             if(!InputManager.IsActivated) return;
-            InputManager.SetActive(false);
-
+            
             if (m_cardManager.SelectedCards.Count <= 0)
             {
                 m_playSFXEvent.Raise(SFX.ButtonCancel);
                 return;
             }
             
+            InputManager.SetActive(false);
             m_scoreDisplayer.Reset();
             m_cardManager.CountScoreFromSelectedCards(m_scoreDisplayer.AddScore,
                 () =>
