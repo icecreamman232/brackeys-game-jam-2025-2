@@ -11,41 +11,38 @@ namespace SGGames.Scripts.System
 {
     public class CardManager : MonoBehaviour, IBootStrap, IGameService
     {
-        [Header("Discard")]
+        [Header("Events")]
         [SerializeField] private PlaySFXEvent m_playSFXEvent;
+        [SerializeField] private DiscardNumberEvent m_discardNumberEvent;
+        [SerializeField] private GameEvent m_gameEvent;
+        [Header("Components")]
+        [SerializeField] private CardPile m_cardPile;
+        [SerializeField] private DiscardPile m_discardPile;
+        [Header("Data")]
         [SerializeField] private int m_maxDiscardTime;
         [SerializeField] private int m_currentDiscardNumber;
-        [SerializeField] private DiscardNumberEvent m_discardNumberEvent;
         [SerializeField] private int m_currentTurnNumber;
-        [SerializeField] private ScoreManager m_scoreManager;
-        [SerializeField] private ItemManager m_itemManager;
         [SerializeField] private int m_maxHandSize = 5;
         [SerializeField] private Transform[] m_handPositions;
         [SerializeField] private List<CardBehavior> m_cardsInHand;
-        [SerializeField] private CardPile m_cardPile;
-        [SerializeField] private DiscardPile m_discardPile;
-        [SerializeField] private GameEvent m_gameEvent;
-
         
+        private ScoreManager m_scoreManager;
+        private ItemManager m_itemManager;
+        private CardComboValidator m_cardComboValidator;
+        private EnergyManager m_energyManager;
         private Action<int, int> m_addingScoreToScoreDisplayAction;
         private CardComboRuleType m_currentComboType = CardComboRuleType.None;
-        private CardComboValidator m_cardComboValidator;
-        private GameplaySoundManager m_gameplaySoundManager;
-        private EnergyManager m_energyManager;
+
+        public Action UpdateScoreToFinalScoreUIAction;
+        public bool CanDiscardManually => m_currentDiscardNumber > 0;
+        public int NumberComboHasBeenPlayed => m_cardComboValidator.ComboHasBeenPlayed;
+        public List<CardBehavior> SelectedCards => m_cardsInHand.Where(card=>card.IsSelected).ToList();
+        
         private const float k_MovingToPositionTime = 0.7f;
         private const float k_MovingToPositionDelay = 0.05f;
         private const float k_DiscardMoveTime = 0.3f;
         public const float k_ShowScoreTime = 0.3f;
-
-        public Action UpdateScoreToFinalScoreUIAction;
-        public bool CanDiscardManually => m_currentDiscardNumber > 0;
         
-        public int CurrentTurnNumber => m_currentTurnNumber;
-        public int NumberComboHasBeenPlayed => m_cardComboValidator.ComboHasBeenPlayed;
-        
-        public List<CardBehavior> CardsInHand => m_cardsInHand;
-        public List<CardBehavior> SelectedCards => m_cardsInHand.Where(card=>card.IsSelected).ToList();
-
         private void Update()
         {
             if (Input.GetMouseButtonUp(1) && InputManager.IsActivated)
@@ -61,6 +58,8 @@ namespace SGGames.Scripts.System
         {
             ServiceLocator.RegisterService<CardManager>(this);
             m_energyManager = ServiceLocator.GetService<EnergyManager>();
+            m_itemManager = ServiceLocator.GetService<ItemManager>();
+            m_scoreManager = ServiceLocator.GetService<ScoreManager>();
             m_gameEvent.AddListener(OnGameEventChanged);
             m_currentTurnNumber = 0;
             m_cardComboValidator = new CardComboValidator();
@@ -113,33 +112,6 @@ namespace SGGames.Scripts.System
             m_discardNumberEvent.Raise(m_currentDiscardNumber);
         }
         
-        private void AddCardToHand(CardBehavior card, int handIndex)
-        {
-            card.ChangeCardState(CardState.InHand);
-            card.CardIndex = handIndex;
-            card.SetName();
-            card.IsOverlappedOnCard = IsCardOverlapping;
-            card.SwapCardsAction = SwapCard;
-            card.SelectAction = OnCardSelected;
-            card.DeselectAction = OnCardDeselected;
-            
-            // Ensure the hand list can accommodate the index
-            while (m_cardsInHand.Count <= handIndex)
-            {
-                m_cardsInHand.Add(null);
-            }
-            m_cardsInHand[handIndex] = card;
-        }
-
-        private void RemoveCardFromHand(CardBehavior card)
-        {
-            int index = card.CardIndex;
-            if (index >= 0 && index < m_cardsInHand.Count)
-            {
-                m_cardsInHand[index] = null;
-            }
-        }
-
         public void CountScoreForCardAtIndex(int index)
         {
             if (SelectedCards.Count <= 0) return;
@@ -157,50 +129,6 @@ namespace SGGames.Scripts.System
             StartCoroutine(OnCountingScore(addingScoreToUIAction, onFinish));
         }
         
-        private IEnumerator OnCountingScore(Action<int, int> addingScoreToUIAction, Action onFinish)
-        {
-            var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
-            var totalScore = 0;
-
-            foreach (var card in selectedCards)
-            {
-                totalScore += card.AttackPts;
-                var startScoreForAnimation = totalScore - 10;
-                //Prevent negative score
-                if (startScoreForAnimation < 0)
-                {
-                    startScoreForAnimation = totalScore;
-                }
-                addingScoreToUIAction?.Invoke(startScoreForAnimation, totalScore);
-                AnimateShowScoreOnCard(card, null);
-                if (m_gameplaySoundManager == null)
-                {
-                    m_gameplaySoundManager = ServiceLocator.GetService<GameplaySoundManager>();
-                }
-                m_gameplaySoundManager.PlaySfx(SFX.ScoreCounting);
-                yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
-            }
-            
-            m_scoreManager.AddScoresFromCard(totalScore);
-            onFinish?.Invoke();
-        }
-
-        private IEnumerator TriggerCardAtIndex(int index)
-        {
-            var card = SelectedCards[index];
-            var score = card.AttackPts;
-            m_scoreManager.AddScoresFromCard(score);
-            var currentScore = m_scoreManager.Score;
-            var startScoreForAnimation = currentScore - 10;
-            if (startScoreForAnimation > 0)
-            {
-                startScoreForAnimation = currentScore;
-            }
-            m_addingScoreToScoreDisplayAction?.Invoke(startScoreForAnimation, currentScore);
-            AnimateShowScoreOnCard(card, null);
-            yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
-        }
-
         public void DiscardSelectedCards(bool isManualDiscard)
         {
             if (SelectedCards.Count <= 0)
@@ -233,6 +161,81 @@ namespace SGGames.Scripts.System
                 }
             }
         }
+        
+        public void FinishTurn()
+        {
+            m_energyManager.Reset();
+            m_currentTurnNumber++;
+            DiscardSelectedCards(false);
+        }
+        
+        private void AddCardToHand(CardBehavior card, int handIndex)
+        {
+            card.ChangeCardState(CardState.InHand);
+            card.CardIndex = handIndex;
+            card.SetName();
+            card.IsOverlappedOnCard = IsCardOverlapping;
+            card.SwapCardsAction = SwapCard;
+            card.SelectAction = OnCardSelected;
+            card.DeselectAction = OnCardDeselected;
+            
+            // Ensure the hand list can accommodate the index
+            while (m_cardsInHand.Count <= handIndex)
+            {
+                m_cardsInHand.Add(null);
+            }
+            m_cardsInHand[handIndex] = card;
+        }
+
+        private void RemoveCardFromHand(CardBehavior card)
+        {
+            int index = card.CardIndex;
+            if (index >= 0 && index < m_cardsInHand.Count)
+            {
+                m_cardsInHand[index] = null;
+            }
+        }
+        
+        private IEnumerator OnCountingScore(Action<int, int> addingScoreToUIAction, Action onFinish)
+        {
+            var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
+            var totalScore = 0;
+
+            foreach (var card in selectedCards)
+            {
+                totalScore += card.AttackPts;
+                var startScoreForAnimation = totalScore - 10;
+                //Prevent negative score
+                if (startScoreForAnimation < 0)
+                {
+                    startScoreForAnimation = totalScore;
+                }
+                addingScoreToUIAction?.Invoke(startScoreForAnimation, totalScore);
+                AnimateShowScoreOnCard(card, null);
+                m_playSFXEvent.Raise(SFX.ScoreCounting);
+                yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
+            }
+            
+            m_scoreManager.AddScoresFromCard(totalScore);
+            onFinish?.Invoke();
+        }
+
+        private IEnumerator TriggerCardAtIndex(int index)
+        {
+            var card = SelectedCards[index];
+            var score = card.AttackPts;
+            m_scoreManager.AddScoresFromCard(score);
+            var currentScore = m_scoreManager.Score;
+            var startScoreForAnimation = currentScore - 10;
+            if (startScoreForAnimation > 0)
+            {
+                startScoreForAnimation = currentScore;
+            }
+            m_addingScoreToScoreDisplayAction?.Invoke(startScoreForAnimation, currentScore);
+            AnimateShowScoreOnCard(card, null);
+            yield return new WaitForSeconds(k_ShowScoreTime + 0.2f + 0.2f);
+        }
+        
 
         private void FillEmptySlots(List<int> emptySlot)
         {
@@ -289,13 +292,6 @@ namespace SGGames.Scripts.System
                 card2.SetName();
                 card2.Input.CanClick = true;
             });
-        }
-
-        public void FinishTurn()
-        {
-            m_energyManager.Reset();
-            m_currentTurnNumber++;
-            DiscardSelectedCards(false);
         }
         
         /// <summary>

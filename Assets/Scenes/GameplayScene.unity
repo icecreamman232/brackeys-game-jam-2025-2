@@ -163,7 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba56a62bfe906e24e892d146c2dcc4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_camera: {fileID: 519420031}
 --- !u!1001 &28428693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5358,9 +5357,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playSFXEvent: {fileID: 11400000, guid: 9bfb184e1880d1249993afc8ca76bf88, type: 2}
+  m_discardNumberEvent: {fileID: 11400000, guid: d7c3b1de8d2941d45815c520f9419cf1, type: 2}
+  m_gameEvent: {fileID: 11400000, guid: 111420eb7606f594a83599265b3ec6a0, type: 2}
+  m_cardPile: {fileID: 2008295626}
+  m_discardPile: {fileID: 1655555930}
   m_maxDiscardTime: 5
   m_currentDiscardNumber: 0
-  m_discardNumberEvent: {fileID: 11400000, guid: d7c3b1de8d2941d45815c520f9419cf1, type: 2}
   m_currentTurnNumber: 0
   m_scoreManager: {fileID: 867436023}
   m_itemManager: {fileID: 1516102850}
@@ -5372,9 +5374,6 @@ MonoBehaviour:
   - {fileID: 2055551648}
   - {fileID: 2045594686}
   m_cardsInHand: []
-  m_cardPile: {fileID: 2008295626}
-  m_discardPile: {fileID: 1655555930}
-  m_gameEvent: {fileID: 11400000, guid: 111420eb7606f594a83599265b3ec6a0, type: 2}
 --- !u!224 &729975916 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 858307673551341057, guid: d8c9aa68e70ac294db03d7aac97c45b5, type: 3}
@@ -9009,7 +9008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e194a4e2107773428b46b74c0d30438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_unintallOnDestroy: 0
   m_bootStrap:
   - {fileID: 2401291}
   - {fileID: 1031114704}
@@ -9017,8 +9015,8 @@ MonoBehaviour:
   - {fileID: 492377823}
   - {fileID: 457553676}
   - {fileID: 867436023}
-  - {fileID: 723669628}
   - {fileID: 1516102850}
+  - {fileID: 723669628}
   - {fileID: 282994451}
   - {fileID: 1966525294}
   - {fileID: 451758882}

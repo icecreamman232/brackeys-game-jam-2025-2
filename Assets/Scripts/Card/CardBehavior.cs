@@ -11,17 +11,20 @@ namespace SGGames.Scripts.Card
     }
     public class CardBehavior : MonoBehaviour
     {
-        [SerializeField] private CardAnimation m_cardAnimation;
-        [SerializeField] private CardInputHandler m_cardInputHandler;
-        [SerializeField] private PlaySFXEvent m_playSFXEvent;
-        [SerializeField] private CardVisual m_cardVisual;
+        [Header("Card Data")]
         [SerializeField] private CardState m_cardState = CardState.InPile;
         [SerializeField] private int m_cardIndex;
         [SerializeField] private int m_atkPoint;
-        [SerializeField] private SelectCardEvent m_selectCardEvent;
+        [SerializeField] protected bool m_isSelected;
+        [Header("Card Components")]
         [SerializeField] private TextMeshPro m_scoreDisplayer;
         [SerializeField] private BoxCollider2D m_cardCollider;
-        [SerializeField] protected bool m_isSelected;
+        [SerializeField] private CardAnimation m_cardAnimation;
+        [SerializeField] private CardInputHandler m_cardInputHandler;
+        [SerializeField] private CardVisual m_cardVisual;
+        [Header("Events")]
+        [SerializeField] private PlaySFXEvent m_playSFXEvent;
+        [SerializeField] private SelectCardEvent m_selectCardEvent;
         
         private CardData m_cardData;
         private string m_originalName;
