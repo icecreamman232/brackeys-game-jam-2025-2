@@ -426,6 +426,94 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: flame-card
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 373
+        width: 140
+        height: 213
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33d36214b5b61224b9424068c53735ff
+      internalID: 872330567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thunder-card
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 373
+        width: 140
+        height: 213
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c4beb8ac37313a4d8fc1787f01aac8d
+      internalID: -1541839032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thunder-atk-pts-bg
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 342
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105775e616b23d548821a98b83ab1efa
+      internalID: -1957942820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flame-atk-pts-bg
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 342
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d6c72a91371ac647bec9212f14d9757
+      internalID: 1297455742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -451,6 +539,10 @@ TextureImporter:
       discard-pile-icon: -62258267
       energy-hud: -977428205
       energy-icon: -102502701
+      flame-atk-pts-bg: 1297455742
+      flame-card: 872330567
+      thunder-atk-pts-bg: -1957942820
+      thunder-card: -1541839032
       water-card: -1454669489
       water-card-atk-pts-bg: -1241175361
       water-card-atk-pts-bg-2: -1330767034

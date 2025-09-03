@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardVisualList:
   - CardElement: 0
-    CardBG: {fileID: -1218738752, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
-    AtkPointBG: {fileID: -533024081, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+    CardBG: {fileID: 872330567, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+    AtkPointBG: {fileID: 1297455742, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
   - CardElement: 1
     CardBG: {fileID: -1454669489, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
     AtkPointBG: {fileID: -1330767034, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
   - CardElement: 2
-    CardBG: {fileID: -428922159, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
-    AtkPointBG: {fileID: 49506600, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+    CardBG: {fileID: -1541839032, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+    AtkPointBG: {fileID: -1957942820, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
