@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8864dd960edf6f646aee5e5591801f9b, type: 3}
+  m_Name: Card Visual Container
+  m_EditorClassIdentifier: 
+  CardVisualList:
+  - CardElement: 0
+    CardBG: {fileID: 872330567, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+    AtkPointBG: {fileID: 1297455742, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+  - CardElement: 1
+    CardBG: {fileID: -1454669489, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+    AtkPointBG: {fileID: -1330767034, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+  - CardElement: 2
+    CardBG: {fileID: -1541839032, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}
+    AtkPointBG: {fileID: -1957942820, guid: 0e491ff804da3624fb184500a985b1d3, type: 3}

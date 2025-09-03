@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453a6d02ed9771440a317c53a1940c13, type: 3}
+  m_Name: Thunder Mark Item Data
+  m_EditorClassIdentifier: 
+  ItemID: 6
+  Name: Thunder Mark
+  Description: <color=#FF2D0B>+0.5</color> mul for each thunder card played
+  Rarity: 0
+  MultiplierType: 0
+  MultiplierValue: 0.5
+  Icon: {fileID: -576324556, guid: c1642b2ecd7d96146a15b02e1f2a0288, type: 3}
+  ItemPrefab: {fileID: -3054338064248071183, guid: c5cad0066ad37cb45b089c0c00cc4779, type: 3}
