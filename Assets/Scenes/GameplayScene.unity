@@ -3281,6 +3281,7 @@ MonoBehaviour:
   m_energyRemaining: 0
   m_selectCardEvent: {fileID: 11400000, guid: 9492163a1c62d464aac181cd905b48be, type: 2}
   m_energyHUDEvent: {fileID: 11400000, guid: fb3bfb14499fba74586255cc1a4ef9c7, type: 2}
+  m_gameEvent: {fileID: 11400000, guid: 111420eb7606f594a83599265b3ec6a0, type: 2}
 --- !u!1 &492377821
 GameObject:
   m_ObjectHideFlags: 0
@@ -9017,6 +9018,7 @@ MonoBehaviour:
   - {fileID: 1516102850}
   - {fileID: 723669628}
   - {fileID: 282994451}
+  - {fileID: 1798846150}
   - {fileID: 1966525294}
   - {fileID: 451758882}
 --- !u!4 &1410301819
@@ -11544,6 +11546,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792253526}
   m_CullTransparentMesh: 1
+--- !u!1 &1798846148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1798846149}
+  - component: {fileID: 1798846150}
+  m_Layer: 0
+  m_Name: MutationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1798846149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798846148}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1798846150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798846148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44f8452811c6614997142455140d156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_numberEnergyStored: 0
+  m_maxEnergyStored: 10
+  m_gameEvent: {fileID: 11400000, guid: 111420eb7606f594a83599265b3ec6a0, type: 2}
 --- !u!1 &1802122380
 GameObject:
   m_ObjectHideFlags: 0
@@ -15024,6 +15073,7 @@ SceneRoots:
   - {fileID: 482539167}
   - {fileID: 1516102849}
   - {fileID: 2401290}
+  - {fileID: 1798846149}
   - {fileID: 723669627}
   - {fileID: 2008295625}
   - {fileID: 1655555931}

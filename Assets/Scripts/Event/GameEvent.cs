@@ -5,6 +5,7 @@ public enum GameEventType
 {
     Victory,
     Defeat,
+    CheckMutation,
 }
 
 

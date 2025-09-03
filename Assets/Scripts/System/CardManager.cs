@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SGGames.Scripts.Card;
 using SGGames.Scripts.Core;
+using SGGames.Scripts.Data;
 using SGGames.Scripts.Event;
 using SGGames.Scripts.Item;
 using SGGames.Scripts.Managers;
@@ -28,6 +29,11 @@ namespace SGGames.Scripts.System
         [SerializeField] private int m_maxHandSize = 5;
         [SerializeField] private Transform[] m_handPositions;
         [SerializeField] private List<CardBehavior> m_cardsInHand;
+
+        private int m_numberFireCardPlayed;
+        private int m_numberThunderCardPlayed;
+        private int m_numberWaterCardPlayed;
+        private CardElement m_majorityElement;
         
         private ScoreManager m_scoreManager;
         private ItemManager m_itemManager;
@@ -40,6 +46,7 @@ namespace SGGames.Scripts.System
         public bool CanDiscardManually => m_currentDiscardNumber > 0;
         public int NumberComboHasBeenPlayed => m_cardComboValidator.ComboHasBeenPlayed;
         public List<CardBehavior> SelectedCards => m_cardsInHand.Where(card=>card.IsSelected).ToList();
+        public CardElement MajorityElement => m_majorityElement;
         
         private const float k_MovingToPositionTime = 0.7f;
         private const float k_MovingToPositionDelay = 0.05f;
@@ -118,12 +125,13 @@ namespace SGGames.Scripts.System
         public void CountScoreForCardAtIndex(int index)
         {
             if (SelectedCards.Count <= 0) return;
-            
+            CalculateNumberElementCardPlayed();
             StartCoroutine(TriggerCardAtIndex(index));
         }
 
         public void CountScoreFromSelectedCards(Action<int, int> addingScoreToUIAction, Action onFinish)
         {
+            CalculateNumberElementCardPlayed();
             if (m_addingScoreToScoreDisplayAction == null)
             {
                 m_addingScoreToScoreDisplayAction = addingScoreToUIAction;
@@ -139,8 +147,8 @@ namespace SGGames.Scripts.System
                 m_playSFXEvent.Raise(SFX.ButtonCancel);
                 return;
             }
-            m_currentComboType = CardComboRuleType.None;
             m_energyManager.Reset();
+            m_currentComboType = CardComboRuleType.None;
             var selectedCards = m_cardsInHand.Where(card=>card.IsSelected).ToList();
             var emptySlot = new List<int>();
             foreach (var card in selectedCards)
@@ -167,7 +175,7 @@ namespace SGGames.Scripts.System
         
         public void FinishTurn()
         {
-            m_energyManager.Reset();
+            m_gameEvent.Raise(GameEventType.CheckMutation);
             m_currentTurnNumber++;
             DiscardSelectedCards(false);
         }
@@ -408,6 +416,40 @@ namespace SGGames.Scripts.System
                     card.SetHandPosition(m_handPositions[handIndex].position);
                     card.Animation.SetOriginalPosition();
                 });
+        }
+
+        private void CalculateNumberElementCardPlayed()
+        {
+            var selectedCards = SelectedCards;
+            
+            foreach (var card in selectedCards)
+            {
+                switch (card.CardData.Info.Element)
+                {
+                    case CardElement.Fire:
+                        m_numberFireCardPlayed++;
+                        break;
+                    case CardElement.Water:
+                        m_numberWaterCardPlayed++;
+                        break;
+                    case CardElement.Thunder:
+                        m_numberThunderCardPlayed++;
+                        break;
+                }
+            }
+            var majorityElement = Mathf.Max(m_numberFireCardPlayed, Mathf.Max(m_numberWaterCardPlayed, m_numberThunderCardPlayed));
+            if (majorityElement == m_numberFireCardPlayed)
+            {
+                m_majorityElement = CardElement.Fire;
+            }
+            else if (majorityElement == m_numberWaterCardPlayed)
+            {
+                m_majorityElement = CardElement.Water;
+            }
+            else if (majorityElement == m_numberThunderCardPlayed)
+            {
+                m_majorityElement = CardElement.Thunder;
+            }
         }
     }
 }

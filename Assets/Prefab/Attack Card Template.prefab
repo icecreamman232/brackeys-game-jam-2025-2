@@ -1024,7 +1024,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2760996441849156086, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
+  - {fileID: 927098376604670825, guid: db2024cb45b4d4e4d81c90c86b0cf711, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1068,8 +1068,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is a card name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
-  m_sharedMaterial: {fileID: 2760996441849156086, guid: ba6c9b13051f99941aab5483694752fb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: db2024cb45b4d4e4d81c90c86b0cf711, type: 2}
+  m_sharedMaterial: {fileID: 927098376604670825, guid: db2024cb45b4d4e4d81c90c86b0cf711, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1093,12 +1093,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.4
-  m_fontSizeBase: 1.2
+  m_fontSize: 1.5
+  m_fontSizeBase: 2
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 0.7
-  m_fontSizeMax: 2
+  m_fontSizeMin: 1
+  m_fontSizeMax: 1.5
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -0.029604912}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -1374,7 +1374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 9162854282812151930, guid: e1133bec46a2df94cbd3d124cb12b6a3, type: 2}
+  - {fileID: 927098376604670825, guid: db2024cb45b4d4e4d81c90c86b0cf711, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1416,13 +1416,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is a long card description as a placeholder text.
-
-    This is a
-    long card description as a placeholder text'
+  m_text: Very shortVery shortVery shortVery shortVery shortVery shortVery shortVery
+    shortVery shortVery shortVery shortVery shortVery shortVery shortVery short
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e1133bec46a2df94cbd3d124cb12b6a3, type: 2}
-  m_sharedMaterial: {fileID: 9162854282812151930, guid: e1133bec46a2df94cbd3d124cb12b6a3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: db2024cb45b4d4e4d81c90c86b0cf711, type: 2}
+  m_sharedMaterial: {fileID: 927098376604670825, guid: db2024cb45b4d4e4d81c90c86b0cf711, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1446,12 +1444,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.2
-  m_fontSizeBase: 1
+  m_fontSize: 1
+  m_fontSizeBase: 1.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 0.7
-  m_fontSizeMax: 2
+  m_fontSizeMin: 1
+  m_fontSizeMax: 1.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
