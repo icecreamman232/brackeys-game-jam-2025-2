@@ -388,6 +388,13 @@ namespace SGGames.Scripts.System
         {
             card.BringCardToFront(true);
             card.Input.CanClick = false;
+            card.transform.LeanScale(Vector3.one * 0.2f, 0.3f)
+                .setEase(LeanTweenType.easeOutCirc)
+                .setDelay(0.1f)
+                .setOnComplete(() =>
+                {
+                    card.transform.localScale = Vector3.one;
+                });
             card.transform.LeanMove(m_discardPile.transform.position, k_DiscardMoveTime)
                 .setEase(LeanTweenType.easeOutCirc)
                 .setOnComplete(() => 
@@ -404,7 +411,14 @@ namespace SGGames.Scripts.System
         {
             card.BringCardToFront(true);
             card.Input.CanClick = false;
+            card.transform.localScale = Vector3.one * 0.2f;
             card.gameObject.SetActive(true);
+            card.transform.LeanScale(Vector3.one, 0.3f)
+                .setDelay(0.15f)
+                .setOnComplete(() =>
+                {
+                    card.transform.localScale = Vector3.one;
+                });
             card.transform.LeanMove(m_handPositions[handIndex].position, k_MovingToPositionTime)
                 .setEase(LeanTweenType.easeOutCubic)
                 .setDelay(delay)
