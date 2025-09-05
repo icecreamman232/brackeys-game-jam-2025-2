@@ -21,7 +21,9 @@ namespace SGGames.Scripts.Item
       [SerializeField] private List<ItemBehavior> m_ownedItems = new List<ItemBehavior>();
       
       private BanhMiItem m_banhMiItemRef;
-      private const int k_DefaultNumberItem = 2;
+      private const int k_DefaultNumberItem = 1;
+      
+      public List<ItemBehavior> OwnedItems => m_ownedItems;
       
       public void Install()
       {

@@ -1,32 +1,36 @@
 using TMPro;
 using UnityEngine;
 
-public class ItemDescriptionUI : MonoBehaviour
+namespace SGGames.Scripts.UI
 {
-    [SerializeField] private TextMeshProUGUI m_itemName;
-    [SerializeField] private TextMeshProUGUI m_descriptionText;
-
-    public void ShowDescription(string itemName, string description, ItemRarity rarity)
+    public class ItemDescriptionUI : MonoBehaviour
     {
-        this.gameObject.SetActive(true);
-        m_itemName.text = itemName;
-        m_descriptionText.text = description;
-        switch (rarity)
+        [SerializeField] private TextMeshProUGUI m_itemName;
+        [SerializeField] private TextMeshProUGUI m_descriptionText;
+
+        public void ShowDescription(string itemName, string description, ItemRarity rarity)
         {
-            case ItemRarity.Common:
-                m_itemName.color = Color.yellow;
-                break;
-            case ItemRarity.Uncommon:
-                m_itemName.color = Color.cyan;
-                break;
-            case ItemRarity.Rare:
-                m_itemName.color = Color.magenta;
-                break;
+            this.gameObject.SetActive(true);
+            m_itemName.text = itemName;
+            m_descriptionText.text = description;
+            switch (rarity)
+            {
+                case ItemRarity.Common:
+                    m_itemName.color = Color.yellow;
+                    break;
+                case ItemRarity.Uncommon:
+                    m_itemName.color = Color.cyan;
+                    break;
+                case ItemRarity.Rare:
+                    m_itemName.color = Color.magenta;
+                    break;
+            }
+        }
+    
+        public void HideDescription()
+        {
+            this.gameObject.SetActive(false);
         }
     }
-    
-    public void HideDescription()
-    {
-        this.gameObject.SetActive(false);
-    }
 }
+

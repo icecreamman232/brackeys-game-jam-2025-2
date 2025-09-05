@@ -3,56 +3,96 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSelectionUI : Selectable
+namespace SGGames.Scripts.UI
 {
-    [SerializeField] private Image m_itemImage;
-    [SerializeField] private ItemDescriptionUI m_itemDescriptionUI;
-    [SerializeField] private ItemData m_itemData;
+    public class ItemSelectionUI : Selectable
+    {
+        [SerializeField] private bool m_canShowDestroyButton;
+        [SerializeField] private Image m_itemImage;
+        [SerializeField] private GameObject m_selectionBG;
+        [SerializeField] private ButtonController m_destroyButton;
+        [SerializeField] private ItemDescriptionUI m_itemDescriptionUI;
+        [SerializeField] private ItemData m_itemData;
     
-    private bool m_isSelected;
+        private bool m_isSelected;
+        public bool IsSelected => m_isSelected;
     
-    public Action<ItemData> OnClickAction;
-    public ItemData ItemData => m_itemData;
+        public Action<ItemData> OnClickAction;
+        public Action<ItemSelectionUI> OnDestroyAction;
+        
+        public ItemData ItemData => m_itemData;
 
-    public void SetItemData(ItemData itemData)
-    {
-        m_itemImage.sprite = itemData.Icon;
-        m_itemData = itemData;
-        m_itemDescriptionUI.HideDescription();
-    }
-
-    public void SetSelect(bool isSelected)
-    {
-        m_isSelected = isSelected;
-        if (isSelected)
+        protected override void Awake()
         {
-            OnSelect();
+            base.Awake();
+            m_destroyButton.gameObject.SetActive(false);
+            m_destroyButton.OnClickAction = OnPressDestroyButton;
         }
-        else
+
+        public void SetItemData(ItemData itemData)
         {
-            OnDeselect();
-        }
-    }
-
-    public override void OnPointerDown(PointerEventData eventData)
-    {
-        OnClickAction?.Invoke(m_itemData);
-        base.OnPointerDown(eventData);
-    }
-
-    private void OnSelect()
-    {
-        m_itemImage.rectTransform.LeanScale(Vector3.one * 1.3f, 0.2f)
-            .setEase(LeanTweenType.easeOutExpo)
-            .setOnComplete(() =>
+            if (itemData != null)
             {
-                m_itemDescriptionUI.ShowDescription(m_itemData.Name, m_itemData.Description, m_itemData.Rarity);
-            });
-    }
+                m_itemImage.sprite = itemData.Icon;
+            }
+            
+            m_itemData = itemData;
+            m_itemDescriptionUI.HideDescription();
+        }
+        
+        public void SetSelect(bool isSelected)
+        {
+            m_isSelected = isSelected;
+            if (isSelected)
+            {
+                OnSelect();
+            }
+            else
+            {
+                OnDeselect();
+            }
+        }
 
-    private void OnDeselect()
-    {
-        m_itemImage.rectTransform.localScale = Vector3.one;
-        m_itemDescriptionUI.HideDescription();
+        public override void OnPointerDown(PointerEventData eventData)
+        {
+            OnClickAction?.Invoke(m_itemData);
+            base.OnPointerDown(eventData);
+        }
+
+        public override void OnPointerEnter(PointerEventData eventData)
+        {
+            m_itemDescriptionUI.ShowDescription(m_itemData.Name, m_itemData.Description, m_itemData.Rarity);
+            base.OnPointerEnter(eventData);
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            m_itemDescriptionUI.HideDescription();
+            base.OnPointerExit(eventData);
+        }
+
+        private void OnSelect()
+        {
+            m_selectionBG.SetActive(true);
+            if (m_canShowDestroyButton)
+            {
+                m_destroyButton.gameObject.SetActive(true);
+            }
+        }
+
+        private void OnDeselect()
+        {
+            m_selectionBG.SetActive(false);
+            if (m_canShowDestroyButton)
+            {
+                m_destroyButton.gameObject.SetActive(false);
+            }
+        }
+
+        private void OnPressDestroyButton()
+        {
+            OnDestroyAction?.Invoke(this);
+        }
     }
 }
+
